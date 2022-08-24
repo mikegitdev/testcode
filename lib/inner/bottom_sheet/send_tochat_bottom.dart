@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/emoji_text.dart';
+import 'package:tasker/inner/bottom_sheet/back_button.dart';
 
 import 'create_alert_bottom.dart';
 import 'send_alert_bottom.dart';
@@ -18,19 +19,7 @@ class SendToChatBottom extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12.w),
-          child: FloatingActionButton(
-            onPressed: () {
-              Get.back();
-            },
-            backgroundColor: AppColor.white,
-            child: Icon(
-              Icons.arrow_back_rounded,
-              color: AppColor.c15213B,
-            ),
-          ),
-        ),
+        const CustomBackButton(),
         12.verticalSpace,
         Container(
           // width: double.maxFinite,
