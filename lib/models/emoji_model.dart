@@ -1,11 +1,11 @@
 class EmojiModel {
   final String emoji;
-  final String title;
+  String? title;
   bool isSelected;
 
   EmojiModel({
+    this.title,
     required this.emoji,
-    required this.title,
     required this.isSelected,
   });
 }

@@ -51,7 +51,7 @@ class EmojiSIngle extends GetView<InnerController> {
                 SizedBox(
                   height: 5.h,
                 ),
-                Text(object.title,
+                Text(object.title!,
                     style: AppTextStyle.regularNormal
                         .copyWith(fontSize: 14.sp, color: AppColor.c676F80)),
               ],

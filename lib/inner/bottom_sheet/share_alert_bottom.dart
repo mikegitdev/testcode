@@ -89,7 +89,7 @@ class _ShareAlertBottomState extends State<ShareAlertBottom> {
                             6.verticalSpace,
                             EmojiText(size: 32.h, text: controller.selectedEmoji!.emoji),
                             6.verticalSpace,
-                            Text(controller.selectedEmoji!.title,
+                            Text(controller.selectedEmoji!.title!,
                                 style: AppTextStyle.regularNormal.copyWith(
                                     fontSize: 14.sp, color: AppColor.c676F80))
                           ],
