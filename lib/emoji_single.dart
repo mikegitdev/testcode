@@ -6,17 +6,16 @@ import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/emoji_text.dart';
 import 'package:tasker/inner/rostr_info/inner_controller.dart';
+import 'package:tasker/models/emoji_model.dart';
 
 class EmojiSIngle extends GetView<InnerController> {
   final BuildContext context;
-  final String emojiName;
-  final String emoji;
+  final EmojiModel object;
 
   EmojiSIngle({
     Key? key,
     required this.context,
-    required this.emojiName,
-    required this.emoji,
+    required this.object,
   }) : super(key: key);
 
   @override
@@ -29,14 +28,14 @@ class EmojiSIngle extends GetView<InnerController> {
           padding: const EdgeInsets.all(2.0),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12.r),
-              gradient:  LinearGradient(
+              gradient: object.isSelected ? const LinearGradient(
                 begin: Alignment.bottomLeft,
                 end: Alignment.topRight,
                 colors: [
                   // border-image-source: linear-gradient(51.32deg, #56CCF2 6.11%, #2F80ED 84.94%);
-                  controller.isPressed ? const Color(0xff56CCF2) : Colors.white,
-                  controller.isPressed ? const Color(0xff2F80ED) : Colors.white,
-                ],)
+                  Color(0xff56CCF2),
+                  Color(0xff2F80ED),
+                ],) : null,
           ),
           child: Container(
             padding: EdgeInsets.only(top: 8.h, bottom: 4.h),
@@ -48,11 +47,11 @@ class EmojiSIngle extends GetView<InnerController> {
             //   color: Colors.amber,
             child: Column(
               children: [
-                EmojiText(size: 32.h, text: emoji),
+                EmojiText(size: 32.h, text: object.emoji),
                 SizedBox(
                   height: 5.h,
                 ),
-                Text(emojiName,
+                Text(object.title,
                     style: AppTextStyle.regularNormal
                         .copyWith(fontSize: 14.sp, color: AppColor.c676F80)),
               ],

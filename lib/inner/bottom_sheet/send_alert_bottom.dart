@@ -28,19 +28,7 @@ class SendAlertBottom extends GetView<InnerController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12.w),
-                      child: FloatingActionButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        backgroundColor: AppColor.white,
-                        child: const Icon(
-                          Icons.arrow_back_rounded,
-                          color: AppColor.c15213B,
-                        ),
-                      ),
-                    ),
+                    const CustomBackButton(),
                     12.verticalSpace,
                     Container(
                       // width: double.maxFinite,
@@ -102,7 +90,6 @@ class SendAlertBottom extends GetView<InnerController> {
                             child: GridView.builder(
                               // physics: const NeverScrollableScrollPhysics(),
                               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-
                                 maxCrossAxisExtent: 140,
                                 childAspectRatio: 3 / 2.14,
                                 crossAxisSpacing: 8,
@@ -112,13 +99,12 @@ class SendAlertBottom extends GetView<InnerController> {
                                 return GestureDetector(
                                   onTap: () {
                                     update(() {
-                                      controller.pressFunction();
+                                      controller.chooseEmoji(controller.localEmojis[index]);
                                     });
                                   },
                                   child: EmojiSIngle(
-                                    emoji: '😍',
-                                    emojiName: emojiTextList[index].emojiText,
                                     context: context,
+                                    object: controller.localEmojis[index],
                                   ),
                                 );
                               },
