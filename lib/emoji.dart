@@ -21,10 +21,7 @@ class Emoji extends StatelessWidget {
         height: 32.h,
         width: 32.w,
         alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: AppColor.cF3F8FF,
-          borderRadius: BorderRadius.circular(12.h),
-        ),
+
         //   color: Colors.amber,
         child: EmojiText(
           size: 32.w,

@@ -27,55 +27,52 @@ class CreateAlertBottom extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(25.r),
-                topRight: Radius.circular(25.r),
-              ),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(25.r)),
             ),
-            padding: EdgeInsets.only(top: 8.h),
+            padding: EdgeInsets.only(top: 8.h, left: 24.w),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Container(
-                  height: 5.h,
-                  width: 64.w,
-                  decoration: BoxDecoration(
+                Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    height: 5.h,
+                    width: 64.w,
+                    decoration: BoxDecoration(
                       color: Colors.black54,
                       borderRadius: BorderRadius.circular(30),
+                    ),
                   ),
                 ),
                 12.verticalSpace,
                 Text(
                   "Create Alert",
+                  textAlign: TextAlign.center,
                   style: AppTextStyle.boldNormal.copyWith(fontSize: 16.sp),
                 ),
                 12.verticalSpace,
                 Text(
                   "Please, choose an emoji and type in an alert name",
+                  textAlign: TextAlign.center,
                   style: AppTextStyle.regularNormal
                       .copyWith(fontSize: 12.sp, color: AppColor.c62677D),
                 ),
                 12.verticalSpace,
-                Padding(
-                  padding: EdgeInsets.only(left: 24.0.sp),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Choose an Emoji",
-                      style: AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
-                    ),
-                  ),
+                Text(
+                  "Choose an Emoji",
+                  style: AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
                 ),
                 12.verticalSpace,
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
+                SizedBox(
                   height: 300.h,
                   child: GridView.builder(
+                    shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 60,
-                        childAspectRatio: 1,
-                        crossAxisSpacing: 8,
-                        mainAxisSpacing: 12,
+                      maxCrossAxisExtent: 40,
+                      childAspectRatio: 3 / 2.5,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 12,
                     ),
                     itemBuilder: (BuildContext ctx, index) {
                       return Emoji(
@@ -86,15 +83,9 @@ class CreateAlertBottom extends StatelessWidget {
                   ),
                 ),
                 24.verticalSpace,
-                Padding(
-                  padding: EdgeInsets.only(left: 24.0.sp),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Make up a Name",
-                      style: AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
-                    ),
-                  ),
+                Text(
+                  "Make up a Name",
+                  style: AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
                 ),
                 12.verticalSpace,
                 Padding(
