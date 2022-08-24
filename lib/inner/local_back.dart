@@ -1,6 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:tasker/emoji_text.dart';
 
 import 'helper_class.dart';
+
+class EmojiTextList{
+  String emojiText;
+
+
+  EmojiTextList({required this.emojiText});
+}
+List<EmojiTextList> emojiTextList = [
+  EmojiTextList(emojiText: "Love"),
+  EmojiTextList(emojiText: "Hot"),
+  EmojiTextList(emojiText: "Date"),
+  EmojiTextList(emojiText: "Obsessed"),
+  EmojiTextList(emojiText: "Thrilling"),
+  EmojiTextList(emojiText: "Funny"),
+  EmojiTextList(emojiText: "Ick"),
+  EmojiTextList(emojiText: "Ghost"),
+  EmojiTextList(emojiText: "Added"),
+  EmojiTextList(emojiText: "Promoted"),
+  EmojiTextList(emojiText: "Demoted"),
+  EmojiTextList(emojiText: "Removed"),
+];
 
 List<Tags> tags = [
   Tags(lookTitle: "Hot", lookColor: Colors.red),

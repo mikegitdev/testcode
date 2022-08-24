@@ -28,7 +28,7 @@ class CreateAlertBottom extends StatelessWidget {
                 Get.back();
               },
               backgroundColor: AppColor.white,
-              child: Icon(
+              child: const Icon(
                 Icons.arrow_back_rounded,
                 color: AppColor.c15213B,
               ),
@@ -85,7 +85,7 @@ class CreateAlertBottom extends StatelessWidget {
                   child: GridView.builder(
                     scrollDirection: Axis.horizontal,
                     // physics: NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                         maxCrossAxisExtent: 60,
                         childAspectRatio: 1,
                         crossAxisSpacing: 8,
@@ -130,7 +130,7 @@ class CreateAlertBottom extends StatelessWidget {
                       ),
                       border: OutlineInputBorder(
                         borderSide:
-                            BorderSide(width: 0, style: BorderStyle.none),
+                            const BorderSide(width: 0, style: BorderStyle.none),
                         borderRadius: BorderRadius.all(Radius.circular(12.r)),
                       ),
                     ),

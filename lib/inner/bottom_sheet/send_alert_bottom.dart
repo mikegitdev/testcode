@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -5,12 +7,16 @@ import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/app_route/app_route_name.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/emoji_single.dart';
+import 'package:tasker/inner/local_back.dart';
+import 'package:tasker/inner/rostr_info/inner_controller.dart';
 
 import 'create_alert_bottom.dart';
 import 'share_alert_bottom.dart';
 
 class SendAlertBottom extends StatelessWidget {
-  const SendAlertBottom({Key? key}) : super(key: key);
+  const SendAlertBottom({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +32,7 @@ class SendAlertBottom extends StatelessWidget {
               Get.back();
             },
             backgroundColor: AppColor.white,
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back_rounded,
               color: AppColor.c15213B,
             ),
@@ -88,20 +94,23 @@ class SendAlertBottom extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
                 height: 346.h,
                 child: GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
+                  // physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 140,
-                      childAspectRatio: 3 / 2.1,
-                      crossAxisSpacing: 8,
-                      mainAxisSpacing: 12,
+                    maxCrossAxisExtent: 140,
+                    childAspectRatio: 3 / 2.1,
+                    crossAxisSpacing: 8,
+                    mainAxisSpacing: 12,
                   ),
                   itemBuilder: (BuildContext ctx, index) {
-                    return EmojiSIngle(
-                      emoji: '😍',
-                      emojiName: 'Love',
+                    return GestureDetector(
+                      onTap: () {},
+                      child: EmojiSIngle(
+                        emoji: '😍',
+                        emojiName: emojiTextList[index].emojiText,
+                      ),
                     );
                   },
-                  itemCount: 12,
+                  itemCount: emojiTextList.length,
                 ),
               ),
               24.verticalSpace,
@@ -118,7 +127,7 @@ class SendAlertBottom extends StatelessWidget {
                           isScrollControlled: true,
                           backgroundColor: Colors.transparent,
                           builder: (context) {
-                            return ShareAlertBottom();
+                            return const ShareAlertBottom();
                           });
                     }, //AppColor.gradient_03
                     style: ElevatedButton.styleFrom(
@@ -143,28 +152,33 @@ class SendAlertBottom extends StatelessWidget {
               12.verticalSpace,
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
-                child: ElevatedButton(
-                    onPressed: () {
-                      // sendAlert(context);
-                      showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          builder: (context) {
-                            return CreateAlertBottom();
-                          });
-                    },
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Add Custom Alert',
-                          style: AppTextStyle.boldNormal.copyWith(
-                              color: AppColor.c41A3F0, fontSize: 16.sp),
-                        ),
-                      ],
-                    )),
+                child: MaterialButton(
+                  elevation: 0,
+                  height: 48.h,
+                  color: AppColor.cCFE8FB,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                  onPressed: () {
+                    // sendAlert(context);
+                    showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        builder: (context) {
+                          return const CreateAlertBottom();
+                        });
+                  },
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Add Custom Alert',
+                        style: AppTextStyle.boldNormal
+                            .copyWith(color: AppColor.c41A3F0, fontSize: 16.sp),
+                      ),
+                    ],
+                  ),
+                ),
               ),
               12.verticalSpace,
             ],

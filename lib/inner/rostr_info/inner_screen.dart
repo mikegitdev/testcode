@@ -34,8 +34,8 @@ class InnerScreen extends StatelessWidget {
               onTap: () {
                 Navigator.of(context, rootNavigator: true).push(
                   MaterialPageRoute(
-                    builder: (context) => PhotoViewPage(
-                      images: const [
+                    builder: (context) => const PhotoViewPage(
+                      images: [
                         "https://faces-img.xcdn.link/thumb-lorem-face-6225_thumb.jpg",
                         "https://faces-img.xcdn.link/thumb-lorem-face-5883_thumb.jpg",
                         "https://faces-img.xcdn.link/thumb-lorem-face-2752_thumb.jpg",
