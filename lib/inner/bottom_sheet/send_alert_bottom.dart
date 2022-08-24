@@ -91,7 +91,7 @@ class SendAlertBottom extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 140,
-                      childAspectRatio: 3 / 2.2,
+                      childAspectRatio: 3 / 2.1,
                       crossAxisSpacing: 8,
                       mainAxisSpacing: 12,
                   ),
