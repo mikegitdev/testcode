@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:tasker/app_route/app_route_name.dart';
+import 'package:tasker/app_route/app_router.dart';
 
 import 'app_controller_binding.dart';
 
@@ -26,9 +28,8 @@ class MyApp extends StatelessWidget {
             title: 'Test',
             initialBinding: AppControllerBinding(),
             debugShowCheckedModeBanner: true,
-
-            //      initialRoute: '/${AppRouteName.splashScreen}',
-            //      getPages: AppRouter.onGeneratePage(),
+            initialRoute: '/${AppRouteName.rostrInner}',
+            getPages: AppRouter.onGeneratePage(),
           );
         });
   }
