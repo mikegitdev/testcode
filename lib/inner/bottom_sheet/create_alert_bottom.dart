@@ -29,7 +29,7 @@ class CreateAlertBottom extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.vertical(top: Radius.circular(25.r)),
             ),
-            padding: EdgeInsets.only(top: 8.h, left: 24.w),
+            padding: EdgeInsets.only(top: 8.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
@@ -58,9 +58,12 @@ class CreateAlertBottom extends StatelessWidget {
                       .copyWith(fontSize: 12.sp, color: AppColor.c62677D),
                 ),
                 12.verticalSpace,
-                Text(
-                  "Choose an Emoji",
-                  style: AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
+                Padding(
+                  padding: EdgeInsets.only(left: 24.w),
+                  child: Text(
+                    "Choose an Emoji",
+                    style: AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
+                  ),
                 ),
                 12.verticalSpace,
                 SizedBox(
@@ -68,6 +71,7 @@ class CreateAlertBottom extends StatelessWidget {
                   child: GridView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.symmetric(horizontal: 24.w),
                     gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 40,
                       childAspectRatio: 3 / 2.5,
@@ -82,15 +86,21 @@ class CreateAlertBottom extends StatelessWidget {
                     itemCount: emojis.length,
                   ),
                 ),
-                24.verticalSpace,
-                Text(
-                  "Make up a Name",
-                  style: AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
+                30.verticalSpace,
+                Padding(
+                  padding: EdgeInsets.only(left: 24.w),
+                  child: Text(
+                    "Make up a Name",
+                    style: AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
+                  ),
                 ),
-                12.verticalSpace,
+                14.verticalSpace,
                 Padding(
                   padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom),
+                      left: 24.w,
+                      right: 24.w,
+                      bottom: MediaQuery.of(context).viewInsets.bottom,
+                  ),
                   child: TextFormField(
                     style: AppTextStyle.regularNormal.copyWith(
                       color: AppColor.c15213B,
@@ -114,35 +124,30 @@ class CreateAlertBottom extends StatelessWidget {
                     ),
                   ),
                 ),
-                12.verticalSpace,
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        gradient: AppColor.gradient_03,
-                        borderRadius: BorderRadius.circular(12.r)),
-                    child: ElevatedButton(
+                20.verticalSpace,
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 24.w),
+                  decoration: BoxDecoration(
+                      gradient: AppColor.gradient_03,
+                      borderRadius: BorderRadius.circular(12.r),
+                  ),
+                  child: ElevatedButton(
                       onPressed: () {}, //AppColor.gradient_03
                       style: ElevatedButton.styleFrom(
                         primary: Colors.transparent,
                         shadowColor: Colors.transparent,
+                        fixedSize: Size.fromHeight(48.h)
                       ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          8.horizontalSpace,
-                          Text(
-                            'Continue',
-                            style: AppTextStyle.boldNormal
-                                .copyWith(color: Colors.white, fontSize: 16.sp),
-                          ),
-                        ],
-                      ),
-                    ),
+                      child: Center(
+                        child: Text(
+                          'Continue',
+                          style: AppTextStyle.boldNormal
+                              .copyWith(color: Colors.white, fontSize: 16.sp),
+                        ),
+                      )
                   ),
                 ),
-                36.verticalSpace,
+                20.verticalSpace,
               ],
             ),
           ),
