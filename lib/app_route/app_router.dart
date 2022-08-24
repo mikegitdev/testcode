@@ -14,7 +14,6 @@ class AppRouter {
   static List<GetPage> onGeneratePage() {
     return [
       /// intro
-
       GetPage(
         name: '/${AppRouteName.rostrInner}',
         bindings: [InnerBinding()],
