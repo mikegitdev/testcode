@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +9,6 @@ import 'package:tasker/bullet_box.dart';
 import 'package:tasker/emoji_text.dart';
 import 'package:tasker/inner/bottom_sheet/send_alert_bottom.dart';
 import 'package:tasker/inner/photo_view.dart';
-import 'package:tasker/inner/rostr_info/inner_controller.dart';
 
 import '../local_back.dart';
 
@@ -20,6 +17,138 @@ class InnerScreen extends GetView<InnerController> {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      backgroundColor: const Color(0XffF5F5F5),
+      appBar: AppBarScreen(
+        appbarTitle: 'Rostr',
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 12.h,
+            ),
+            InkWell(
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () {
+                Navigator.of(context, rootNavigator: true).push(
+                  MaterialPageRoute(
+                    builder: (context) => const PhotoViewPage(
+                      images: [
+                        "https://faces-img.xcdn.link/thumb-lorem-face-6225_thumb.jpg",
+                        "https://faces-img.xcdn.link/thumb-lorem-face-5883_thumb.jpg",
+                        "https://faces-img.xcdn.link/thumb-lorem-face-2752_thumb.jpg",
+                        "https://faces-img.xcdn.link/thumb-lorem-face-770_thumb.jpg"
+                      ],
+                      selectedImgIndex: 0,
+                    ),
+                  ),
+                );
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.network(
+                  "https://faces-img.xcdn.link/thumb-lorem-face-6225_thumb.jpg",
+                  height: 96.h,
+                  width: 96.h,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 12.h,
+            ),
+            Text(
+              "Zander Valenstein",
+              style: AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
+            ),
+            SizedBox(
+              height: 4.h,
+            ),
+            Text(
+              "24 years old",
+              style: AppTextStyle.regularNormal
+                  .copyWith(fontSize: 14.sp, color: Colors.black54),
+            ),
+            SizedBox(
+              height: 2.h,
+            ),
+            Text(
+              "Tinder",
+              style: AppTextStyle.regularNormal
+                  .copyWith(fontSize: 14.sp, color: Colors.black54),
+            ),
+            SizedBox(
+              height: 16.h,
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  OutlinedButton(
+                    onPressed: () {
+                      if (kDebugMode) {
+                        print("Send  Alert");
+                      }
+                      Get.bottomSheet(
+                        const SendAlertBottom(),
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                      );
+                    },
+                    style: OutlinedButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      side: const BorderSide(
+                        width: 3.0,
+                        color: Color(0xff41A3F0),
+                      ),
+                      fixedSize: Size(101.w, 34.h),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                          30.0.r,
+                        ),
+                      ),
+                    ),
+                    child: Text('Send Alert',
+                        style: AppTextStyle.boldNormal.copyWith(
+                          fontSize: 16.sp,
+                          color: const Color(0xff41A3F0),
+                        )),
+                  ),
+                  12.horizontalSpace,
+                  ElevatedButton(
+                    onPressed: () {
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => const Safety()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      primary: Color(0xffCFE8FB),
+                      fixedSize: Size(101.w, 32.h),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                          30.0.r,
+                        ),
+                      ),
+                    ),
+                    child: Text('Edit Info',
+                        style: AppTextStyle.boldNormal.copyWith(
+                          fontSize: 16.sp,
+                          color: Color(0xff41A3F0),
+                        )),
+                  ),
+                  SizedBox(
+                    width: 12.w,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Navigator.push(
+                      //     context,ghghghghghhghgghhghggh
     return GetBuilder<InnerController>(
       builder: (ctr) => Scaffold(
         resizeToAvoidBottomInset: true,

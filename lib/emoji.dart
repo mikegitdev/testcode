@@ -20,15 +20,14 @@ class Emoji extends StatelessWidget {
       child: Container(
         height: 32.h,
         width: 32.w,
-        padding: EdgeInsets.only(top: 8.h, bottom: 4.h),
+        alignment: Alignment.center,
         decoration: BoxDecoration(
           color: AppColor.cF3F8FF,
           borderRadius: BorderRadius.circular(12.h),
-          // border: Border.all(color: AppColor.c0B4499, width: 1.0),
         ),
         //   color: Colors.amber,
         child: EmojiText(
-          size: 32.h,
+          size: 32.w,
           text: emojiName,
         ),
       ),

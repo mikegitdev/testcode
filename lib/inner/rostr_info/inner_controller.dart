@@ -1,9 +1,8 @@
-import 'dart:developer';
-
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class InnerController extends GetxController {
-  final count = 0.obs;
+  final count = 0;
   bool isPressed = false;
   @override
   void onInit() {

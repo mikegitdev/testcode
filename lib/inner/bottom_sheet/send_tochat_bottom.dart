@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/emoji_text.dart';
-import 'package:tasker/inner/rostr_info/inner_controller.dart';
 
 import 'create_alert_bottom.dart';
 import 'send_alert_bottom.dart';
@@ -20,19 +19,7 @@ class SendToChatBottom extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12.w),
-          child: FloatingActionButton(
-            onPressed: () {
-              Get.back();
-            },
-            backgroundColor: AppColor.white,
-            child: Icon(
-              Icons.arrow_back_rounded,
-              color: AppColor.c15213B,
-            ),
-          ),
-        ),
+        const CustomBackButton(),
         12.verticalSpace,
         Container(
           // width: double.maxFinite,
@@ -100,13 +87,11 @@ class SendToChatBottom extends StatelessWidget {
                 child: OutlinedButton(
                   onPressed: () {
                     debugPrint('SendAlertBottom');
-                    showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        builder: (context) {
-                          return SendAlertBottom();
-                        });
+                    Get.bottomSheet(
+                      const SendAlertBottom(),
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                    );
                   },
                   style: OutlinedButton.styleFrom(
                     //  minimumSize: Size(1.sw, 48.h),
@@ -229,7 +214,7 @@ class SendToChatBottom extends StatelessWidget {
                     // suffixIcon: IconButton(
                     //     onPressed: () {}, icon: Icon(Icons.highlight_off)),
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(width: 0, style: BorderStyle.none),
+                      borderSide: const BorderSide(width: 0, style: BorderStyle.none),
                       borderRadius: BorderRadius.all(Radius.circular(12.r)),
                     ),
                   ),
@@ -241,13 +226,11 @@ class SendToChatBottom extends StatelessWidget {
                 child: ElevatedButton(
                     onPressed: () {
                       // sendAlert(context);
-                      showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          builder: (context) {
-                            return CreateAlertBottom();
-                          });
+                      Get.bottomSheet(
+                        const CreateAlertBottom(),
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                      );
                     },
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -270,13 +253,11 @@ class SendToChatBottom extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12.r)),
                   child: ElevatedButton(
                     onPressed: () {
-                      showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          builder: (context) {
-                            return SendToChatBottom(innerController: innerController,);
-                          });
+                      Get.bottomSheet(
+                        const SendToChatBottom(),
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                      );
                     }, //AppColor.gradient_03
                     style: ElevatedButton.styleFrom(
                       primary: Colors.transparent,

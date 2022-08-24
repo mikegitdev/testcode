@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/emoji.dart';
+import 'package:tasker/inner/bottom_sheet/back_button.dart';
 
 import '../local_back.dart';
 
@@ -21,23 +22,9 @@ class CreateAlertBottom extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.w),
-            child: FloatingActionButton(
-              onPressed: () {
-                Get.back();
-              },
-              backgroundColor: AppColor.white,
-              child: const Icon(
-                Icons.arrow_back_rounded,
-                color: AppColor.c15213B,
-              ),
-            ),
-          ),
+          const CustomBackButton(),
           12.verticalSpace,
           Container(
-            // width: double.maxFinite,
-            // height: double.maxFinite,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
@@ -46,7 +33,6 @@ class CreateAlertBottom extends StatelessWidget {
               ),
             ),
             padding: EdgeInsets.only(top: 8.h),
-            //  height: 626.h,
             child: Column(
               children: <Widget>[
                 Container(
@@ -54,7 +40,8 @@ class CreateAlertBottom extends StatelessWidget {
                   width: 64.w,
                   decoration: BoxDecoration(
                       color: Colors.black54,
-                      borderRadius: BorderRadius.circular(30)),
+                      borderRadius: BorderRadius.circular(30),
+                  ),
                 ),
                 12.verticalSpace,
                 Text(
@@ -84,12 +71,12 @@ class CreateAlertBottom extends StatelessWidget {
                   height: 300.h,
                   child: GridView.builder(
                     scrollDirection: Axis.horizontal,
-                    // physics: NeverScrollableScrollPhysics(),
                     gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                         maxCrossAxisExtent: 60,
                         childAspectRatio: 1,
                         crossAxisSpacing: 8,
-                        mainAxisSpacing: 12),
+                        mainAxisSpacing: 12,
+                    ),
                     itemBuilder: (BuildContext ctx, index) {
                       return Emoji(
                         emojiName: emojis[index],
