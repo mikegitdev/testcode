@@ -38,7 +38,8 @@ class EmojiText extends StatelessWidget {
       children.add(
         TextSpan(
             text: String.fromCharCodes(chunk),
-            style: TextStyle(fontSize: size)),
+            style: TextStyle(fontSize: size),
+        ),
       );
     }
 

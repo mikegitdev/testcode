@@ -511,7 +511,8 @@ class InnerScreen extends GetView<InnerController> {
                   children: [
                     Row(
                       children: [
-                        Text("Likes" ' ',
+                        Text(
+                            "Likes" ' ',
                             style: AppTextStyle.boldNormal
                                 .copyWith(fontSize: 16.sp)),
                         EmojiText(
@@ -520,7 +521,7 @@ class InnerScreen extends GetView<InnerController> {
                         ),
                       ],
                     ),
-                    BulletList([
+                    BulletList(const [
                       "He loves to watch Breaking bad on netflix",
                       "Likes basketball"
                     ]),

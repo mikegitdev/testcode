@@ -20,8 +20,7 @@ class SendAlertBottom extends GetView<InnerController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<InnerController>(builder: (ctr) {
-      return StatefulBuilder(
-          builder: (context, update) {
+      return StatefulBuilder(builder: (context, update) {
         return Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,7 +81,10 @@ class SendAlertBottom extends GetView<InnerController> {
                   ),
                   20.verticalSpace,
                   SizedBox(
-                    height: controller.createdEmojis != null && controller.createdEmojis!.isNotEmpty ? 450.h : 346.h,
+                    height: controller.createdEmojis != null &&
+                            controller.createdEmojis!.isNotEmpty
+                        ? 450.h
+                        : 346.h,
                     child: ListView(
                       children: [
                         Container(
@@ -101,7 +103,8 @@ class SendAlertBottom extends GetView<InnerController> {
                               return GestureDetector(
                                 onTap: () {
                                   update(() {
-                                    controller.chooseEmoji(controller.localEmojis[index]);
+                                    controller.chooseEmoji(
+                                        controller.localEmojis[index]);
                                   });
                                 },
                                 child: EmojiSingle(
@@ -112,44 +115,51 @@ class SendAlertBottom extends GetView<InnerController> {
                             itemCount: controller.localEmojis.length,
                           ),
                         ),
-                        controller.createdEmojis != null && controller.createdEmojis!.isNotEmpty
+                        controller.createdEmojis != null &&
+                                controller.createdEmojis!.isNotEmpty
                             ? Column(
-                          children: [
-                            24.verticalSpace,
-                            Text(
-                              "Custom Alerts",
-                              style:
-                              AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
-                            ),
-                            24.verticalSpace,
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 24.w),
-                              height: 200.h,
-                              child: GridView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                                  maxCrossAxisExtent: 140,
-                                  childAspectRatio: 3 / 2.14,
-                                  crossAxisSpacing: 8,
-                                  mainAxisSpacing: 12,
-                                ),
-                                itemBuilder: (BuildContext ctx, index) {
-                                  return GestureDetector(
-                                    onTap: () {
-                                      update(() {
-                                        controller.chooseEmoji(controller.createdEmojis![index]);
-                                      });
-                                    },
-                                    child: EmojiSingle(
-                                      object: controller.createdEmojis![index],
+                                children: [
+                                  24.verticalSpace,
+                                  Text(
+                                    "Custom Alerts",
+                                    style: AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
+                                  ),
+                                  24.verticalSpace,
+                                  Container(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 24.w),
+                                    height: 200.h,
+                                    child: GridView.builder(
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      gridDelegate:
+                                          const SliverGridDelegateWithMaxCrossAxisExtent(
+                                        maxCrossAxisExtent: 140,
+                                        childAspectRatio: 3 / 2.14,
+                                        crossAxisSpacing: 8,
+                                        mainAxisSpacing: 12,
+                                      ),
+                                      itemBuilder: (BuildContext ctx, index) {
+                                        return GestureDetector(
+                                          onTap: () {
+                                            update(() {
+                                              controller.chooseEmoji(controller
+                                                  .createdEmojis![index]);
+                                            });
+                                          },
+                                          child: EmojiSingle(
+                                            object: controller
+                                                .createdEmojis![index],
+                                          ),
+                                        );
+                                      },
+                                      itemCount:
+                                          controller.createdEmojis!.length,
                                     ),
-                                  );
-                                },
-                                itemCount: controller.createdEmojis!.length,
-                              ),
-                            ),
-                          ],
-                        ) : const SizedBox.shrink(),
+                                  ),
+                                ],
+                              )
+                            : const SizedBox.shrink(),
                       ],
                     ),
                   ),
@@ -163,7 +173,8 @@ class SendAlertBottom extends GetView<InnerController> {
                       child: ElevatedButton(
                         onPressed: () {
                           if (controller.selectedEmoji != null) {
-                            controller.openBottomSheet(bottomSheet: const ShareAlertBottom());
+                            controller.openBottomSheet(
+                                bottomSheet: const ShareAlertBottom());
                           }
                         }, //AppColor.gradient_03
                         style: ElevatedButton.styleFrom(
@@ -186,13 +197,16 @@ class SendAlertBottom extends GetView<InnerController> {
                     child: ElevatedButton(
                       onPressed: () {
                         // sendAlert(context);
-                        controller.openBottomSheet(bottomSheet: const CreateAlertBottom(), isCleanCreatedEmoji: true);
+                        controller.openBottomSheet(
+                            bottomSheet: const CreateAlertBottom(),
+                            isCleanCreatedEmoji: true);
                       },
                       style: ElevatedButton.styleFrom(
                         elevation: 0.0,
                         primary: AppColor.cCFE8FB,
                         fixedSize: Size.fromHeight(48.h),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.r)),
                       ),
                       child: Center(
                         child: Text(
