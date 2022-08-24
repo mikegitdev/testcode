@@ -77,12 +77,11 @@ class CreateAlertBottom extends GetView<InnerController> {
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           padding: EdgeInsets.symmetric(horizontal: 24.w),
-                          gridDelegate:
-                              SliverGridDelegateWithMaxCrossAxisExtent(
+                          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                             maxCrossAxisExtent: 40,
-                            childAspectRatio: 3.h / 2.4.w,
-                            crossAxisSpacing: 8.h,
-                            mainAxisSpacing: 12.w,
+                            childAspectRatio: 3 / 2.7,
+                            crossAxisSpacing: 8,
+                            mainAxisSpacing: 10,
                           ),
                           itemBuilder: (BuildContext ctx, index) {
                             return GestureDetector(
@@ -93,9 +92,7 @@ class CreateAlertBottom extends GetView<InnerController> {
                               },
                               child: Stack(
                                 children: [
-                                  controller.createEmojiImage.isNotEmpty &&
-                                          controller.createEmojiImage ==
-                                              emojisSet[index].emoji
+                                  controller.createEmojiImage.isNotEmpty && controller.createEmojiImage == emojisSet[index].emoji
                                       ? Positioned.fill(
                                           child: Container(
                                             padding: const EdgeInsets.all(2),
@@ -104,33 +101,33 @@ class CreateAlertBottom extends GetView<InnerController> {
                                               color: AppColor.c41A3F0,
                                             ),
                                             child: Container(
+                                              alignment: Alignment.center,
                                               decoration: const BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 color: AppColor.white,
                                               ),
-                                              child: Center(
+                                              child: FittedBox(
                                                 child: EmojiText(
-                                                  size: 32.sp,
+                                                  size: 28.sp,
                                                   text: emojisSet[index].emoji,
                                                 ),
                                               ),
                                             ),
                                           ),
                                         )
-                                      : EmojiText(
-                                          size: 32.sp,
-                                          text: emojisSet[index].emoji,
+                                      : Center(
+                                        child: FittedBox(
+                                          child: EmojiText(
+                                              size: 28.sp,
+                                              text: emojisSet[index].emoji,
+                                            ),
                                         ),
+                                      ),
                                   Visibility(
-                                    visible: controller
-                                            .createEmojiImage.isNotEmpty &&
-                                        controller.createEmojiImage !=
-                                            emojisSet[index].emoji,
+                                    visible: controller.createEmojiImage.isNotEmpty && controller.createEmojiImage != emojisSet[index].emoji,
                                     child: Container(color: Colors.white60),
                                   ),
-                                  controller.createEmojiImage.isNotEmpty &&
-                                          controller.createEmojiImage ==
-                                              emojisSet[index].emoji
+                                  controller.createEmojiImage.isNotEmpty && controller.createEmojiImage == emojisSet[index].emoji
                                       ? Positioned(
                                           bottom: 2.0,
                                           right: 2.0,
