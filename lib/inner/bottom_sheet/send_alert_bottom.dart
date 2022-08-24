@@ -195,7 +195,7 @@ class SendAlertBottom extends GetView<InnerController> {
                           const CreateAlertBottom(),
                           isScrollControlled: true,
                           backgroundColor: Colors.transparent,
-                        );
+                        ).whenComplete(() => controller.cleanCreateEmoji());
                       },
                       style: ElevatedButton.styleFrom(
                         elevation: 0.0,

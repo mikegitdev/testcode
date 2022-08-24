@@ -84,9 +84,13 @@ class InnerController extends GetxController {
         update();
         SharedPreferenceService.storeEmojis(createdEmoji);
       }
-      _createEmojiImage = '';
-      createEmojiTitle.clear();
-      update();
     }
+    cleanCreateEmoji();
+  }
+
+  void cleanCreateEmoji(){
+    _createEmojiImage = '';
+    createEmojiTitle.clear();
+    update();
   }
 }
