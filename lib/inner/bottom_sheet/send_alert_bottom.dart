@@ -83,7 +83,6 @@ class SendAlertBottom extends StatelessWidget {
                 child: GridView.builder(
                   // physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-
                       maxCrossAxisExtent: 140,
                       childAspectRatio: 3 / 2.14,
                       crossAxisSpacing: 8,
@@ -110,29 +109,22 @@ class SendAlertBottom extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12.r)),
                   child: ElevatedButton(
                     onPressed: () {
-                      showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          builder: (context) {
-                            return const ShareAlertBottom();
-                          });
+                      Get.bottomSheet(
+                        const ShareAlertBottom(),
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                      );
                     }, //AppColor.gradient_03
                     style: ElevatedButton.styleFrom(
                       primary: Colors.transparent,
                       shadowColor: Colors.transparent,
                     ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        8.horizontalSpace,
-                        Text(
-                          'Continue',
-                          style: AppTextStyle.boldNormal
-                              .copyWith(color: Colors.white, fontSize: 16.sp),
-                        ),
-                      ],
+                    child: Center(
+                      child: Text(
+                        'Continue',
+                        style: AppTextStyle.boldNormal
+                            .copyWith(color: Colors.white, fontSize: 16.sp),
+                      ),
                     ),
                   ),
                 ),
@@ -143,13 +135,11 @@ class SendAlertBottom extends StatelessWidget {
                 child: ElevatedButton(
                     onPressed: () {
                       // sendAlert(context);
-                      showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          builder: (context) {
-                            return const CreateAlertBottom();
-                          });
+                      Get.bottomSheet(
+                        const CreateAlertBottom(),
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                      );
                     },
                   style: ElevatedButton.styleFrom(
                     elevation: 0.0,
@@ -157,17 +147,13 @@ class SendAlertBottom extends StatelessWidget {
                     fixedSize: Size.fromHeight(48.h),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
                   ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Add Custom Alert',
-                          style: AppTextStyle.boldNormal.copyWith(
-                              color: AppColor.c41A3F0, fontSize: 16.sp),
-                        ),
-                      ],
-                    ),
+                    child: Center(
+                      child: Text(
+                        'Add Custom Alert',
+                        style: AppTextStyle.boldNormal.copyWith(
+                            color: AppColor.c41A3F0, fontSize: 16.sp),
+                      ),
+                    )
                 ),
               ),
               12.verticalSpace,

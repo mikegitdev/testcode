@@ -25,8 +25,6 @@ class CreateAlertBottom extends StatelessWidget {
           const CustomBackButton(),
           12.verticalSpace,
           Container(
-            // width: double.maxFinite,
-            // height: double.maxFinite,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
@@ -35,7 +33,6 @@ class CreateAlertBottom extends StatelessWidget {
               ),
             ),
             padding: EdgeInsets.only(top: 8.h),
-            //  height: 626.h,
             child: Column(
               children: <Widget>[
                 Container(
@@ -43,7 +40,8 @@ class CreateAlertBottom extends StatelessWidget {
                   width: 64.w,
                   decoration: BoxDecoration(
                       color: Colors.black54,
-                      borderRadius: BorderRadius.circular(30)),
+                      borderRadius: BorderRadius.circular(30),
+                  ),
                 ),
                 12.verticalSpace,
                 Text(
@@ -73,12 +71,12 @@ class CreateAlertBottom extends StatelessWidget {
                   height: 300.h,
                   child: GridView.builder(
                     scrollDirection: Axis.horizontal,
-                    // physics: NeverScrollableScrollPhysics(),
                     gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                         maxCrossAxisExtent: 60,
                         childAspectRatio: 1,
                         crossAxisSpacing: 8,
-                        mainAxisSpacing: 12),
+                        mainAxisSpacing: 12,
+                    ),
                     itemBuilder: (BuildContext ctx, index) {
                       return Emoji(
                         emojiName: emojis[index],

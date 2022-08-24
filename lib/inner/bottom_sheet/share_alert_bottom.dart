@@ -331,13 +331,11 @@ class _ShareAlertBottomState extends State<ShareAlertBottom> {
                       borderRadius: BorderRadius.circular(12.r)),
                   child: ElevatedButton(
                     onPressed: () {
-                      showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          builder: (context) {
-                            return ShareAlertBottom();
-                          });
+                      Get.bottomSheet(
+                        const ShareAlertBottom(),
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                      );
                     }, //AppColor.gradient_03
                     style: ElevatedButton.styleFrom(
                       primary: Colors.transparent,

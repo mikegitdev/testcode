@@ -87,13 +87,11 @@ class SendToChatBottom extends StatelessWidget {
                 child: OutlinedButton(
                   onPressed: () {
                     debugPrint('SendAlertBottom');
-                    showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        builder: (context) {
-                          return SendAlertBottom();
-                        });
+                    Get.bottomSheet(
+                      const SendAlertBottom(),
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                    );
                   },
                   style: OutlinedButton.styleFrom(
                     //  minimumSize: Size(1.sw, 48.h),
@@ -216,7 +214,7 @@ class SendToChatBottom extends StatelessWidget {
                     // suffixIcon: IconButton(
                     //     onPressed: () {}, icon: Icon(Icons.highlight_off)),
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(width: 0, style: BorderStyle.none),
+                      borderSide: const BorderSide(width: 0, style: BorderStyle.none),
                       borderRadius: BorderRadius.all(Radius.circular(12.r)),
                     ),
                   ),
@@ -228,13 +226,11 @@ class SendToChatBottom extends StatelessWidget {
                 child: ElevatedButton(
                     onPressed: () {
                       // sendAlert(context);
-                      showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          builder: (context) {
-                            return CreateAlertBottom();
-                          });
+                      Get.bottomSheet(
+                        const CreateAlertBottom(),
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                      );
                     },
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -257,13 +253,11 @@ class SendToChatBottom extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12.r)),
                   child: ElevatedButton(
                     onPressed: () {
-                      showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          builder: (context) {
-                            return SendToChatBottom();
-                          });
+                      Get.bottomSheet(
+                        const SendToChatBottom(),
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                      );
                     }, //AppColor.gradient_03
                     style: ElevatedButton.styleFrom(
                       primary: Colors.transparent,

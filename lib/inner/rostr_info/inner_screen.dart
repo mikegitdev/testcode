@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/appbar.dart';
 import 'package:tasker/bullet_box.dart';
@@ -92,13 +93,11 @@ class InnerScreen extends StatelessWidget {
                       if (kDebugMode) {
                         print("Send  Alert");
                       }
-                      showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          builder: (context) {
-                            return const SendAlertBottom();
-                          });
+                      Get.bottomSheet(
+                        const SendAlertBottom(),
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                      );
                     },
                     style: OutlinedButton.styleFrom(
                       padding: EdgeInsets.zero,
