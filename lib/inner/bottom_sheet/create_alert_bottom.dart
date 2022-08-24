@@ -77,11 +77,11 @@ class CreateAlertBottom extends GetView<InnerController> {
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           padding: EdgeInsets.symmetric(horizontal: 24.w),
-                          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                             maxCrossAxisExtent: 40,
-                            childAspectRatio: 3 / 2.7,
-                            crossAxisSpacing: 8,
-                            mainAxisSpacing: 10,
+                            childAspectRatio: 3.h / 2.6.w,
+                            crossAxisSpacing: 8.h,
+                            mainAxisSpacing: 10.w,
                           ),
                           itemBuilder: (BuildContext ctx, index) {
                             return GestureDetector(
@@ -186,9 +186,7 @@ class CreateAlertBottom extends GetView<InnerController> {
                             ),
                           ),
                           onChanged: (text) {
-                            update(() {
-                              controller.canCreateEmoji();
-                            });
+                            update(() {controller.canCreateEmoji;});
                           },
                         ),
                       ),
@@ -196,7 +194,7 @@ class CreateAlertBottom extends GetView<InnerController> {
                       Container(
                         margin: EdgeInsets.symmetric(horizontal: 24.w),
                         decoration: BoxDecoration(
-                          gradient: controller.canCreateEmoji()
+                          gradient: controller.canCreateEmoji
                               ? AppColor.gradient_03
                               : null,
                           borderRadius: BorderRadius.circular(12.r),
@@ -206,7 +204,7 @@ class CreateAlertBottom extends GetView<InnerController> {
                               controller.createEmoji();
                             }, //AppColor.gradient_03
                             style: ElevatedButton.styleFrom(
-                                primary: controller.canCreateEmoji()
+                                primary: controller.canCreateEmoji
                                     ? Colors.transparent
                                     : AppColor.cCFE8FB,
                                 shadowColor: Colors.transparent,

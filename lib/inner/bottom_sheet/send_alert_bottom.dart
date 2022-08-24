@@ -29,8 +29,6 @@ class SendAlertBottom extends GetView<InnerController> {
             const CustomBackButton(),
             12.verticalSpace,
             Container(
-              // width: double.maxFinite,
-              // height: double.maxFinite,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -81,17 +79,14 @@ class SendAlertBottom extends GetView<InnerController> {
                   ),
                   20.verticalSpace,
                   SizedBox(
-                    height: controller.createdEmojis != null &&
-                            controller.createdEmojis!.isNotEmpty
-                        ? 450.h
-                        : 346.h,
+                    height: controller.isCreatedExist ? 450.h : 346.h,
                     child: ListView(
                       children: [
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 24.w),
-                          height: 346.h,
+                          height: 350.h,
                           child: GridView.builder(
-                            // physics: const NeverScrollableScrollPhysics(),
+                            physics: controller.isCreatedExist ? const NeverScrollableScrollPhysics() : null,
                             gridDelegate:
                                 const SliverGridDelegateWithMaxCrossAxisExtent(
                               maxCrossAxisExtent: 140,
@@ -130,8 +125,7 @@ class SendAlertBottom extends GetView<InnerController> {
                                         EdgeInsets.symmetric(horizontal: 24.w),
                                     height: 200.h,
                                     child: GridView.builder(
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
+                                      physics: const NeverScrollableScrollPhysics(),
                                       gridDelegate:
                                           const SliverGridDelegateWithMaxCrossAxisExtent(
                                         maxCrossAxisExtent: 140,
