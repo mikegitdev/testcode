@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tasker/data/local_storage.dart';
+import 'package:tasker/inner/local_back.dart';
 import 'package:tasker/models/emoji_model.dart';
 
 class InnerController extends GetxController {
-  EmojiModel? selectedEmoji;
-  List<EmojiModel>? createdEmojis;
-  String createEmojiImage = '';
+  EmojiModel? _selectedEmoji;
+  List<EmojiModel>? _createdEmojis;
+  String _createEmojiImage = '';
   TextEditingController createEmojiTitle = TextEditingController();
 
-  List<EmojiModel> localEmojis = [
+  final List<EmojiModel> _localEmojis = [
     EmojiModel(emoji: '😍', title: 'Love', isSelected: false),
     EmojiModel(emoji: '🔥', title: 'Hot', isSelected: false),
     EmojiModel(emoji: '🍷', title: 'Date', isSelected: false),
@@ -24,10 +25,11 @@ class InnerController extends GetxController {
     EmojiModel(emoji: '❌', title: 'Removed', isSelected: false),
   ];
 
-  loadData()async{
-    createdEmojis = await SharedPreferenceService.loadEmojis();
-    update();
-  }
+  EmojiModel? get selectedEmoji => _selectedEmoji;
+  List<EmojiModel>? get createdEmojis => _createdEmojis;
+  String get createEmojiImage => _createEmojiImage;
+  List<EmojiModel> get localEmojis => _localEmojis;
+  bool get canCreateEmoji => _createEmojiImage.isNotEmpty && createEmojiTitle.text.trim().isNotEmpty;
 
   @override
   void onInit() {
@@ -35,45 +37,56 @@ class InnerController extends GetxController {
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
+  loadData()async{
+    _createdEmojis = await SharedPreferenceService.loadEmojis();
+    update();
   }
 
   void chooseEmoji(EmojiModel object) {
-    for(var emoji in localEmojis){
+    for(var emoji in _localEmojis){
       if(emoji.title == object.title && object.isSelected == false){
         emoji.isSelected = true;
-        selectedEmoji = emoji;
+        _selectedEmoji = emoji;
       }else{
         emoji.isSelected = false;
       }
     }
     update();
-    debugPrint(selectedEmoji!.title);
+    debugPrint(_selectedEmoji!.title);
   }
 
   void chooseEmojiImage(EmojiModel image){
-    createEmojiImage = image.emoji;
+    debugPrint('SELECTED: ${image.emoji} : ${image.isSelected}');
+    _createEmojiImage = image.emoji;
+    for(var emoji in emojisSet){
+      if(emoji.emoji == image.emoji && emoji.isSelected == false){
+        emoji.isSelected = true;
+      }else{
+        emoji.isSelected = false;
+      }
+    }
     update();
+    print('$_createEmojiImage => ${image.isSelected}');
   }
 
   void createEmoji(){
-    String image = createEmojiImage;
+    String image = _createEmojiImage;
     String title = createEmojiTitle.text.trim();
-
+    print('TITLE: $title  IMAGE: $image');
     if(image.isNotEmpty && title.isNotEmpty){
       final newEmoji = EmojiModel(emoji: image, title: title, isSelected: false);
-      if(createdEmojis != null){
-        createdEmojis!.add(newEmoji);
+      if(_createdEmojis != null){
+        _createdEmojis!.add(newEmoji);
         update();
-        SharedPreferenceService.storeEmojis(createdEmojis!);
+        SharedPreferenceService.storeEmojis(_createdEmojis!);
+      }else{
+        List<EmojiModel> createdEmoji = [newEmoji];
+        update();
+        SharedPreferenceService.storeEmojis(createdEmoji);
       }
+      _createEmojiImage = '';
+      createEmojiTitle.clear();
+      update();
     }
   }
 }
