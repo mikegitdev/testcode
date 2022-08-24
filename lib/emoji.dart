@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tasker/app_color.dart';
+import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/emoji_text.dart';
 
 class Emoji extends StatelessWidget {

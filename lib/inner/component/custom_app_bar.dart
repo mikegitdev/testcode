@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tasker/app_color.dart';
-import 'package:tasker/app_icon.dart';
-import 'package:tasker/app_text_style.dart';
+import 'package:tasker/app_utils/app_color.dart';
+import 'package:tasker/app_utils/app_icon.dart';
+import 'package:tasker/app_utils/app_text_style.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:tasker/app_color.dart';
+import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/app_route/app_route_name.dart';
-import 'package:tasker/app_text_style.dart';
+import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/emoji_single.dart';
 
 import 'create_alert_bottom.dart';
@@ -88,12 +88,13 @@ class SendAlertBottom extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
                 height: 346.h,
                 child: GridView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 140,
-                      childAspectRatio: 3 / 2,
+                      childAspectRatio: 3 / 2.2,
                       crossAxisSpacing: 8,
-                      mainAxisSpacing: 12),
+                      mainAxisSpacing: 12,
+                  ),
                   itemBuilder: (BuildContext ctx, index) {
                     return EmojiSIngle(
                       emoji: '😍',

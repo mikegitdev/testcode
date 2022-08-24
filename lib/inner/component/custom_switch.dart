@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tasker/app_color.dart';
-import 'package:tasker/app_text_style.dart';
+import 'package:tasker/app_utils/app_color.dart';
+import 'package:tasker/app_utils/app_text_style.dart';
 
 class CustomSwitch extends StatefulWidget {
   final bool value;

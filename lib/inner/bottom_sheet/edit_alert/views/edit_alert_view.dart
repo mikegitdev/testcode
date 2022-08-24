@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
-import 'package:tasker/app_color.dart';
-import 'package:tasker/app_text_style.dart';
+import 'package:tasker/app_utils/app_color.dart';
+import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/inner/component/custom_checkbox_list.dart';
 import 'package:tasker/inner/component/custom_checkbox_list_remove.dart';
 

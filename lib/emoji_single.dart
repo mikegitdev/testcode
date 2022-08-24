@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tasker/app_color.dart';
-import 'package:tasker/app_text_style.dart';
+import 'package:tasker/app_utils/app_color.dart';
+import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/emoji_text.dart';
 
 class EmojiSIngle extends StatelessWidget {
@@ -28,7 +28,7 @@ class EmojiSIngle extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColor.cF3F8FF,
           borderRadius: BorderRadius.circular(12.h),
-          // border: Border.all(color: AppColor.c0B4499, width: 1.0),
+          border: Border.all(color: AppColor.c0B4499, width: 1.0),
         ),
         //   color: Colors.amber,
         child: Column(

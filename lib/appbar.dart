@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:tasker/app_text_style.dart';
+import 'package:tasker/app_utils/app_text_style.dart';
 
 class AppBarScreen extends StatelessWidget with PreferredSizeWidget {
   @override
@@ -21,11 +21,12 @@ class AppBarScreen extends StatelessWidget with PreferredSizeWidget {
           style: AppTextStyle.boldNormal
               .copyWith(fontSize: 16.sp, color: Colors.black)),
       leading: IconButton(
+        splashRadius: 1,
         icon: const Icon(
           Icons.arrow_back_ios,
           color: Colors.black,
         ),
-        onPressed: () => Navigator.of(context).pop(),
+        onPressed: () => Navigator.of(context).maybePop(),
       ),
       actions: [
         Padding(
@@ -38,16 +39,16 @@ class AppBarScreen extends StatelessWidget with PreferredSizeWidget {
             child: SvgPicture.asset("assets/icons/more.svg"),
             onPressed: () {
               PopupMenuButton<int>(
-                icon: Icon(Icons.more_vert),
+                icon: const Icon(Icons.more_vert),
                 // offset: const Offset(20, 40),
                 position: PopupMenuPosition.under,
                 onSelected: (item) => onSelected(context, item),
                 itemBuilder: (context) => [
-                  PopupMenuItem<int>(
+                  const PopupMenuItem<int>(
                     value: 0,
                     child: Text("Delete Entry"),
                   ),
-                  PopupMenuItem<int>(
+                  const PopupMenuItem<int>(
                     value: 1,
                     child: Text("Move To Archive"),
                   ),
@@ -58,7 +59,7 @@ class AppBarScreen extends StatelessWidget with PreferredSizeWidget {
         ),
       ],
       elevation: 0,
-      backgroundColor: Color(0XffF5F5F5),
+      backgroundColor: const Color(0XffF5F5F5),
       automaticallyImplyLeading: true,
     );
   }

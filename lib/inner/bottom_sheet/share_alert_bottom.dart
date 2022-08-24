@@ -7,9 +7,9 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:share_plus/share_plus.dart';
-import 'package:tasker/app_color.dart';
-import 'package:tasker/app_image.dart';
-import 'package:tasker/app_text_style.dart';
+import 'package:tasker/app_utils/app_color.dart';
+import 'package:tasker/app_utils/app_image.dart';
+import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/emoji_text.dart';
 import '../helper_class.dart';
 import 'create_alert_bottom.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tasker/app_text_style.dart';
+import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/appbar.dart';
 import 'package:tasker/bullet_box.dart';
 import 'package:tasker/emoji_text.dart';
@@ -12,11 +12,13 @@ import 'package:tasker/inner/photo_view.dart';
 import '../local_back.dart';
 
 class InnerScreen extends StatelessWidget {
+  const InnerScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: Color(0XffF5F5F5),
+      backgroundColor: const Color(0XffF5F5F5),
       appBar: AppBarScreen(
         appbarTitle: 'Rostr',
       ),
