@@ -8,13 +8,11 @@ import 'package:tasker/emoji_text.dart';
 import 'package:tasker/inner/rostr_info/inner_controller.dart';
 import 'package:tasker/models/emoji_model.dart';
 
-class EmojiSIngle extends GetView<InnerController> {
-  final BuildContext context;
+class EmojiSingle extends GetView<InnerController> {
   final EmojiModel object;
 
-  EmojiSIngle({
+  EmojiSingle({
     Key? key,
-    required this.context,
     required this.object,
   }) : super(key: key);
 
@@ -35,7 +33,8 @@ class EmojiSIngle extends GetView<InnerController> {
                   // border-image-source: linear-gradient(51.32deg, #56CCF2 6.11%, #2F80ED 84.94%);
                   Color(0xff56CCF2),
                   Color(0xff2F80ED),
-                ],) : null,
+                ],
+              ) : null,
           ),
           child: Container(
             padding: EdgeInsets.only(top: 8.h, bottom: 4.h),
@@ -48,12 +47,11 @@ class EmojiSIngle extends GetView<InnerController> {
             child: Column(
               children: [
                 EmojiText(size: 32.h, text: object.emoji),
-                SizedBox(
-                  height: 5.h,
+                SizedBox(height: 5.h),
+                Text(
+                  object.title!,
+                  style: AppTextStyle.regularNormal.copyWith(fontSize: 14.sp, color: AppColor.c676F80),
                 ),
-                Text(object.title!,
-                    style: AppTextStyle.regularNormal
-                        .copyWith(fontSize: 14.sp, color: AppColor.c676F80)),
               ],
             ),
           ),

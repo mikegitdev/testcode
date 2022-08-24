@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tasker/emoji_text.dart';
 import 'package:tasker/models/emoji_model.dart';
 
 import 'helper_class.dart';

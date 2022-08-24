@@ -20,7 +20,8 @@ class SendAlertBottom extends GetView<InnerController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<InnerController>(builder: (ctr) {
-      return StatefulBuilder(builder: (context, update) {
+      return StatefulBuilder(
+          builder: (context, update) {
         return Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,8 +100,7 @@ class SendAlertBottom extends GetView<InnerController> {
                               controller.chooseEmoji(controller.localEmojis[index]);
                             });
                           },
-                          child: EmojiSIngle(
-                            context: context,
+                          child: EmojiSingle(
                             object: controller.localEmojis[index],
                           ),
                         );
