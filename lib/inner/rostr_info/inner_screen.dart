@@ -95,13 +95,11 @@ class InnerScreen extends GetView<InnerController> {
                         if (kDebugMode) {
                           print("Send  Alert");
                         }
-                        showModalBottomSheet(
-                            context: context,
-                            isScrollControlled: true,
-                            backgroundColor: Colors.transparent,
-                            builder: (context) {
-                              return SendAlertBottom();
-                            });
+                        Get.bottomSheet(
+                          const SendAlertBottom(),
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                        );
                       },
                       style: OutlinedButton.styleFrom(
                         padding: EdgeInsets.zero,

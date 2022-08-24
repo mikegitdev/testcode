@@ -24,7 +24,6 @@ class ShareAlertBottom extends StatefulWidget {
 
 class _ShareAlertBottomState extends State<ShareAlertBottom> {
   var _image;
-  // ImagePicker? imagePicker;
   final ImagePicker imagePicker = ImagePicker();
   var type;
 

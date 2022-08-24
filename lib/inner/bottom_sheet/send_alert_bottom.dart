@@ -134,13 +134,11 @@ class SendAlertBottom extends GetView<InnerController> {
                                   borderRadius: BorderRadius.circular(12.r)),
                               child: ElevatedButton(
                                 onPressed: () {
-                                  showModalBottomSheet(
-                                      context: context,
-                                      isScrollControlled: true,
-                                      backgroundColor: Colors.transparent,
-                                      builder: (context) {
-                                        return const ShareAlertBottom();
-                                      });
+                                  Get.bottomSheet(
+                                    const ShareAlertBottom(),
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                  );
                                 }, //AppColor.gradient_03
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.transparent,
@@ -173,13 +171,11 @@ class SendAlertBottom extends GetView<InnerController> {
                                   borderRadius: BorderRadius.circular(12.r)),
                               onPressed: () {
                                 // sendAlert(context);
-                                showModalBottomSheet(
-                                    context: context,
-                                    isScrollControlled: true,
-                                    backgroundColor: Colors.transparent,
-                                    builder: (context) {
-                                      return const CreateAlertBottom();
-                                    });
+                                Get.bottomSheet(
+                                  const CreateAlertBottom(),
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                );
                               },
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
