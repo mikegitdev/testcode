@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
-import 'package:tasker/emoji.dart';
 import 'package:tasker/emoji_text.dart';
 import 'package:tasker/inner/bottom_sheet/back_button.dart';
 import 'package:tasker/inner/rostr_info/inner_controller.dart';
@@ -30,8 +29,7 @@ class CreateAlertBottom extends GetView<InnerController> {
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(25.r)),
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(25.r)),
                   ),
                   padding: EdgeInsets.only(top: 8.h),
                   child: Column(
@@ -66,8 +64,7 @@ class CreateAlertBottom extends GetView<InnerController> {
                         padding: EdgeInsets.only(left: 24.w),
                         child: Text(
                           "Choose an Emoji",
-                          style:
-                              AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
+                          style: AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
                         ),
                       ),
                       12.verticalSpace,
@@ -77,8 +74,7 @@ class CreateAlertBottom extends GetView<InnerController> {
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           padding: EdgeInsets.symmetric(horizontal: 24.w),
-                          gridDelegate:
-                              const SliverGridDelegateWithMaxCrossAxisExtent(
+                          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                             maxCrossAxisExtent: 40,
                             childAspectRatio: 3 / 2.8,
                             crossAxisSpacing: 8,
@@ -92,60 +88,55 @@ class CreateAlertBottom extends GetView<InnerController> {
                               },
                               child: Stack(
                                 children: [
-                                  controller.createEmojiImage.isNotEmpty &&
-                                          controller.createEmojiImage ==
-                                              emojisSet[index].emoji
+                                  controller.createEmojiImage.isNotEmpty && controller.createEmojiImage == emojisSet[index].emoji
                                       ? Positioned.fill(
-                                          child: Container(
-                                            padding: const EdgeInsets.all(2),
-                                            decoration: const BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: AppColor.c41A3F0,
-                                            ),
-                                            child: Center(
-                                              child: Container(
-                                                height: 36.h,
-                                                width: 36.w,
-                                                alignment: Alignment.center,
-                                                decoration: const BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  color: AppColor.white,
-                                                ),
-                                                child: Stack(
-                                                  children: [
-                                                    EmojiText(
-                                                      size: 26.w,
-                                                      text:
-                                                          emojisSet[index].emoji,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
+                                    child: Container(
+                                      padding: const EdgeInsets.all(2),
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: AppColor.c41A3F0,
+                                      ),
+                                      child: Center(
+                                        child: Container(
+                                          height: 36.h,
+                                          width: 36.w,
+                                          alignment: Alignment.center,
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: AppColor.white,
                                           ),
-                                        )
+                                          child: Stack(
+                                            children: [
+                                              EmojiText(
+                                                size: 26.w,
+                                                text:
+                                                emojisSet[index].emoji,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )
                                       : EmojiText(
-                                          size: 32.w,
-                                          text: emojisSet[index].emoji),
+                                      size: 32.w,
+                                      text: emojisSet[index].emoji,
+                                  ),
                                   Visibility(
                                     visible:
-                                        controller.createEmojiImage.isNotEmpty &&
-                                            controller.createEmojiImage !=
-                                                emojisSet[index].emoji,
+                                    controller.createEmojiImage.isNotEmpty && controller.createEmojiImage != emojisSet[index].emoji,
                                     child: Container(color: Colors.white60),
                                   ),
-                                  controller.createEmojiImage.isNotEmpty &&
-                                          controller.createEmojiImage ==
-                                              emojisSet[index].emoji
+                                  controller.createEmojiImage.isNotEmpty && controller.createEmojiImage == emojisSet[index].emoji
                                       ? Positioned(
-                                          bottom: 2.0,
-                                          right: 2.0,
-                                          child: SizedBox(
-                                            height: 14.h,
-                                            width: 14.w,
-                                            child: SvgPicture.asset('assets/icons/ic_check.svg'),
-                                          ),
-                                        )
+                                    bottom: 2.0,
+                                    right: 2.0,
+                                    child: SizedBox(
+                                      height: 14.h,
+                                      width: 14.w,
+                                      child: SvgPicture.asset('assets/icons/ic_check.svg'),
+                                    ),
+                                  )
                                       : const SizedBox.shrink(),
                                 ],
                               ),
@@ -159,8 +150,7 @@ class CreateAlertBottom extends GetView<InnerController> {
                         padding: EdgeInsets.only(left: 24.w),
                         child: Text(
                           "Make up a Name",
-                          style:
-                              AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
+                          style: AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
                         ),
                       ),
                       14.verticalSpace,
@@ -176,8 +166,7 @@ class CreateAlertBottom extends GetView<InnerController> {
                           ),
                           controller: controller.createEmojiTitle,
                           decoration: InputDecoration(
-                            contentPadding:
-                                EdgeInsets.symmetric(horizontal: 16.w),
+                            contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
                             fillColor: AppColor.cF6FAFE,
                             filled: true,
                             hintText: "e.g. Handsome",
@@ -189,8 +178,7 @@ class CreateAlertBottom extends GetView<InnerController> {
                             border: OutlineInputBorder(
                               borderSide: const BorderSide(
                                   width: 0, style: BorderStyle.none),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12.r)),
+                              borderRadius: BorderRadius.all(Radius.circular(12.r)),
                             ),
                           ),
                         ),

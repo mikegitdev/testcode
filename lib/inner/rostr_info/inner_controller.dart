@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tasker/data/local_storage.dart';
@@ -72,25 +74,46 @@ class InnerController extends GetxController {
   void createEmoji(){
     String image = _createEmojiImage;
     String title = createEmojiTitle.text.trim();
-    print('TITLE: $title  IMAGE: $image CREATEDIMOJIS: ${createdEmojis?.length}');
+    print('TITLE: $title  IMAGE: $image CREATEDIMOJIS: ${createdEmojis?.length} CANCREATE: $canCreateEmoji');
     if(image.isNotEmpty && title.isNotEmpty){
       final newEmoji = EmojiModel(emoji: image, title: title, isSelected: false);
       if(_createdEmojis != null){
         _createdEmojis!.add(newEmoji);
-        update();
-        SharedPreferenceService.storeEmojis(_createdEmojis!);
       }else{
-        List<EmojiModel> createdEmoji = [newEmoji];
-        update();
-        SharedPreferenceService.storeEmojis(createdEmoji);
+        _createdEmojis = [newEmoji];
       }
+      update();
+      SharedPreferenceService.storeEmojis(_createdEmojis!);
     }
-    cleanCreateEmoji();
+    cleanCreatedEmoji();
   }
 
-  void cleanCreateEmoji(){
+  void cleanCreatedEmoji(){
     _createEmojiImage = '';
     createEmojiTitle.clear();
     update();
+  }
+
+  void cleanSelectedEmoji(){
+    _selectedEmoji = null;
+    for(var emoji in _localEmojis){
+      emoji.isSelected = false;
+    }
+    update();
+  }
+
+  Future openBottomSheet({required Widget bottomSheet, bool isCleanSelectedEmoji = false, bool isCleanCreatedEmoji = false}){
+    return Get.bottomSheet(
+      bottomSheet,
+      isDismissible: false, // Dismiss when anywhere except the sheet pressed
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+    ).whenComplete(() {
+      if(isCleanSelectedEmoji){
+        cleanSelectedEmoji();
+      }else if(isCleanCreatedEmoji){
+        cleanCreatedEmoji();
+      }
+    });
   }
 }

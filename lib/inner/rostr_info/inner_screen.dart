@@ -92,14 +92,12 @@ class InnerScreen extends GetView<InnerController> {
                   children: [
                     OutlinedButton(
                       onPressed: () {
-                        if (kDebugMode) {
-                          print("Send  Alert");
-                        }
-                        Get.bottomSheet(
-                          const SendAlertBottom(),
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                        );
+                        controller.openBottomSheet(bottomSheet: const SendAlertBottom(), isCleanSelectedEmoji: true);
+                        // Get.bottomSheet(
+                        //   const SendAlertBottom(),
+                        //   isScrollControlled: true,
+                        //   backgroundColor: Colors.transparent,
+                        // ).whenComplete(() => controller.cleanSelectedEmoji());
                       },
                       style: OutlinedButton.styleFrom(
                         padding: EdgeInsets.zero,
@@ -114,10 +112,11 @@ class InnerScreen extends GetView<InnerController> {
                           ),
                         ),
                       ),
-                      child: Text('Send Alert',
+                      child: Text(
+                          'Send Alert',
                           style: AppTextStyle.boldNormal.copyWith(
                             fontSize: 16.sp,
-                            color: Color(0xff41A3F0),
+                            color: const Color(0xff41A3F0),
                           )),
                     ),
                     12.horizontalSpace,
