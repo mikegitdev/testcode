@@ -11,144 +11,13 @@ import 'package:tasker/inner/bottom_sheet/send_alert_bottom.dart';
 import 'package:tasker/inner/photo_view.dart';
 
 import '../local_back.dart';
+import 'inner_controller.dart';
 
 class InnerScreen extends GetView<InnerController> {
   const InnerScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      backgroundColor: const Color(0XffF5F5F5),
-      appBar: AppBarScreen(
-        appbarTitle: 'Rostr',
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 12.h,
-            ),
-            InkWell(
-              hoverColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onTap: () {
-                Navigator.of(context, rootNavigator: true).push(
-                  MaterialPageRoute(
-                    builder: (context) => const PhotoViewPage(
-                      images: [
-                        "https://faces-img.xcdn.link/thumb-lorem-face-6225_thumb.jpg",
-                        "https://faces-img.xcdn.link/thumb-lorem-face-5883_thumb.jpg",
-                        "https://faces-img.xcdn.link/thumb-lorem-face-2752_thumb.jpg",
-                        "https://faces-img.xcdn.link/thumb-lorem-face-770_thumb.jpg"
-                      ],
-                      selectedImgIndex: 0,
-                    ),
-                  ),
-                );
-              },
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(
-                  "https://faces-img.xcdn.link/thumb-lorem-face-6225_thumb.jpg",
-                  height: 96.h,
-                  width: 96.h,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 12.h,
-            ),
-            Text(
-              "Zander Valenstein",
-              style: AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
-            ),
-            SizedBox(
-              height: 4.h,
-            ),
-            Text(
-              "24 years old",
-              style: AppTextStyle.regularNormal
-                  .copyWith(fontSize: 14.sp, color: Colors.black54),
-            ),
-            SizedBox(
-              height: 2.h,
-            ),
-            Text(
-              "Tinder",
-              style: AppTextStyle.regularNormal
-                  .copyWith(fontSize: 14.sp, color: Colors.black54),
-            ),
-            SizedBox(
-              height: 16.h,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  OutlinedButton(
-                    onPressed: () {
-                      if (kDebugMode) {
-                        print("Send  Alert");
-                      }
-                      Get.bottomSheet(
-                        const SendAlertBottom(),
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                      );
-                    },
-                    style: OutlinedButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                      side: const BorderSide(
-                        width: 3.0,
-                        color: Color(0xff41A3F0),
-                      ),
-                      fixedSize: Size(101.w, 34.h),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                          30.0.r,
-                        ),
-                      ),
-                    ),
-                    child: Text('Send Alert',
-                        style: AppTextStyle.boldNormal.copyWith(
-                          fontSize: 16.sp,
-                          color: const Color(0xff41A3F0),
-                        )),
-                  ),
-                  12.horizontalSpace,
-                  ElevatedButton(
-                    onPressed: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => const Safety()));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                      primary: Color(0xffCFE8FB),
-                      fixedSize: Size(101.w, 32.h),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                          30.0.r,
-                        ),
-                      ),
-                    ),
-                    child: Text('Edit Info',
-                        style: AppTextStyle.boldNormal.copyWith(
-                          fontSize: 16.sp,
-                          color: Color(0xff41A3F0),
-                        )),
-                  ),
-                  SizedBox(
-                    width: 12.w,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Navigator.push(
-                      //     context,ghghghghghhghgghhghggh
     return GetBuilder<InnerController>(
       builder: (ctr) => Scaffold(
         resizeToAvoidBottomInset: true,
@@ -345,7 +214,8 @@ class InnerScreen extends GetView<InnerController> {
                     children: [
                       Text(
                         " " "Overall Rating",
-                        style: AppTextStyle.boldNormal.copyWith(fontSize: 16.sp),
+                        style:
+                            AppTextStyle.boldNormal.copyWith(fontSize: 16.sp),
                       ),
                       Wrap(
                         alignment: WrapAlignment.start,
@@ -377,7 +247,7 @@ class InnerScreen extends GetView<InnerController> {
                     Column(
                       children: List.generate(
                         ratings.length - ratings.length ~/ 2,
-                            (index) => Padding(
+                        (index) => Padding(
                           padding: EdgeInsets.only(bottom: 12.0.h),
                           child: Container(
                             height: 38.h,
@@ -418,7 +288,7 @@ class InnerScreen extends GetView<InnerController> {
                     Column(
                       children: List.generate(
                         ratings.length ~/ 2,
-                            (index) => Padding(
+                        (index) => Padding(
                           padding: EdgeInsets.only(bottom: 12.0.h),
                           child: Container(
                             height: 38.h,
@@ -527,21 +397,21 @@ class InnerScreen extends GetView<InnerController> {
                 width: MediaQuery.of(context).size.width - 48.h,
                 child: Wrap(
                     children: List.generate(
-                      tags.length,
-                          (index) => Padding(
-                        padding: EdgeInsets.only(right: 12.h, bottom: 12.h),
-                        child: Container(
-                          padding: EdgeInsets.all(8.h),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.h),
-                            color: Colors.white,
-                          ),
-                          child: Text(tags[index].lookTitle,
-                              style: AppTextStyle.regularNormal.copyWith(
-                                  fontSize: 14.sp, color: tags[index].lookColor)),
-                        ),
+                  tags.length,
+                  (index) => Padding(
+                    padding: EdgeInsets.only(right: 12.h, bottom: 12.h),
+                    child: Container(
+                      padding: EdgeInsets.all(8.h),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.h),
+                        color: Colors.white,
                       ),
-                    )),
+                      child: Text(tags[index].lookTitle,
+                          style: AppTextStyle.regularNormal.copyWith(
+                              fontSize: 14.sp, color: tags[index].lookColor)),
+                    ),
+                  ),
+                )),
               ),
               SizedBox(
                 height: 74.h,
@@ -623,7 +493,8 @@ class InnerScreen extends GetView<InnerController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("General Notes",
-                        style: AppTextStyle.boldNormal.copyWith(fontSize: 16.sp)),
+                        style:
+                            AppTextStyle.boldNormal.copyWith(fontSize: 16.sp)),
                     BulletList([
                       "Really outgoing and gets along well with my friends",
                       "Met him at the bar",
@@ -717,7 +588,8 @@ class InnerScreen extends GetView<InnerController> {
                         ),
                       ],
                     ),
-                    BulletList(["Very Smart", "He is very funny and confident"]),
+                    BulletList(
+                        ["Very Smart", "He is very funny and confident"]),
                   ],
                 ),
               ),
@@ -823,7 +695,8 @@ class InnerScreen extends GetView<InnerController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("Phone Number",
-                        style: AppTextStyle.boldNormal.copyWith(fontSize: 16.sp)),
+                        style:
+                            AppTextStyle.boldNormal.copyWith(fontSize: 16.sp)),
                     Text(
                       "408-777-9999",
                       style: AppTextStyle.regularNormal.copyWith(
@@ -846,7 +719,8 @@ class InnerScreen extends GetView<InnerController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("Snapchat",
-                        style: AppTextStyle.boldNormal.copyWith(fontSize: 16.sp)),
+                        style:
+                            AppTextStyle.boldNormal.copyWith(fontSize: 16.sp)),
                     Text(
                       "408-777-9999",
                       style: AppTextStyle.regularNormal.copyWith(

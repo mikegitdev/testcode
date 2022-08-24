@@ -5,12 +5,12 @@ import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/emoji_text.dart';
 
+import 'back_button.dart';
 import 'create_alert_bottom.dart';
 import 'send_alert_bottom.dart';
 
 class SendToChatBottom extends StatelessWidget {
-  final InnerController innerController;
-  const SendToChatBottom({Key? key, required this.innerController}) : super(key: key);
+  const SendToChatBottom({Key? key,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
