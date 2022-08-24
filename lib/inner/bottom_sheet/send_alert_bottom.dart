@@ -23,14 +23,18 @@ class SendAlertBottom extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12.w),
-          child: FloatingActionButton(
-            onPressed: () {
-              Get.back();
-            },
-            backgroundColor: AppColor.white,
-            child: const Icon(
+        Container(
+          height: 44.h,
+          width: 44.w,
+          margin: EdgeInsets.only(left: 12.w),
+          decoration: const BoxDecoration(
+            color: AppColor.white,
+            shape: BoxShape.circle,
+          ),
+          child: IconButton(
+            splashRadius: 1,
+            onPressed: () => Get.back(),
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: AppColor.c15213B,
             ),
