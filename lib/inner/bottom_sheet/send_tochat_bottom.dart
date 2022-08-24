@@ -91,11 +91,6 @@ class SendToChatBottom extends GetView<InnerController> {
                       onPressed: () {
                         debugPrint('SendAlertBottom');
                         controller.openBottomSheet(bottomSheet: const SendAlertBottom());
-                        // Get.bottomSheet(
-                        //   const SendAlertBottom(),
-                        //   isScrollControlled: true,
-                        //   backgroundColor: Colors.transparent,
-                        // );
                       },
                       style: OutlinedButton.styleFrom(
                         //  minimumSize: Size(1.sw, 48.h),
@@ -231,11 +226,6 @@ class SendToChatBottom extends GetView<InnerController> {
                         onPressed: () {
                           // sendAlert(context);
                           controller.openBottomSheet(bottomSheet: const CreateAlertBottom());
-                          // Get.bottomSheet(
-                          //   const CreateAlertBottom(),
-                          //   isScrollControlled: true,
-                          //   backgroundColor: Colors.transparent,
-                          // );
                         },
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -259,11 +249,6 @@ class SendToChatBottom extends GetView<InnerController> {
                       child: ElevatedButton(
                         onPressed: () {
                           controller.openBottomSheet(bottomSheet: const SendToChatBottom());
-                          // Get.bottomSheet(
-                          //   const SendToChatBottom(),
-                          //   isScrollControlled: true,
-                          //   backgroundColor: Colors.transparent,
-                          // );
                         }, //AppColor.gradient_03
                         style: ElevatedButton.styleFrom(
                           primary: Colors.transparent,

@@ -93,11 +93,6 @@ class InnerScreen extends GetView<InnerController> {
                     OutlinedButton(
                       onPressed: () {
                         controller.openBottomSheet(bottomSheet: const SendAlertBottom(), isCleanSelectedEmoji: true);
-                        // Get.bottomSheet(
-                        //   const SendAlertBottom(),
-                        //   isScrollControlled: true,
-                        //   backgroundColor: Colors.transparent,
-                        // ).whenComplete(() => controller.cleanSelectedEmoji());
                       },
                       style: OutlinedButton.styleFrom(
                         padding: EdgeInsets.zero,

@@ -164,11 +164,6 @@ class SendAlertBottom extends GetView<InnerController> {
                         onPressed: () {
                           if (controller.selectedEmoji != null) {
                             controller.openBottomSheet(bottomSheet: const ShareAlertBottom());
-                            // Get.bottomSheet(
-                            //   const ShareAlertBottom(),
-                            //   isScrollControlled: true,
-                            //   backgroundColor: Colors.transparent,
-                            // );
                           }
                         }, //AppColor.gradient_03
                         style: ElevatedButton.styleFrom(
@@ -191,13 +186,7 @@ class SendAlertBottom extends GetView<InnerController> {
                     child: ElevatedButton(
                       onPressed: () {
                         // sendAlert(context);
-
                         controller.openBottomSheet(bottomSheet: const CreateAlertBottom(), isCleanCreatedEmoji: true);
-                        // Get.bottomSheet(
-                        //   const CreateAlertBottom(),
-                        //   isScrollControlled: true,
-                        //   backgroundColor: Colors.transparent,
-                        // ).whenComplete(() => controller.cleanCreateEmoji());
                       },
                       style: ElevatedButton.styleFrom(
                         elevation: 0.0,
