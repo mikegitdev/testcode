@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tasker/data/local_storage.dart';
@@ -43,11 +42,9 @@ class InnerController extends GetxController {
     update();
   }
 
-
   bool canCreateEmoji() {
     String image = _createEmojiImage;
     String title = createEmojiTitle.text.trim();
-    print('TITLE: $title  IMAGE: $image CREATEDIMOJIS: ${createdEmojis?.length} CANCREATE: $canCreateEmoji');
     return image.isNotEmpty && title.isNotEmpty;
   }
 
@@ -61,11 +58,9 @@ class InnerController extends GetxController {
       }
     }
     update();
-    debugPrint(_selectedEmoji!.title);
   }
 
   void chooseEmojiImage(EmojiModel image){
-    debugPrint('SELECTED: ${image.emoji} : ${image.isSelected}');
     _createEmojiImage = image.emoji;
     for(var emoji in emojisSet){
       if(emoji.emoji == image.emoji && emoji.isSelected == false){
@@ -75,7 +70,7 @@ class InnerController extends GetxController {
       }
     }
     update();
-    print('$_createEmojiImage => ${image.isSelected}');
+    print('SELECTED: $_createEmojiImage => ${image.isSelected}');
   }
 
   void createEmoji(){

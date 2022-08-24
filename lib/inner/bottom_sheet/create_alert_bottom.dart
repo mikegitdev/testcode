@@ -74,11 +74,11 @@ class CreateAlertBottom extends GetView<InnerController> {
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           padding: EdgeInsets.symmetric(horizontal: 24.w),
-                          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                             maxCrossAxisExtent: 40,
-                            childAspectRatio: 3 / 2.8,
-                            crossAxisSpacing: 8,
-                            mainAxisSpacing: 12,
+                            childAspectRatio: 3.h / 2.8.w,
+                            crossAxisSpacing: 8.h,
+                            mainAxisSpacing: 12.w,
                           ),
                           itemBuilder: (BuildContext ctx, index) {
                             return GestureDetector(
@@ -97,30 +97,22 @@ class CreateAlertBottom extends GetView<InnerController> {
                                         shape: BoxShape.circle,
                                         color: AppColor.c41A3F0,
                                       ),
-                                      child: Center(
-                                        child: Container(
-                                          height: 36.h,
-                                          width: 36.w,
-                                          alignment: Alignment.center,
-                                          decoration: const BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: AppColor.white,
-                                          ),
-                                          child: Stack(
-                                            children: [
-                                              EmojiText(
-                                                size: 26.w,
-                                                text:
-                                                emojisSet[index].emoji,
-                                              ),
-                                            ],
+                                      child: Container(
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: AppColor.white,
+                                        ),
+                                        child: Center(
+                                          child: EmojiText(
+                                            size: 30.w,
+                                            text: emojisSet[index].emoji,
                                           ),
                                         ),
                                       ),
                                     ),
                                   )
                                       : EmojiText(
-                                      size: 32.w,
+                                    size: 30.w,
                                       text: emojisSet[index].emoji,
                                   ),
                                   Visibility(
