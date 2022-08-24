@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tasker/data/local_storage.dart';
 import 'package:tasker/models/emoji_model.dart';
 
 class InnerController extends GetxController {
-  final count = 0;
-  bool isPressed = false;
   EmojiModel? selectedEmoji;
+  List<EmojiModel>? createdEmojis;
+  String createEmojiImage = '';
+  TextEditingController createEmojiTitle = TextEditingController();
+
   List<EmojiModel> localEmojis = [
     EmojiModel(emoji: '😍', title: 'Love', isSelected: false),
     EmojiModel(emoji: '🔥', title: 'Hot', isSelected: false),
@@ -20,11 +23,15 @@ class InnerController extends GetxController {
     EmojiModel(emoji: '🔻', title: 'Demoted', isSelected: false),
     EmojiModel(emoji: '❌', title: 'Removed', isSelected: false),
   ];
-  List<EmojiModel> createdEmojis = [];
 
+  loadData()async{
+    createdEmojis = await SharedPreferenceService.loadEmojis();
+    update();
+  }
 
   @override
   void onInit() {
+    loadData();
     super.onInit();
   }
 
@@ -49,5 +56,24 @@ class InnerController extends GetxController {
     }
     update();
     debugPrint(selectedEmoji!.title);
+  }
+
+  void chooseEmojiImage(EmojiModel image){
+    createEmojiImage = image.emoji;
+    update();
+  }
+
+  void createEmoji(){
+    String image = createEmojiImage;
+    String title = createEmojiTitle.text.trim();
+
+    if(image.isNotEmpty && title.isNotEmpty){
+      final newEmoji = EmojiModel(emoji: image, title: title, isSelected: false);
+      if(createdEmojis != null){
+        createdEmojis!.add(newEmoji);
+        update();
+        SharedPreferenceService.storeEmojis(createdEmojis!);
+      }
+    }
   }
 }
