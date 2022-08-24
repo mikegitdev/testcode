@@ -72,7 +72,7 @@ class InnerController extends GetxController {
   void createEmoji(){
     String image = _createEmojiImage;
     String title = createEmojiTitle.text.trim();
-    print('TITLE: $title  IMAGE: $image');
+    print('TITLE: $title  IMAGE: $image CREATEDIMOJIS: ${createdEmojis?.length}');
     if(image.isNotEmpty && title.isNotEmpty){
       final newEmoji = EmojiModel(emoji: image, title: title, isSelected: false);
       if(_createdEmojis != null){

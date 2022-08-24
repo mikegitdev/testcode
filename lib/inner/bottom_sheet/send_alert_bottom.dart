@@ -81,31 +81,77 @@ class SendAlertBottom extends GetView<InnerController> {
                         .copyWith(fontSize: 12.sp, color: AppColor.c62677D),
                   ),
                   32.verticalSpace,
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 24.w),
-                    height: 346.h,
-                    child: GridView.builder(
-                      // physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 140,
-                        childAspectRatio: 3 / 2.14,
-                        crossAxisSpacing: 8,
-                        mainAxisSpacing: 12,
-                      ),
-                      itemBuilder: (BuildContext ctx, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            update(() {
-                              controller.chooseEmoji(controller.localEmojis[index]);
-                            });
-                          },
-                          child: EmojiSingle(
-                            object: controller.localEmojis[index],
+                  SizedBox(
+                    height: 400.h,
+                    child: ListView(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 24.w),
+                          height: 346.h,
+                          child: GridView.builder(
+                            // physics: const NeverScrollableScrollPhysics(),
+                            gridDelegate:
+                                const SliverGridDelegateWithMaxCrossAxisExtent(
+                              maxCrossAxisExtent: 140,
+                              childAspectRatio: 3 / 2.14,
+                              crossAxisSpacing: 8,
+                              mainAxisSpacing: 12,
+                            ),
+                            itemBuilder: (BuildContext ctx, index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  update(() {
+                                    controller.chooseEmoji(controller.localEmojis[index]);
+                                  });
+                                },
+                                child: EmojiSingle(
+                                  object: controller.localEmojis[index],
+                                ),
+                              );
+                            },
+                            itemCount: controller.localEmojis.length,
                           ),
-                        );
-                      },
-                      itemCount: controller.localEmojis.length,
+                        ),
+
+                        controller.createdEmojis != null && controller.createdEmojis!.isNotEmpty
+                            ? Column(
+                          children: [
+                            24.verticalSpace,
+                            Text(
+                              "Custom Alerts",
+                              style:
+                              AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
+                            ),
+                            24.verticalSpace,
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 24.w),
+                              height: 200.h,
+                              child: GridView.builder(
+                                gridDelegate:
+                                const SliverGridDelegateWithMaxCrossAxisExtent(
+                                  maxCrossAxisExtent: 140,
+                                  childAspectRatio: 3 / 2.14,
+                                  crossAxisSpacing: 8,
+                                  mainAxisSpacing: 12,
+                                ),
+                                itemBuilder: (BuildContext ctx, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      update(() {
+                                        controller.chooseEmoji(controller.createdEmojis![index]);
+                                      });
+                                    },
+                                    child: EmojiSingle(
+                                      object: controller.createdEmojis![index],
+                                    ),
+                                  );
+                                },
+                                itemCount: controller.createdEmojis!.length,
+                              ),
+                            ),
+                          ],
+                        ) : const SizedBox.shrink(),
+                      ],
                     ),
                   ),
                   24.verticalSpace,
