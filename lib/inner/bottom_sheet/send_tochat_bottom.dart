@@ -4,12 +4,14 @@ import 'package:get/get.dart';
 import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/emoji_text.dart';
+import 'package:tasker/inner/rostr_info/inner_controller.dart';
 
 import 'create_alert_bottom.dart';
 import 'send_alert_bottom.dart';
 
 class SendToChatBottom extends StatelessWidget {
-  const SendToChatBottom({Key? key}) : super(key: key);
+  final InnerController innerController;
+  const SendToChatBottom({Key? key, required this.innerController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -273,7 +275,7 @@ class SendToChatBottom extends StatelessWidget {
                           isScrollControlled: true,
                           backgroundColor: Colors.transparent,
                           builder: (context) {
-                            return SendToChatBottom();
+                            return SendToChatBottom(innerController: innerController,);
                           });
                     }, //AppColor.gradient_03
                     style: ElevatedButton.styleFrom(
