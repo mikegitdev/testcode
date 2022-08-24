@@ -5,6 +5,7 @@ import 'package:tasker/models/emoji_model.dart';
 class InnerController extends GetxController {
   final count = 0;
   bool isPressed = false;
+  EmojiModel? selectedEmoji;
   List<EmojiModel> localEmojis = [
     EmojiModel(emoji: '😍', title: 'Love', isSelected: false),
     EmojiModel(emoji: '🔥', title: 'Hot', isSelected: false),
@@ -39,12 +40,12 @@ class InnerController extends GetxController {
     for(var emoji in localEmojis){
       if(emoji.title == object.title && object.isSelected == false){
         emoji.isSelected = true;
-      }else if(emoji.title == object.title && object.isSelected){
-        emoji.isSelected = false;
+        selectedEmoji = emoji;
       }else{
         emoji.isSelected = false;
       }
     }
     update();
+    debugPrint(selectedEmoji!.title);
   }
 }
