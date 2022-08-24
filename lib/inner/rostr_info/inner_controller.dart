@@ -20,6 +20,8 @@ class InnerController extends GetxController {
     EmojiModel(emoji: '🔻', title: 'Demoted', isSelected: false),
     EmojiModel(emoji: '❌', title: 'Removed', isSelected: false),
   ];
+  List<EmojiModel> createdEmojis = [];
+
 
   @override
   void onInit() {

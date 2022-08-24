@@ -217,34 +217,37 @@ class _ShareAlertBottomState extends State<ShareAlertBottom> {
                       right: 24.0.w,
                       // bottom: MediaQuery.of(context).viewInsets.bottom,
                     ),
-                    child: TextFormField(
-                      style: AppTextStyle.regularNormal.copyWith(
-                        color: AppColor.c15213B,
-                        fontSize: 16.sp,
-                      ),
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
-                        fillColor: AppColor.cF6FAFE,
-                        filled: true,
-                        // helperText: "Name",
-                        labelText: "Name",
-                        floatingLabelAlignment: FloatingLabelAlignment.start,
-                        alignLabelWithHint: false,
-                        floatingLabelStyle: AppTextStyle.regularNormal.copyWith(
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                      child: TextFormField(
+                        style: AppTextStyle.regularNormal.copyWith(
+                          color: AppColor.c15213B,
                           fontSize: 16.sp,
-                          color: AppColor.c969BA7,
                         ),
-                        // hintText: "e.g. Handsome",
-                        labelStyle: AppTextStyle.regularNormal.copyWith(
-                          color: AppColor.c969BA7,
-                          fontSize: 12.sp,
-                          height: 2.h,
-                        ),
-                        suffixIcon: IconButton(
-                            onPressed: () {}, icon: Icon(Icons.highlight_off)),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(width: 0, style: BorderStyle.none),
-                          borderRadius: BorderRadius.all(Radius.circular(12.r)),
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+                          fillColor: AppColor.cF6FAFE,
+                          filled: true,
+                          // helperText: "Name",
+                          labelText: "Name",
+                          floatingLabelAlignment: FloatingLabelAlignment.start,
+                          alignLabelWithHint: false,
+                          floatingLabelStyle: AppTextStyle.regularNormal.copyWith(
+                            fontSize: 16.sp,
+                            color: AppColor.c969BA7,
+                          ),
+                          // hintText: "e.g. Handsome",
+                          labelStyle: AppTextStyle.regularNormal.copyWith(
+                            color: AppColor.c969BA7,
+                            fontSize: 12.sp,
+                            height: 2.h,
+                          ),
+                          suffixIcon: IconButton(
+                              onPressed: () {}, icon: Icon(Icons.highlight_off)),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(width: 0, style: BorderStyle.none),
+                            borderRadius: BorderRadius.all(Radius.circular(12.r)),
+                          ),
                         ),
                       ),
                     ),
@@ -254,7 +257,7 @@ class _ShareAlertBottomState extends State<ShareAlertBottom> {
                     padding: EdgeInsets.only(
                       left: 24.0.w,
                       right: 24.0.w,
-                      // bottom: MediaQuery.of(context).viewInsets.bottom,
+                      bottom: MediaQuery.of(context).viewInsets.bottom,
                     ),
                     child: TextFormField(
                       style: AppTextStyle.regularNormal.copyWith(
