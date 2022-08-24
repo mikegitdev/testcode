@@ -151,32 +151,34 @@ class SendAlertBottom extends StatelessWidget {
               12.verticalSpace,
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
-                child: MaterialButton(
-                  elevation: 0,
-                  height: 48.h,
-                  color: AppColor.cCFE8FB,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
-                  onPressed: () {
-                    // sendAlert(context);
-                    showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        builder: (context) {
-                          return const CreateAlertBottom();
-                        });
-                  },
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Add Custom Alert',
-                        style: AppTextStyle.boldNormal
-                            .copyWith(color: AppColor.c41A3F0, fontSize: 16.sp),
-                      ),
-                    ],
+                child: ElevatedButton(
+                    onPressed: () {
+                      // sendAlert(context);
+                      showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          builder: (context) {
+                            return CreateAlertBottom();
+                          });
+                    },
+                  style: ElevatedButton.styleFrom(
+                    elevation: 0.0,
+                    primary: AppColor.cCFE8FB,
+                    fixedSize: Size.fromHeight(48.h),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
                   ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Add Custom Alert',
+                          style: AppTextStyle.boldNormal.copyWith(
+                              color: AppColor.c41A3F0, fontSize: 16.sp),
+                        ),
+                      ],
+                    ),
                 ),
               ),
               12.verticalSpace,
