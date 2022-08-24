@@ -14,20 +14,15 @@ class Emoji extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        debugPrint("selectedImgIndex");
-      },
-      child: Container(
-        height: 32.h,
-        width: 32.w,
-        alignment: Alignment.center,
+    return Container(
+      height: 32.h,
+      width: 32.w,
+      alignment: Alignment.center,
 
-        //   color: Colors.amber,
-        child: EmojiText(
-          size: 32.w,
-          text: object.emoji,
-        ),
+      //   color: Colors.amber,
+      child: EmojiText(
+        size: 32.w,
+        text: object.emoji,
       ),
     );
   }

@@ -85,9 +85,7 @@ class CreateAlertBottom extends GetView<InnerController> {
                                 controller.chooseEmojiImage(emojisSet[index]);
                                 // update(() {});
                               },
-                              child: Emoji(
-                                object: emojisSet[index],
-                              ),
+                              child: Emoji(object: emojisSet[index]),
                             );
                           },
                           itemCount: emojisSet.length,
