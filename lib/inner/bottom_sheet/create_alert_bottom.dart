@@ -83,8 +83,9 @@ class CreateAlertBottom extends GetView<InnerController> {
                           itemBuilder: (BuildContext ctx, index) {
                             return GestureDetector(
                               onTap: () {
-                                controller.chooseEmojiImage(emojisSet[index]);
-                                // update(() {});
+                                update(() {
+                                  controller.chooseEmojiImage(emojisSet[index]);
+                                });
                               },
                               child: Stack(
                                 children: [
@@ -181,13 +182,18 @@ class CreateAlertBottom extends GetView<InnerController> {
                               borderRadius: BorderRadius.all(Radius.circular(12.r)),
                             ),
                           ),
+                          onChanged: (text){
+                            update(() {
+                              controller.canCreateEmoji();
+                            });
+                          },
                         ),
                       ),
                       20.verticalSpace,
                       Container(
                         margin: EdgeInsets.symmetric(horizontal: 24.w),
                         decoration: BoxDecoration(
-                          gradient: controller.canCreateEmoji
+                          gradient: controller.canCreateEmoji()
                               ? AppColor.gradient_03
                               : null,
                           borderRadius: BorderRadius.circular(12.r),
@@ -197,7 +203,7 @@ class CreateAlertBottom extends GetView<InnerController> {
                               controller.createEmoji();
                             }, //AppColor.gradient_03
                             style: ElevatedButton.styleFrom(
-                                primary: controller.canCreateEmoji
+                                primary: controller.canCreateEmoji()
                                     ? Colors.transparent
                                     : AppColor.cCFE8FB,
                                 shadowColor: Colors.transparent,

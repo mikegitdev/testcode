@@ -31,7 +31,6 @@ class InnerController extends GetxController {
   List<EmojiModel>? get createdEmojis => _createdEmojis;
   String get createEmojiImage => _createEmojiImage;
   List<EmojiModel> get localEmojis => _localEmojis;
-  bool get canCreateEmoji => _createEmojiImage.isNotEmpty && createEmojiTitle.text.trim().isNotEmpty;
 
   @override
   void onInit() {
@@ -42,6 +41,14 @@ class InnerController extends GetxController {
   loadData()async{
     _createdEmojis = await SharedPreferenceService.loadEmojis();
     update();
+  }
+
+
+  bool canCreateEmoji() {
+    String image = _createEmojiImage;
+    String title = createEmojiTitle.text.trim();
+    print('TITLE: $title  IMAGE: $image CREATEDIMOJIS: ${createdEmojis?.length} CANCREATE: $canCreateEmoji');
+    return image.isNotEmpty && title.isNotEmpty;
   }
 
   void chooseEmoji(EmojiModel object) {
@@ -72,11 +79,8 @@ class InnerController extends GetxController {
   }
 
   void createEmoji(){
-    String image = _createEmojiImage;
-    String title = createEmojiTitle.text.trim();
-    print('TITLE: $title  IMAGE: $image CREATEDIMOJIS: ${createdEmojis?.length} CANCREATE: $canCreateEmoji');
-    if(image.isNotEmpty && title.isNotEmpty){
-      final newEmoji = EmojiModel(emoji: image, title: title, isSelected: false);
+    if(canCreateEmoji()){
+      final newEmoji = EmojiModel(emoji: _createEmojiImage, title: createEmojiTitle.text.trim(), isSelected: false);
       if(_createdEmojis != null){
         _createdEmojis!.add(newEmoji);
       }else{
