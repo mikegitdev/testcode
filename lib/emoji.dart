@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/emoji_text.dart';
+import 'package:tasker/models/emoji_model.dart';
 
 class Emoji extends StatelessWidget {
-  String emojiName;
+  EmojiModel object;
 
   Emoji({
     Key? key,
-    required this.emojiName,
+    required this.object,
   }) : super(key: key);
 
   @override
@@ -25,7 +26,7 @@ class Emoji extends StatelessWidget {
         //   color: Colors.amber,
         child: EmojiText(
           size: 32.w,
-          text: emojiName,
+          text: object.emoji,
         ),
       ),
     );

@@ -96,8 +96,7 @@ class SendAlertBottom extends GetView<InnerController> {
                         return GestureDetector(
                           onTap: () {
                             update(() {
-                              controller
-                                  .chooseEmoji(controller.localEmojis[index]);
+                              controller.chooseEmoji(controller.localEmojis[index]);
                             });
                           },
                           child: EmojiSIngle(
@@ -106,7 +105,7 @@ class SendAlertBottom extends GetView<InnerController> {
                           ),
                         );
                       },
-                      itemCount: emojiTextList.length,
+                      itemCount: controller.localEmojis.length,
                     ),
                   ),
                   24.verticalSpace,

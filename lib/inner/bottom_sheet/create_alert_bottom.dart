@@ -80,10 +80,10 @@ class CreateAlertBottom extends StatelessWidget {
                     ),
                     itemBuilder: (BuildContext ctx, index) {
                       return Emoji(
-                        emojiName: emojis[index],
+                        object: emojisSet[index],
                       );
                     },
-                    itemCount: emojis.length,
+                    itemCount: emojisSet.length,
                   ),
                 ),
                 30.verticalSpace,
