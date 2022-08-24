@@ -97,12 +97,12 @@ class InnerScreen extends StatelessWidget {
                           isScrollControlled: true,
                           backgroundColor: Colors.transparent,
                           builder: (context) {
-                            return SendAlertBottom();
+                            return const SendAlertBottom();
                           });
                     },
                     style: OutlinedButton.styleFrom(
                       padding: EdgeInsets.zero,
-                      side: BorderSide(
+                      side: const BorderSide(
                         width: 3.0,
                         color: Color(0xff41A3F0),
                       ),
@@ -116,7 +116,7 @@ class InnerScreen extends StatelessWidget {
                     child: Text('Send Alert',
                         style: AppTextStyle.boldNormal.copyWith(
                           fontSize: 16.sp,
-                          color: Color(0xff41A3F0),
+                          color: const Color(0xff41A3F0),
                         )),
                   ),
                   12.horizontalSpace,

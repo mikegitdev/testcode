@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 class EditAlertController extends GetxController {
   //TODO: Implement EditInfoController
 
-  final count = 0.obs;
+  int count = 0;
+
   @override
   void onInit() {
     super.onInit();
@@ -19,5 +20,8 @@ class EditAlertController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  void increment() {
+    count += 1;
+    update();
+  }
 }
