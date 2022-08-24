@@ -14,9 +14,7 @@ import 'create_alert_bottom.dart';
 import 'share_alert_bottom.dart';
 
 class SendAlertBottom extends StatelessWidget {
-  const SendAlertBottom({
-    Key? key,
-  }) : super(key: key);
+  const SendAlertBottom({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -96,10 +94,11 @@ class SendAlertBottom extends StatelessWidget {
                 child: GridView.builder(
                   // physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 140,
-                    childAspectRatio: 3 / 2.1,
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 12,
+
+                      maxCrossAxisExtent: 140,
+                      childAspectRatio: 3 / 2.14,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 12,
                   ),
                   itemBuilder: (BuildContext ctx, index) {
                     return GestureDetector(

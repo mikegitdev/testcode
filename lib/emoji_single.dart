@@ -22,25 +22,39 @@ class EmojiSIngle extends StatelessWidget {
         debugPrint("selectedImgIndex");
       },
       child: Container(
-        height: 72.h,
-        width: 100.w,
-        padding: EdgeInsets.only(top: 8.h, bottom: 4.h),
+        height: 74.h,
+        width: 104.w,
+        padding: const EdgeInsets.all(2.0),
         decoration: BoxDecoration(
-          color: AppColor.cF3F8FF,
-          borderRadius: BorderRadius.circular(12.h),
-          border: Border.all(color: AppColor.c0B4499, width: 1.0),
+            borderRadius: BorderRadius.circular(12.r),
+            gradient: const LinearGradient(
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
+                colors: [
+                  // border-image-source: linear-gradient(51.32deg, #56CCF2 6.11%, #2F80ED 84.94%);
+                  Color(0xff56CCF2),
+                  Color(0xff2F80ED),
+                ])
         ),
-        //   color: Colors.amber,
-        child: Column(
-          children: [
-            EmojiText(size: 32.h, text: emoji),
-            SizedBox(
-              height: 5.h,
-            ),
-            Text(emojiName,
-                style: AppTextStyle.regularNormal
-                    .copyWith(fontSize: 14.sp, color: AppColor.c676F80)),
-          ],
+        child: Container(
+          padding: EdgeInsets.only(top: 8.h, bottom: 4.h),
+          decoration: BoxDecoration(
+            color: AppColor.cF6FAFE,
+            borderRadius: BorderRadius.circular(12.r),
+            // border: Border.all(color: AppColor.c0B4499, width: 2.0),
+          ),
+          //   color: Colors.amber,
+          child: Column(
+            children: [
+              EmojiText(size: 32.h, text: emoji),
+              SizedBox(
+                height: 5.h,
+              ),
+              Text(emojiName,
+                  style: AppTextStyle.regularNormal
+                      .copyWith(fontSize: 14.sp, color: AppColor.c676F80)),
+            ],
+          ),
         ),
       ),
     );
