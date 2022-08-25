@@ -71,7 +71,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                         Align(
                           alignment: Alignment.bottomRight,
                           child: CircleAvatar(
-                            backgroundColor: Color(0xff41A3F0),
+                            backgroundColor: const Color(0xff41A3F0),
                             radius: 17,
                             child: Image.asset(AppImage.camera),
                           ),
