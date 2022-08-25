@@ -337,7 +337,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                                       "- -" " ",
                                       style: AppTextStyle.boldNormal.copyWith(
                                         fontSize: 16.sp,
-                                        color: Color(0xff00AE26),
+                                        color: const Color(0xff00AE26),
                                       ),
                                     ),
                                     const Icon(
@@ -353,105 +353,153 @@ class CreateRostr extends GetView<CreateRostrController> {
 
 
                         ///................................................................
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 24.h),
+                        ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              primary: AppColor.white,
+                              shadowColor: Colors.transparent,
+                              fixedSize: Size(157.w,37.h)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Column(
-                                children: List.generate(
-                                  ratings.length - ratings.length ~/ 2,
-                                  (index) => Padding(
-                                    padding: EdgeInsets.only(bottom: 12.0.h),
-                                    child: Container(
-                                      height: 38.h,
-                                      width: MediaQuery.of(context).size.width /
-                                              2 -
-                                          30.h,
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(8.r)),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            " ${ratings[ratings.length ~/ 2 + index].ratingTitle}",
-                                            style: AppTextStyle.regularNormal
-                                                .copyWith(fontSize: 16.sp),
-                                          ),
-                                          Wrap(
-                                            alignment: WrapAlignment.start,
-                                            children: [
-                                              Text(
-                                                "${ratings[ratings.length ~/ 2 + index].ratingScore} ",
-                                                style: AppTextStyle.boldNormal
-                                                    .copyWith(
-                                                  fontSize: 16.sp,
-                                                  color:
-                                                      const Color(0xff00AE26),
-                                                ),
-                                              ),
-                                              const Icon(
-                                                Icons.grade,
-                                                color: Colors.amber,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                              Text(
+                                'Looks',
+                                style: AppTextStyle.boldNormal.copyWith(
+                                    color: AppColor.c15213B, fontSize: 16.sp),
                               ),
-                              Column(
-                                children: List.generate(
-                                  ratings.length ~/ 2,
-                                  (index) => Padding(
-                                    padding: EdgeInsets.only(bottom: 12.0.h),
-                                    child: Container(
-                                      height: 38.h,
-                                      width: MediaQuery.of(context).size.width /
-                                              2 -
-                                          30.h,
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(8.r)),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            " ${ratings[index].ratingTitle}",
-                                            style: AppTextStyle.regularNormal
-                                                .copyWith(fontSize: 16.sp),
-                                          ),
-                                          Wrap(
-                                            alignment: WrapAlignment.start,
-                                            children: [
-                                              Text(
-                                                "${ratings[index].ratingScore} ",
-                                                style: AppTextStyle.boldNormal
-                                                    .copyWith(
-                                                  fontSize: 16.sp,
-                                                  color:
-                                                      const Color(0xff00AE26),
-                                                ),
-                                              ),
-                                              const Icon(
-                                                Icons.grade,
-                                                color: Colors.amber,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                              const Icon(Icons.arrow_forward_outlined,color: Colors.black,)
+                            ],
+                          ),
+                        ),
+
+                        // Padding(
+                        //   padding: EdgeInsets.only(bottom: 24.h),
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //     crossAxisAlignment: CrossAxisAlignment.start,
+                        //     children: [
+                        //       Column(
+                        //         children: List.generate(
+                        //           ratings.length - ratings.length ~/ 2,
+                        //           (index) => Padding(
+                        //             padding: EdgeInsets.only(bottom: 12.0.h),
+                        //             child: Container(
+                        //               height: 38.h,
+                        //               width: MediaQuery.of(context).size.width /
+                        //                       2 -
+                        //                   30.h,
+                        //               decoration: BoxDecoration(
+                        //                   color: Colors.white,
+                        //                   borderRadius:
+                        //                       BorderRadius.circular(8.r)),
+                        //               child: Row(
+                        //                 mainAxisAlignment:
+                        //                     MainAxisAlignment.spaceBetween,
+                        //                 children: [
+                        //                   Text(
+                        //                     " ${ratings[ratings.length ~/ 2 + index].ratingTitle}",
+                        //                     style: AppTextStyle.regularNormal
+                        //                         .copyWith(fontSize: 16.sp),
+                        //                   ),
+                        //                   Wrap(
+                        //                     alignment: WrapAlignment.start,
+                        //                     children: [
+                        //                       Text(
+                        //                         "${ratings[ratings.length ~/ 2 + index].ratingScore} ",
+                        //                         style: AppTextStyle.boldNormal
+                        //                             .copyWith(
+                        //                           fontSize: 16.sp,
+                        //                           color:
+                        //                               const Color(0xff00AE26),
+                        //                         ),
+                        //                       ),
+                        //                       const Icon(
+                        //                         Icons.grade,
+                        //                         color: Colors.amber,
+                        //                       ),
+                        //                     ],
+                        //                   ),
+                        //                 ],
+                        //               ),
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       ),
+                        //       Column(
+                        //         children: List.generate(
+                        //           ratings.length ~/ 2,
+                        //           (index) => Padding(
+                        //             padding: EdgeInsets.only(bottom: 12.0.h),
+                        //             child: Container(
+                        //               height: 38.h,
+                        //               width: MediaQuery.of(context).size.width /
+                        //                       2 -
+                        //                   30.h,
+                        //               decoration: BoxDecoration(
+                        //                   color: Colors.white,
+                        //                   borderRadius:
+                        //                       BorderRadius.circular(8.r)),
+                        //               child: Row(
+                        //                 mainAxisAlignment:
+                        //                     MainAxisAlignment.spaceBetween,
+                        //                 children: [
+                        //                   Text(
+                        //                     " ${ratings[index].ratingTitle}",
+                        //                     style: AppTextStyle.regularNormal
+                        //                         .copyWith(fontSize: 16.sp),
+                        //                   ),
+                        //                   Wrap(
+                        //                     alignment: WrapAlignment.start,
+                        //                     children: [
+                        //                       Text(
+                        //                         "${ratings[index].ratingScore} ",
+                        //                         style: AppTextStyle.boldNormal
+                        //                             .copyWith(
+                        //                           fontSize: 16.sp,
+                        //                           color:
+                        //                               const Color(0xff00AE26),
+                        //                         ),
+                        //                       ),
+                        //                       const Icon(
+                        //                         Icons.grade,
+                        //                         color: Colors.amber,
+                        //                       ),
+                        //                     ],
+                        //                   ),
+                        //                 ],
+                        //               ),
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                        ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              primary: AppColor.cCFE8FB,
+                              shadowColor: Colors.transparent,
+                              fixedSize: Size.fromHeight(40.h)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/icons/add.svg',
+                                height: 18.h,
+                                color: const Color(0xff41A3F0),
+                              ),
+                              5.horizontalSpace,
+                              Text(
+                                'Add Rating',
+                                style: AppTextStyle.boldNormal.copyWith(
+                                    color: const Color(0xff41A3F0), fontSize: 16.sp),
                               ),
                             ],
                           ),
@@ -509,13 +557,22 @@ class CreateRostr extends GetView<CreateRostrController> {
                     ),
                     primary: AppColor.cCFE8FB,
                     shadowColor: Colors.transparent,
-                    fixedSize: Size.fromHeight(48.h)),
-                child: Center(
-                  child: Text(
-                    'Add Rating',
-                    style: AppTextStyle.boldNormal.copyWith(
-                        color: const Color(0xff41A3F0), fontSize: 16.sp),
-                  ),
+                    fixedSize: Size.fromHeight(40.h)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/icons/add.svg',
+                      height: 18.h,
+                      color: const Color(0xff41A3F0),
+                    ),
+                    5.horizontalSpace,
+                    Text(
+                      'Add Tags',
+                      style: AppTextStyle.boldNormal.copyWith(
+                          color: const Color(0xff41A3F0), fontSize: 16.sp),
+                    ),
+                  ],
                 ),
               ),
               16.verticalSpace,
@@ -538,6 +595,7 @@ class CreateRostr extends GetView<CreateRostrController> {
               ),
               16.verticalSpace,
               Container(
+                width: double.infinity,
                 margin: EdgeInsets.only(bottom: 24.h),
                 padding: EdgeInsets.all(8.h),
                 decoration: BoxDecoration(
