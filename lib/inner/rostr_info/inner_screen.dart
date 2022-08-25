@@ -124,7 +124,7 @@ class InnerScreen extends GetView<InnerController> {
                       },
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.zero,
-                        primary: Color(0xffCFE8FB),
+                        primary: const Color(0xffCFE8FB),
                         fixedSize: Size(101.w, 32.h),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
@@ -135,7 +135,7 @@ class InnerScreen extends GetView<InnerController> {
                       child: Text('Edit Info',
                           style: AppTextStyle.boldNormal.copyWith(
                             fontSize: 16.sp,
-                            color: Color(0xff41A3F0),
+                            color: const Color(0xff41A3F0),
                           )),
                     ),
                     SizedBox(
@@ -216,7 +216,7 @@ class InnerScreen extends GetView<InnerController> {
                             "9.6" " ",
                             style: AppTextStyle.boldNormal.copyWith(
                               fontSize: 16.sp,
-                              color: Color(0xff00AE26),
+                              color: const Color(0xff00AE26),
                             ),
                           ),
                           const Icon(
@@ -265,7 +265,7 @@ class InnerScreen extends GetView<InnerController> {
                                         color: Color(0xff00AE26),
                                       ),
                                     ),
-                                    Icon(
+                                    const Icon(
                                       Icons.grade,
                                       color: Colors.amber,
                                     ),
@@ -306,7 +306,7 @@ class InnerScreen extends GetView<InnerController> {
                                         color: Color(0xff00AE26),
                                       ),
                                     ),
-                                    Icon(
+                                    const Icon(
                                       Icons.grade,
                                       color: Colors.amber,
                                     ),
@@ -335,7 +335,7 @@ class InnerScreen extends GetView<InnerController> {
                     },
                     style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.zero,
-                        primary: Color(0xffCFE8FB),
+                        primary: const Color(0xffCFE8FB),
 
                         //  fixedSize: Size(101.w, 32.h),
                         shape: RoundedRectangleBorder(
@@ -343,7 +343,7 @@ class InnerScreen extends GetView<InnerController> {
                             12.0.r,
                           ),
                         ),
-                        side: BorderSide(
+                        side: const BorderSide(
                           color: Colors.transparent,
                         )),
                     child: Wrap(
@@ -422,14 +422,14 @@ class InnerScreen extends GetView<InnerController> {
                     },
                     style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.zero,
-                        primary: Color(0xffCFE8FB),
+                        primary: const Color(0xffCFE8FB),
                         //  fixedSize: Size(101.w, 32.h),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
                             12.0.r,
                           ),
                         ),
-                        side: BorderSide(
+                        side: const BorderSide(
                           color: Colors.transparent,
                         )),
                     child: Wrap(
@@ -487,7 +487,7 @@ class InnerScreen extends GetView<InnerController> {
                     Text("General Notes",
                         style:
                             AppTextStyle.boldNormal.copyWith(fontSize: 16.sp)),
-                    BulletList([
+                    BulletList(const [
                       "Really outgoing and gets along well with my friends",
                       "Met him at the bar",
                       "Told me that he is looking for a relationship but he just got out of one 3 month ago",

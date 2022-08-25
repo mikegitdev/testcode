@@ -1,24 +1,16 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 
 class CreateRostrController extends GetxController {
-  final enableRating = false.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  bool enableRating = false;
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void changeRating() {
-    enableRating == true ? enableRating(false) : enableRating(true);
+  void changeRating(bool value) {
+    enableRating = value;
     update();
+    enableRating ? enableRating == false : enableRating == true;
+    update();
+    log("enableRating   $enableRating");
   }
 }
