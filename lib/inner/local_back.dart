@@ -198,6 +198,7 @@ List<EmojiModel> emojisSet = [
   EmojiModel(emoji: "🚫", isSelected: false),
   EmojiModel(emoji: "💯", isSelected: false),
 ];
+
 List<Ratings> ratings = [
   Ratings(
     ratingTitle: "Looks",
