@@ -55,7 +55,7 @@ class EditAlertView extends GetView<EditAlertController> {
                 onTap: () {},
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomCheckboxList(
+                  child: CustomSwitchListTile(
                     text: 'Love',
                     value: true,
                     onChanged: (value) {},
@@ -71,7 +71,7 @@ class EditAlertView extends GetView<EditAlertController> {
                 onTap: () {},
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomCheckboxList(
+                  child: CustomSwitchListTile(
                     text: 'Hot',
                     value: true,
                     onChanged: (value) {},
@@ -87,7 +87,7 @@ class EditAlertView extends GetView<EditAlertController> {
                 onTap: () {},
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomCheckboxList(
+                  child: CustomSwitchListTile(
                     text: 'Date',
                     value: true,
                     onChanged: (value) {},
@@ -103,7 +103,7 @@ class EditAlertView extends GetView<EditAlertController> {
                 onTap: () {},
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomCheckboxList(
+                  child: CustomSwitchListTile(
                     text: 'Obsessed',
                     value: true,
                     onChanged: (value) {},
@@ -119,7 +119,7 @@ class EditAlertView extends GetView<EditAlertController> {
                 onTap: () {},
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomCheckboxList(
+                  child: CustomSwitchListTile(
                     text: 'F-boy',
                     value: true,
                     onChanged: (value) {},
@@ -135,7 +135,7 @@ class EditAlertView extends GetView<EditAlertController> {
                 onTap: () {},
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomCheckboxList(
+                  child: CustomSwitchListTile(
                     text: 'F-girl',
                     value: true,
                     onChanged: (value) {},
@@ -151,7 +151,7 @@ class EditAlertView extends GetView<EditAlertController> {
                 onTap: () {},
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomCheckboxList(
+                  child: CustomSwitchListTile(
                     text: 'Ick',
                     value: true,
                     onChanged: (value) {},
@@ -167,7 +167,7 @@ class EditAlertView extends GetView<EditAlertController> {
                 onTap: () {},
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomCheckboxList(
+                  child: CustomSwitchListTile(
                     text: 'Ghost',
                     value: true,
                     onChanged: (value) {},
@@ -183,7 +183,7 @@ class EditAlertView extends GetView<EditAlertController> {
                 onTap: () {},
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomCheckboxList(
+                  child: CustomSwitchListTile(
                     text: 'Added',
                     value: true,
                     onChanged: (value) {},
@@ -199,7 +199,7 @@ class EditAlertView extends GetView<EditAlertController> {
                 onTap: () {},
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomCheckboxList(
+                  child: CustomSwitchListTile(
                     text: 'Promoted',
                     value: true,
                     onChanged: (value) {},
@@ -215,7 +215,7 @@ class EditAlertView extends GetView<EditAlertController> {
                 onTap: () {},
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomCheckboxList(
+                  child: CustomSwitchListTile(
                     text: 'Demoted',
                     value: true,
                     onChanged: (value) {},
@@ -231,7 +231,7 @@ class EditAlertView extends GetView<EditAlertController> {
                 onTap: () {},
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomCheckboxList(
+                  child: CustomSwitchListTile(
                     text: 'Removed',
                     value: true,
                     onChanged: (value) {},
