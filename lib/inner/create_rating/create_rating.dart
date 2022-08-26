@@ -47,8 +47,8 @@ class CreateRating extends StatelessWidget {
             ),
             26.verticalSpace,
 
-            //#Ratings
-            CustomCheckboxList(
+            // * Ratings
+            CustomSwitchListTile(
               text: 'Ratings',
               value: false,
               onChanged: (value) {
@@ -100,7 +100,7 @@ class CreateRating extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      ratings[index].ratingTitle,
+                      ratings[index].title,
                       style: AppTextStyle.boldNormal.copyWith(
                         color: AppColor.c15213B, //E50101
                         fontWeight: FontWeight.w700,
