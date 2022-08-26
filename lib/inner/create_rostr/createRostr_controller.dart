@@ -3,24 +3,32 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:tasker/data/models/tag_model.dart';
 import 'package:tasker/inner/local_back.dart';
+
+enum BottomSheetType{
+  EVENT_DATE,
+  CONTACT,
+}
 
 class CreateRostrController extends GetxController {
   bool enableRating = false;
   File? image;
   List<File> fileList = [];
-  // List<CreateNote> createNoteList = [];
-  // List<CreateTag> createTagList = [];
-  // List<CreateDate> createDateList = [];
 
   final personNameController = TextEditingController();
   final personBirthDateController = TextEditingController();
   final personPlaceController = TextEditingController();
 
+  // * Used in Bottom Sheets
   final ratingNameController = TextEditingController();
-  final noteController = TextEditingController();
-  final tagController = TextEditingController();
+  final noteNameController = TextEditingController();
+  final tagNameController = TextEditingController();
+  final contactNameController = TextEditingController();
+  final contactLinkController = TextEditingController();
+  final eventDateController = TextEditingController();
+  final eventHeadingController = TextEditingController();
+  final eventDescriptionController = TextEditingController();
+
   Color? _newTagColor;
   final List<Color> tagColors = const [
     Color(0xffE50101),
@@ -47,13 +55,6 @@ class CreateRostrController extends GetxController {
     'Starting Lineup',
     'Reserves',
   ];
-
-
-  TextEditingController noteTitleController = TextEditingController();
-  TextEditingController noteSubtitleController = TextEditingController();
-  TextEditingController dateController = TextEditingController();
-  TextEditingController headingNameController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
 
   List<String> get sectionItems => _sectionItems;
   List<String> get folderItems => _folderItems;

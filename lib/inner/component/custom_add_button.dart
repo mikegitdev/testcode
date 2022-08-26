@@ -4,11 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
 
-class CreateButton extends StatelessWidget {
+class AddButton extends StatelessWidget {
   final String title;
   final void Function() onTap;
 
-  const CreateButton({
+  const AddButton({
     Key? key,
     required this.title,
     required this.onTap,
