@@ -1,19 +1,18 @@
-import 'package:flutter/material.dart';
-import 'package:tasker/models/emoji_model.dart';
+import 'package:tasker/app_utils/app_color.dart';
+import 'package:tasker/data/models/emoji_model.dart';
+import 'package:tasker/data/models/rating_model.dart';
+import 'package:tasker/data/models/tag_model.dart';
 
-import 'helper_class.dart';
-
-List<Tags> tags = [
-  Tags(lookTitle: "Hot", lookColor: Colors.red),
-  Tags(lookTitle: "Smart", lookColor: Colors.blue),
-  Tags(lookTitle: "Rich", lookColor: Colors.green),
-  Tags(lookTitle: "Alpha", lookColor: Colors.yellow),
-  Tags(lookTitle: "Funny", lookColor: Colors.purple),
-  Tags(lookTitle: "Confident", lookColor: Colors.amber),
-  Tags(lookTitle: "Rich", lookColor: Colors.blue),
-  Tags(lookTitle: "Outgoing", lookColor: Colors.grey),
-  Tags(lookTitle: "Introvert", lookColor: Colors.black),
-  Tags(lookTitle: "Best", lookColor: Colors.brown),
+List<Tag> tags = [
+  Tag(title: 'Hot', color: AppColor.cE50101),
+  Tag(title: 'Rich', color: AppColor.c83C3F5),
+  Tag(title: 'Successful', color: AppColor.c00AE26),
+  Tag(title: 'Smart', color: AppColor.cFF9900),
+  Tag(title: 'Confident', color: AppColor.c660099),
+  Tag(title: 'Funny', color: AppColor.c1372FF),
+  Tag(title: 'Beta', color: AppColor.cA09000),
+  Tag(title: 'Alpha', color: AppColor.c222222),
+  Tag(title: 'Sigma', color: AppColor.c969696),
 ];
 
 List<EmojiModel> emojisSet = [
@@ -200,32 +199,11 @@ List<EmojiModel> emojisSet = [
 ];
 
 List<Ratings> ratings = [
-  Ratings(
-    ratingTitle: "Looks",
-    ratingScore: "8",
-  ),
-  Ratings(
-    ratingTitle: "Personality",
-    ratingScore: "9",
-  ),
-  Ratings(
-    ratingTitle: "Fun",
-    ratingScore: "7",
-  ),
-  Ratings(
-    ratingTitle: "Intelligence",
-    ratingScore: "8",
-  ),
-  Ratings(
-    ratingTitle: "Successful",
-    ratingScore: "9",
-  ),
-  Ratings(
-    ratingTitle: "Humor",
-    ratingScore: "9",
-  ),
-  Ratings(
-    ratingTitle: "Compatibility",
-    ratingScore: "8",
-  ),
+  Ratings(title: "Looks", score: 8),
+  Ratings(title: "Personality", score: 9),
+  Ratings(title: "Fun", score: 7),
+  Ratings(title: "Intelligence", score: 8),
+  Ratings(title: "Successful", score: 9),
+  Ratings(title: "Humor", score: 9),
+  Ratings(title: "Compatibility", score: 8),
 ];
