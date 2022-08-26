@@ -1,53 +1,22 @@
-import 'dart:developer';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:tasker/appbar.dart';
+import 'package:flutter/material.dart';
+import 'package:tasker/emoji_text.dart';
+import 'package:tasker/inner/component/create_button.dart';
+import 'package:tasker/inner/component/custom_text_field.dart';
+import 'package:tasker/inner/local_back.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/app_utils/app_image.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
-import 'package:tasker/appbar.dart';
-import 'package:tasker/emoji_text.dart';
-import 'package:tasker/inner/bottom_sheet/back_button.dart';
-import 'package:tasker/inner/bottom_sheet/create_rating_sheet.dart';
-import 'package:tasker/inner/bottom_sheet/send_tochat_bottom.dart';
-import 'package:tasker/inner/bottom_sheet/share_alert_bottom.dart';
-import 'package:tasker/inner/component/custom_checkbox_list.dart';
-import 'package:tasker/inner/component/custom_elevated_button.dart';
-import 'package:tasker/inner/component/custom_text_field.dart';
-import 'package:tasker/inner/component/textfield_bottomsheet.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tasker/inner/create_rating/create_rating.dart';
+import 'package:tasker/inner/component/custom_checkbox_list.dart';
 import 'package:tasker/inner/create_rostr/createRostr_controller.dart';
-import 'package:tasker/inner/create_rostr/widgets/create_data_bottom_sheet.dart';
-import 'package:tasker/inner/create_rostr/widgets/create_tag_bottom_sheet.dart';
-import 'package:tasker/inner/create_rostr/widgets/elevated_buttons.dart';
-import 'package:tasker/inner/local_back.dart';
-
-import 'widgets/create_note_bottom_sheet.dart';
+import 'package:tasker/inner/bottom_sheet/single_textfield_bottom_sheet.dart';
 
 class CreateRostr extends GetView<CreateRostrController> {
-  CreateRostr({Key? key}) : super(key: key);
-  final CreateRostrController createRostrController =
-      Get.put(CreateRostrController());
-  final String sectionValue = 'Choose a rostr type';
-
-  // List of items in our dropdown menu
-  final List<String> sectionItems = [
-    'Choose a rostr type',
-    'Dating',
-    'Friends',
-    'Professional',
-  ];
-
-  final String folderValue = 'Choose a folder';
-
-  // List of items in our dropdown menu
-  final List<String> folderItems = [
-    'Choose a folder',
-    'Starting Lineup',
-    'Reserves',
-  ];
+  const CreateRostr({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +33,7 @@ class CreateRostr extends GetView<CreateRostrController> {
             children: [
               12.verticalSpace,
               Visibility(
-                visible: createRostrController.fileList.isNotEmpty,
+                visible: controller.fileList.isNotEmpty,
                 child: SizedBox(
                   height: 100,
                   width: double.infinity,
@@ -80,7 +49,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(15),
                               child: Image.file(
-                                createRostrController.fileList[index],
+                                controller.fileList[index],
                                 height: 100.h,
                                 width: 100.w,
                               ),
@@ -94,7 +63,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                createRostrController.deleteIndex(index);
+                                controller.deleteIndex(index);
                               },
                               child: Align(
                                 alignment: Alignment.bottomRight,
@@ -109,13 +78,13 @@ class CreateRostr extends GetView<CreateRostrController> {
                         ),
                       ),
                     ),
-                    itemCount: createRostrController.fileList.length,
+                    itemCount: controller.fileList.length,
                   ),
                 ),
               ),
 
               Visibility(
-                visible: createRostrController.fileList.isEmpty,
+                visible: controller.fileList.isEmpty,
                 child: SizedBox(
                   height: 100,
                   width: 100,
@@ -136,7 +105,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            createRostrController.showPicker(context);
+                            controller.showPicker(context);
                           },
                           child: Align(
                             alignment: Alignment.bottomRight,
@@ -154,7 +123,7 @@ class CreateRostr extends GetView<CreateRostrController> {
               ),
 
               12.verticalSpace,
-              createRostrController.fileList.isEmpty
+              controller.fileList.isEmpty
                   ? GestureDetector(
                       onTap: () {},
                       child: Text("Add A Photo",
@@ -163,7 +132,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                     )
                   : ElevatedButton(
                       onPressed: () {
-                        createRostrController.showPicker(context);
+                        controller.showPicker(context);
                       },
                       style: ElevatedButton.styleFrom(
                         elevation: 0,
@@ -196,117 +165,36 @@ class CreateRostr extends GetView<CreateRostrController> {
                 ],
               ),
               12.verticalSpace,
-              TextFormField(
-                style: AppTextStyle.regularNormal.copyWith(
-                  color: AppColor.c15213B,
-                  fontSize: 16.sp,
-                ),
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
-                  fillColor: AppColor.cF6FAFE,
-                  filled: true,
-                  // helperText: "Name",
-                  hintText: "Name",
-                  floatingLabelAlignment: FloatingLabelAlignment.start,
-                  alignLabelWithHint: false,
-                  floatingLabelStyle: AppTextStyle.regularNormal.copyWith(
-                    fontSize: 16.sp,
-                    color: AppColor.c969BA7,
-                  ),
-                  // hintText: "e.g. Handsome",
-                  labelStyle: AppTextStyle.regularNormal.copyWith(
-                    color: AppColor.c969BA7,
-                    fontSize: 12.sp,
-                    height: 2.h,
-                  ),
-                  border: OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(width: 0, style: BorderStyle.none),
-                    borderRadius: BorderRadius.all(Radius.circular(12.r)),
-                  ),
-                ),
+              CustomTextField(
+                hintText: 'Name',
+                textController: controller.personNameController,
               ),
               12.verticalSpace,
-              TextFormField(
-                style: AppTextStyle.regularNormal.copyWith(
-                  color: AppColor.c15213B,
-                  fontSize: 16.sp,
-                ),
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
-                  fillColor: AppColor.cF6FAFE,
-                  filled: true,
-                  // helperText: "Name",
-                  hintText: "Date of birth (MM/DD/YYYY) / Age (XX)",
-                  floatingLabelAlignment: FloatingLabelAlignment.start,
-                  alignLabelWithHint: false,
-                  floatingLabelStyle: AppTextStyle.regularNormal.copyWith(
-                    fontSize: 16.sp,
-                    color: AppColor.c969BA7,
-                  ),
-                  // hintText: "e.g. Handsome",
-                  labelStyle: AppTextStyle.regularNormal.copyWith(
-                    color: AppColor.c969BA7,
-                    fontSize: 12.sp,
-                    height: 2.h,
-                  ),
-                  border: OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(width: 0, style: BorderStyle.none),
-                    borderRadius: BorderRadius.all(Radius.circular(12.r)),
-                  ),
-                ),
+              CustomTextField(
+                hintText: 'Date of birth (MM/DD/YYYY) / Age (XX)',
+                textController: controller.personBirthDateController,
               ),
               12.verticalSpace,
-              TextFormField(
-                style: AppTextStyle.regularNormal.copyWith(
-                  color: AppColor.c15213B,
-                  fontSize: 16.sp,
-                ),
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
-                  fillColor: AppColor.cF6FAFE,
-                  filled: true,
-                  // helperText: "Name",
-                  hintText: "Where we met",
-                  floatingLabelAlignment: FloatingLabelAlignment.start,
-                  alignLabelWithHint: false,
-                  floatingLabelStyle: AppTextStyle.regularNormal.copyWith(
-                    fontSize: 16.sp,
-                    color: AppColor.c969BA7,
-                  ),
-                  // hintText: "e.g. Handsome",
-                  labelStyle: AppTextStyle.regularNormal.copyWith(
-                    color: AppColor.c969BA7,
-                    fontSize: 12.sp,
-                    height: 2.h,
-                  ),
-                  border: OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(width: 0, style: BorderStyle.none),
-                    borderRadius: BorderRadius.all(Radius.circular(12.r)),
-                  ),
-                ),
+              CustomTextField(
+                hintText: 'Where we met',
+                textController: controller.personPlaceController,
               ),
 
               16.verticalSpace,
-              InkWell(
-                onTap: () {},
-                child: CustomCheckboxList(
-                  text: 'Enable ratings',
-                  value: createRostrController.enableRating,
-                  onChanged: (value) {
-                    createRostrController.changeRating(value);
-                  },
-                  activeColor: Colors.red,
-                  activeText: 'On',
-                  inactiveText: 'Off',
-                  activeTextColor: AppColor.white,
-                  inactiveTextColor: AppColor.c969696,
-                ),
+              CustomSwitchListTile(
+                activeText: 'On',
+                inactiveText: 'Off',
+                text: 'Enable ratings',
+                activeColor: Colors.red,
+                activeTextColor: AppColor.white,
+                inactiveTextColor: AppColor.c969696,
+                value: controller.enableRating,
+                onChanged: (value) {
+                  controller.changeRating(value);
+                },
               ),
 
-              createRostrController.enableRating == true
+              controller.enableRating
                   ? Column(
                       children: [
                         Row(
@@ -339,6 +227,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                           padding: EdgeInsets.only(bottom: 24.h),
                           child: Container(
                             height: 38.h,
+                            padding: const EdgeInsets.all(8.0),
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(8.r)),
@@ -346,7 +235,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  " " "Overall Rating",
+                                  "Overall Rating",
                                   style: AppTextStyle.boldNormal
                                       .copyWith(fontSize: 16.sp),
                                 ),
@@ -354,7 +243,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                                   alignment: WrapAlignment.start,
                                   children: [
                                     Text(
-                                      "- -" " ",
+                                      "- - ",
                                       style: AppTextStyle.boldNormal.copyWith(
                                         fontSize: 16.sp,
                                         color: const Color(0xff00AE26),
@@ -370,186 +259,66 @@ class CreateRostr extends GetView<CreateRostrController> {
                             ),
                           ),
                         ),
-
-                        ///................................................................
-                        // SizedBox(
-                        //   height: 80.h,
-                        //   width: double.infinity,
-                        //   child: GridView.builder(
-                        //     shrinkWrap: true,
-                        //     scrollDirection: Axis.horizontal,
-                        //     padding: EdgeInsets.symmetric(horizontal: 24.w),
-                        //     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                        //       maxCrossAxisExtent: 60,
-                        //       childAspectRatio: 0.4/ 2,
-                        //       crossAxisSpacing: 8.h,
-                        //       mainAxisSpacing: 20.w,
-                        //     ),
-                        //     itemBuilder: (BuildContext ctx, index) {
-                        //       return ElevatedButton(
-                        //         onPressed: () {},
-                        //         style: ElevatedButton.styleFrom(
-                        //             shape: RoundedRectangleBorder(
-                        //               borderRadius: BorderRadius.circular(8),
-                        //             ),
-                        //             primary: AppColor.white,
-                        //             shadowColor: Colors.transparent,
-                        //             fixedSize: Size(157.w,37.h)),
-                        //         child: Row(
-                        //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //           children: [
-                        //             Text(
-                        //               'Looks',
-                        //               style: AppTextStyle.boldNormal.copyWith(
-                        //                   color: AppColor.c15213B, fontSize: 16.sp),
-                        //             ),
-                        //             const Icon(Icons.arrow_forward_outlined,color: Colors.black,)
-                        //           ],
-                        //         ),
-                        //       );
-                        //     },
-                        //     itemCount: emojisSet.length,
-                        //   ),
-                        // ),
-
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 24.h),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                children: List.generate(
-                                  ratings.length - ratings.length ~/ 2,
-                                  (index) => Padding(
-                                    padding: EdgeInsets.only(bottom: 12.0.h),
-                                    child: Container(
-                                      height: 38.h,
-                                      width: MediaQuery.of(context).size.width /
-                                              2 -
-                                          30.h,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius:
-                                            BorderRadius.circular(8.r),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            " ${ratings[ratings.length ~/ 2 + index].ratingTitle}",
-                                            style: AppTextStyle.regularNormal
-                                                .copyWith(
-                                                    fontSize: 16.sp,
-                                                    color: AppColor.c15213B),
-                                          ),
-                                          const Icon(
-                                            Icons.arrow_forward_outlined,
-                                            color: AppColor.c15213B,
-                                          ),
-                                          // Wrap(
-                                          //   alignment: WrapAlignment.start,
-                                          //   children: [
-                                          //     Text(
-                                          //       "${ratings[ratings.length ~/ 2 + index].ratingScore} ",
-                                          //       style: AppTextStyle.boldNormal
-                                          //           .copyWith(
-                                          //         fontSize: 16.sp,
-                                          //         color:
-                                          //             const Color(0xff00AE26),
-                                          //       ),
-                                          //     ),
-                                          //     const Icon(
-                                          //       Icons.grade,
-                                          //       color: Colors.amber,
-                                          //     ),
-                                          //   ],
-                                          // ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
+                        SizedBox(
+                          height: 50.h * controller.ratingsColumnNumber,
+                          child: GridView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 12.h,
+                              crossAxisSpacing: 12.w,
+                              childAspectRatio: 4,
+                            ),
+                            itemCount: ratings.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Container(
+                                padding: const EdgeInsets.all(8.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  color: AppColor.white,
                                 ),
-                              ),
-                              Column(
-                                children: List.generate(
-                                  ratings.length ~/ 2,
-                                  (index) => Padding(
-                                    padding: EdgeInsets.only(bottom: 12.0.h),
-                                    child: Container(
-                                      height: 38.h,
-                                      width: MediaQuery.of(context).size.width /
-                                              2 -
-                                          30.h,
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(8.r)),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            " ${ratings[index].ratingTitle}",
-                                            style: AppTextStyle.regularNormal
-                                                .copyWith(
-                                                    fontSize: 16.sp,
-                                                    color: AppColor.c15213B),
-                                          ),
-                                          const Icon(
-                                            Icons.arrow_forward_outlined,
-                                            color: AppColor.c15213B,
-                                          ),
-                                        ],
-                                      ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      ratings[index].title,
+                                      style: AppTextStyle.regularNormal
+                                          .copyWith(
+                                              fontSize: 16.sp,
+                                              color: AppColor.c15213B),
                                     ),
-                                  ),
+                                    const Icon(
+                                      Icons.arrow_forward_outlined,
+                                      color: AppColor.c15213B,
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
+                              );
+                            },
                           ),
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            Get.bottomSheet(
-                              isDismissible: false,
-                              // Dismiss when anywhere except the sheet pressed
-                              isScrollControlled: true,
-                              const CreateRatingBottomSheet(),
+                        24.verticalSpace,
+                        CreateButton(
+                          title: 'Add Rating',
+                          onTap: () {
+                            controller.openBottomSheet(
+                              SingleTextFieldBottomSheet(
+                                title: 'Create a Rating',
+                                subtitle:
+                                    'Please, input a name of a new rating categorie',
+                                hintText: 'Rating name',
+                                textController: controller.ratingNameController,
+                                onTap: () {},
+                              ),
                             );
                           },
-                          style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              primary: AppColor.cCFE8FB,
-                              shadowColor: Colors.transparent,
-                              fixedSize: Size.fromHeight(40.h)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                'assets/icons/add.svg',
-                                height: 18.h,
-                                color: const Color(0xff41A3F0),
-                              ),
-                              5.horizontalSpace,
-                              Text(
-                                'Add Rating',
-                                style: AppTextStyle.boldNormal.copyWith(
-                                    color: const Color(0xff41A3F0),
-                                    fontSize: 16.sp),
-                              ),
-                            ],
-                          ),
-                        ),
+                        )
                       ],
                     )
-                  : const SizedBox(
-                      height: 12,
-                    ),
-
+                  : const SizedBox.shrink(),
+              12.verticalSpace,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -567,39 +336,49 @@ class CreateRostr extends GetView<CreateRostrController> {
                   ),
                 ],
               ),
-              Visibility(
-                visible: tags.isNotEmpty,
-                child: SizedBox(
-                  height: 60.h,
-                  width: MediaQuery.of(context).size.width - 48.h,
-                  child: Wrap(
-                      children: List.generate(
-                        tags.length,
-                    (index) => Padding(
-                      padding: EdgeInsets.only(right: 12.h, bottom: 12.h),
-                      child: Container(
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Wrap(
+                    spacing: 12.0,
+                    runSpacing: 8.0,
+                    children: List.generate(
+                      tags.length,
+                      (index) => Container(
                         padding: EdgeInsets.all(8.h),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.h),
                           color: Colors.white,
                         ),
-                        child: Text(tags[index].lookTitle,
-                            style: AppTextStyle.regularNormal.copyWith(
-                                fontSize: 14.sp, color: tags[index].lookColor)),
+                        child: Text(
+                          tags[index].title,
+                          style: AppTextStyle.regularNormal.copyWith(
+                            fontSize: 14.sp,
+                            color: tags[index].color,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
                       ),
-                    ),
-                  )),
-                ),
+                    )),
               ),
-              80.verticalSpace,
-              CreateRostrElevatedButton(
-                buttonText: 'Add Tag',
-                bottomSheet: CreateTagBottomSheet(
-                  createRostrController: createRostrController,
-                ),
-                createRostrController: createRostrController,
+              20.verticalSpace,
+              CreateButton(
+                title: 'Add Tag',
+                onTap: () {
+                  controller.openBottomSheet(
+                    SingleTextFieldBottomSheet(
+                      title: 'Create a Tag',
+                      subtitle:
+                          'Please, input a name of a new tag and choose a color',
+                      hintText: 'Tag name',
+                      textController: controller.ratingNameController,
+                      chooseColor: true,
+                      onTap: () {},
+                    ),
+                  );
+                },
               ),
               16.verticalSpace,
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -617,52 +396,156 @@ class CreateRostr extends GetView<CreateRostrController> {
                   ),
                 ],
               ),
-              Visibility(
-                visible: createRostrController.createNoteList.isNotEmpty,
-                child: ListView.builder(
-                  padding: EdgeInsets.zero,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: Container(
-                      padding: const EdgeInsets.only(
-                        left: 8,
-                      ),
-                      height: 66,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: AppColor.white,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                              createRostrController
-                                  .createNoteList[index].noteTitle,
-                              style: AppTextStyle.boldNormal
-                                  .copyWith(fontSize: 16.sp)),
-                          Text(
-                              createRostrController
-                                  .createNoteList[index].noteSubtitle,
-                              style: AppTextStyle.regularNormal
-                                  .copyWith(fontSize: 16.sp, height: 1.6)),
-                        ],
-                      ),
-                    ),
-                  ),
-                  itemCount: createRostrController.createNoteList.length,
+              16.verticalSpace,
+              Container(
+                width: double.infinity,
+                margin: EdgeInsets.only(bottom: 24.h),
+                padding: EdgeInsets.all(8.h),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12.r),
+                  color: Colors.white,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("General Notes",
+                        style:
+                            AppTextStyle.boldNormal.copyWith(fontSize: 16.sp)),
+                    Text("Write some general notes about this person",
+                        style: AppTextStyle.regularNormal
+                            .copyWith(fontSize: 16.sp, height: 1.6)),
+                  ],
                 ),
               ),
-
-              12.verticalSpace,
-              CreateRostrElevatedButton(
-                buttonText: 'Add Note',
-                bottomSheet: CreateNoteBottomSheet(
-                  createRostrController: createRostrController,
+              Container(
+                margin: EdgeInsets.only(bottom: 24.h),
+                padding: EdgeInsets.all(8.h),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12.r),
+                  color: Colors.white,
                 ),
-                createRostrController: createRostrController,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text('Likes ',
+                            style: AppTextStyle.boldNormal
+                                .copyWith(fontSize: 16.sp)),
+                        EmojiText(
+                          text: '👍',
+                          size: 21.h,
+                        ),
+                      ],
+                    ),
+                    Text("Write things that this person likes",
+                        style: AppTextStyle.regularNormal
+                            .copyWith(fontSize: 16.sp, height: 1.6)),
+                  ],
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.only(bottom: 24.h),
+                padding: EdgeInsets.all(8.h),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12.r),
+                  color: Colors.white,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text("Dislikes",
+                            style: AppTextStyle.boldNormal
+                                .copyWith(fontSize: 16.sp)),
+                        EmojiText(
+                          text: '👎',
+                          size: 21.h,
+                        ),
+                      ],
+                    ),
+                    Text("Write things that this person dislikes",
+                        style: AppTextStyle.regularNormal
+                            .copyWith(fontSize: 16.sp, height: 1.6)),
+                  ],
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.only(bottom: 24.h),
+                padding: EdgeInsets.all(8.h),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12.r),
+                  color: Colors.white,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text("Pros" ' ',
+                            style: AppTextStyle.boldNormal
+                                .copyWith(fontSize: 16.sp)),
+                        EmojiText(
+                          text: '🟢',
+                          size: 16.h,
+                        ),
+                      ],
+                    ),
+                    Text("Write things that YOU like about this person",
+                        style: AppTextStyle.regularNormal
+                            .copyWith(fontSize: 16.sp, height: 1.6)),
+                  ],
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.only(bottom: 24.h),
+                padding: EdgeInsets.all(8.h),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12.r),
+                  color: Colors.white,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text('Cons ',
+                            style: AppTextStyle.boldNormal
+                                .copyWith(fontSize: 16.sp)),
+                        EmojiText(
+                          text: '🔴',
+                          size: 16.h,
+                        ),
+                      ],
+                    ),
+                    Text("Write things that you consider drawbacks / red flags",
+                        style: AppTextStyle.regularNormal
+                            .copyWith(fontSize: 16.sp, height: 1.6)),
+                  ],
+                ),
+              ),
+              CreateButton(
+                title: 'Add Note',
+                onTap: () {
+                  controller.openBottomSheet(
+                    SingleTextFieldBottomSheet(
+                      title: 'Create a Note',
+                      subtitle: 'Please, input a name of a new note block',
+                      hintText: 'Notes name',
+                      textController: controller.noteController,
+                      onTap: () {},
+                    ),
+                  );
+                },
               ),
 
               12.verticalSpace,
@@ -755,13 +638,13 @@ class CreateRostr extends GetView<CreateRostrController> {
                       SvgPicture.asset(
                         'assets/icons/add.svg',
                         height: 18.h,
-                        color: Color(0xff41A3F0),
+                        color: AppColor.c41A3F0,
                       ),
                       Text(
-                        ' ' 'Add Contact',
+                        ' Add Contact',
                         style: AppTextStyle.boldNormal.copyWith(
                           fontSize: 16.sp,
-                          color: Color(0xff41A3F0),
+                          color: AppColor.c41A3F0,
                         ),
                       ),
                     ],
@@ -787,41 +670,50 @@ class CreateRostr extends GetView<CreateRostrController> {
                 ],
               ),
               12.verticalSpace,
-              ListView.builder(shrinkWrap:true,itemCount: 3,itemBuilder: (context,index) => Container(
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.only(
-                  bottom: 24.h,
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: 3,
+                itemBuilder: (context, index) => Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.only(
+                    bottom: 24.h,
+                  ),
+                  padding: EdgeInsets.all(8.h),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12.r),
+                    color: Colors.white,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Event",
+                              style: AppTextStyle.boldNormal
+                                  .copyWith(fontSize: 16.sp)),
+                          Text("01/01/21",
+                              style: AppTextStyle.boldNormal
+                                  .copyWith(fontSize: 16.sp)),
+                        ],
+                      ),
+                      Text(
+                        "This section allows you to add events that take place between you and this person, such as a first kiss, dates, and other events. Created events will also be saved to your calendar in the Rostr Tools section. ",
+                        style: AppTextStyle.regularNormal
+                            .copyWith(fontSize: 16.sp, height: 1.6),
+                      ),
+                    ],
+                  ),
                 ),
-                padding: EdgeInsets.all(8.h),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.r),
-                  color: Colors.white,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Event",
-                            style: AppTextStyle.boldNormal
-                                .copyWith(fontSize: 16.sp)),
-                        Text("01/01/21",
-                            style: AppTextStyle.boldNormal
-                                .copyWith(fontSize: 16.sp)),
-                      ],
-                    ),
-                    Text(
-                      "This section allows you to add events that take place between you and this person, such as a first kiss, dates, and other events. Created events will also be saved to your calendar in the Rostr Tools section. ",
-                      style: AppTextStyle.regularNormal
-                          .copyWith(fontSize: 16.sp, height: 1.6),
-                    ),
-                  ],
-                ),
-              ),),
+              ),
 
-              CreateRostrElevatedButton(buttonText: "Add Date", bottomSheet: CreateDataBottomSheet(createRostrController: createRostrController,), createRostrController: createRostrController),
+              // CreateRostrElevatedButton(
+              //     buttonText: "Add Date",
+              //     bottomSheet: CreateDataBottomSheet(
+              //       controller: controller,
+              //     ),
+              //     controller: controller),
               16.verticalSpace,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -849,10 +741,10 @@ class CreateRostr extends GetView<CreateRostrController> {
                 ),
                 child: DropdownButton<String>(
                     underline: const SizedBox(),
-                    value: sectionValue,
+                    value: 'Choose a rostr type',
                     isDense: true,
                     isExpanded: true,
-                    items: sectionItems.map((String items) {
+                    items: controller.sectionItems.map((String items) {
                       return DropdownMenuItem(
                         value: items,
                         child: Text(items),
@@ -869,10 +761,10 @@ class CreateRostr extends GetView<CreateRostrController> {
                 ),
                 child: DropdownButton<String>(
                     underline: const SizedBox(),
-                    value: folderValue,
+                    value: 'Choose a folder',
                     isDense: true,
                     isExpanded: true,
-                    items: folderItems.map((String items) {
+                    items: controller.folderItems.map((String items) {
                       return DropdownMenuItem(
                         value: items,
                         child: Text(items),
