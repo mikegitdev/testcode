@@ -9,9 +9,22 @@ import 'package:tasker/app_utils/app_image.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/appbar.dart';
 import 'package:tasker/emoji_text.dart';
+import 'package:tasker/inner/bottom_sheet/back_button.dart';
+import 'package:tasker/inner/bottom_sheet/create_rating_sheet.dart';
+import 'package:tasker/inner/bottom_sheet/send_tochat_bottom.dart';
+import 'package:tasker/inner/bottom_sheet/share_alert_bottom.dart';
 import 'package:tasker/inner/component/custom_checkbox_list.dart';
+import 'package:tasker/inner/component/custom_elevated_button.dart';
+import 'package:tasker/inner/component/custom_text_field.dart';
+import 'package:tasker/inner/component/textfield_bottomsheet.dart';
+import 'package:tasker/inner/create_rating/create_rating.dart';
 import 'package:tasker/inner/create_rostr/createRostr_controller.dart';
+import 'package:tasker/inner/create_rostr/widgets/create_data_bottom_sheet.dart';
+import 'package:tasker/inner/create_rostr/widgets/create_tag_bottom_sheet.dart';
+import 'package:tasker/inner/create_rostr/widgets/elevated_buttons.dart';
 import 'package:tasker/inner/local_back.dart';
+
+import 'widgets/create_note_bottom_sheet.dart';
 
 class CreateRostr extends GetView<CreateRostrController> {
   CreateRostr({Key? key}) : super(key: key);
@@ -305,7 +318,14 @@ class CreateRostr extends GetView<CreateRostrController> {
                                   .copyWith(fontSize: 18.sp),
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const CreateRating(),
+                                  ),
+                                );
+                              },
                               child: Text(
                                 "Edit",
                                 style: AppTextStyle.boldNormal.copyWith(
@@ -351,135 +371,154 @@ class CreateRostr extends GetView<CreateRostrController> {
                           ),
                         ),
 
-
                         ///................................................................
-                        ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              primary: AppColor.white,
-                              shadowColor: Colors.transparent,
-                              fixedSize: Size(157.w,37.h)),
+                        // SizedBox(
+                        //   height: 80.h,
+                        //   width: double.infinity,
+                        //   child: GridView.builder(
+                        //     shrinkWrap: true,
+                        //     scrollDirection: Axis.horizontal,
+                        //     padding: EdgeInsets.symmetric(horizontal: 24.w),
+                        //     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                        //       maxCrossAxisExtent: 60,
+                        //       childAspectRatio: 0.4/ 2,
+                        //       crossAxisSpacing: 8.h,
+                        //       mainAxisSpacing: 20.w,
+                        //     ),
+                        //     itemBuilder: (BuildContext ctx, index) {
+                        //       return ElevatedButton(
+                        //         onPressed: () {},
+                        //         style: ElevatedButton.styleFrom(
+                        //             shape: RoundedRectangleBorder(
+                        //               borderRadius: BorderRadius.circular(8),
+                        //             ),
+                        //             primary: AppColor.white,
+                        //             shadowColor: Colors.transparent,
+                        //             fixedSize: Size(157.w,37.h)),
+                        //         child: Row(
+                        //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //           children: [
+                        //             Text(
+                        //               'Looks',
+                        //               style: AppTextStyle.boldNormal.copyWith(
+                        //                   color: AppColor.c15213B, fontSize: 16.sp),
+                        //             ),
+                        //             const Icon(Icons.arrow_forward_outlined,color: Colors.black,)
+                        //           ],
+                        //         ),
+                        //       );
+                        //     },
+                        //     itemCount: emojisSet.length,
+                        //   ),
+                        // ),
+
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 24.h),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'Looks',
-                                style: AppTextStyle.boldNormal.copyWith(
-                                    color: AppColor.c15213B, fontSize: 16.sp),
+                              Column(
+                                children: List.generate(
+                                  ratings.length - ratings.length ~/ 2,
+                                  (index) => Padding(
+                                    padding: EdgeInsets.only(bottom: 12.0.h),
+                                    child: Container(
+                                      height: 38.h,
+                                      width: MediaQuery.of(context).size.width /
+                                              2 -
+                                          30.h,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(8.r),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            " ${ratings[ratings.length ~/ 2 + index].ratingTitle}",
+                                            style: AppTextStyle.regularNormal
+                                                .copyWith(
+                                                    fontSize: 16.sp,
+                                                    color: AppColor.c15213B),
+                                          ),
+                                          const Icon(
+                                            Icons.arrow_forward_outlined,
+                                            color: AppColor.c15213B,
+                                          ),
+                                          // Wrap(
+                                          //   alignment: WrapAlignment.start,
+                                          //   children: [
+                                          //     Text(
+                                          //       "${ratings[ratings.length ~/ 2 + index].ratingScore} ",
+                                          //       style: AppTextStyle.boldNormal
+                                          //           .copyWith(
+                                          //         fontSize: 16.sp,
+                                          //         color:
+                                          //             const Color(0xff00AE26),
+                                          //       ),
+                                          //     ),
+                                          //     const Icon(
+                                          //       Icons.grade,
+                                          //       color: Colors.amber,
+                                          //     ),
+                                          //   ],
+                                          // ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ),
-                              const Icon(Icons.arrow_forward_outlined,color: Colors.black,)
+                              Column(
+                                children: List.generate(
+                                  ratings.length ~/ 2,
+                                  (index) => Padding(
+                                    padding: EdgeInsets.only(bottom: 12.0.h),
+                                    child: Container(
+                                      height: 38.h,
+                                      width: MediaQuery.of(context).size.width /
+                                              2 -
+                                          30.h,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(8.r)),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            " ${ratings[index].ratingTitle}",
+                                            style: AppTextStyle.regularNormal
+                                                .copyWith(
+                                                    fontSize: 16.sp,
+                                                    color: AppColor.c15213B),
+                                          ),
+                                          const Icon(
+                                            Icons.arrow_forward_outlined,
+                                            color: AppColor.c15213B,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
-
-                        // Padding(
-                        //   padding: EdgeInsets.only(bottom: 24.h),
-                        //   child: Row(
-                        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //     crossAxisAlignment: CrossAxisAlignment.start,
-                        //     children: [
-                        //       Column(
-                        //         children: List.generate(
-                        //           ratings.length - ratings.length ~/ 2,
-                        //           (index) => Padding(
-                        //             padding: EdgeInsets.only(bottom: 12.0.h),
-                        //             child: Container(
-                        //               height: 38.h,
-                        //               width: MediaQuery.of(context).size.width /
-                        //                       2 -
-                        //                   30.h,
-                        //               decoration: BoxDecoration(
-                        //                   color: Colors.white,
-                        //                   borderRadius:
-                        //                       BorderRadius.circular(8.r)),
-                        //               child: Row(
-                        //                 mainAxisAlignment:
-                        //                     MainAxisAlignment.spaceBetween,
-                        //                 children: [
-                        //                   Text(
-                        //                     " ${ratings[ratings.length ~/ 2 + index].ratingTitle}",
-                        //                     style: AppTextStyle.regularNormal
-                        //                         .copyWith(fontSize: 16.sp),
-                        //                   ),
-                        //                   Wrap(
-                        //                     alignment: WrapAlignment.start,
-                        //                     children: [
-                        //                       Text(
-                        //                         "${ratings[ratings.length ~/ 2 + index].ratingScore} ",
-                        //                         style: AppTextStyle.boldNormal
-                        //                             .copyWith(
-                        //                           fontSize: 16.sp,
-                        //                           color:
-                        //                               const Color(0xff00AE26),
-                        //                         ),
-                        //                       ),
-                        //                       const Icon(
-                        //                         Icons.grade,
-                        //                         color: Colors.amber,
-                        //                       ),
-                        //                     ],
-                        //                   ),
-                        //                 ],
-                        //               ),
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //       Column(
-                        //         children: List.generate(
-                        //           ratings.length ~/ 2,
-                        //           (index) => Padding(
-                        //             padding: EdgeInsets.only(bottom: 12.0.h),
-                        //             child: Container(
-                        //               height: 38.h,
-                        //               width: MediaQuery.of(context).size.width /
-                        //                       2 -
-                        //                   30.h,
-                        //               decoration: BoxDecoration(
-                        //                   color: Colors.white,
-                        //                   borderRadius:
-                        //                       BorderRadius.circular(8.r)),
-                        //               child: Row(
-                        //                 mainAxisAlignment:
-                        //                     MainAxisAlignment.spaceBetween,
-                        //                 children: [
-                        //                   Text(
-                        //                     " ${ratings[index].ratingTitle}",
-                        //                     style: AppTextStyle.regularNormal
-                        //                         .copyWith(fontSize: 16.sp),
-                        //                   ),
-                        //                   Wrap(
-                        //                     alignment: WrapAlignment.start,
-                        //                     children: [
-                        //                       Text(
-                        //                         "${ratings[index].ratingScore} ",
-                        //                         style: AppTextStyle.boldNormal
-                        //                             .copyWith(
-                        //                           fontSize: 16.sp,
-                        //                           color:
-                        //                               const Color(0xff00AE26),
-                        //                         ),
-                        //                       ),
-                        //                       const Icon(
-                        //                         Icons.grade,
-                        //                         color: Colors.amber,
-                        //                       ),
-                        //                     ],
-                        //                   ),
-                        //                 ],
-                        //               ),
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.bottomSheet(
+                              isDismissible: false,
+                              // Dismiss when anywhere except the sheet pressed
+                              isScrollControlled: true,
+                              const CreateRatingBottomSheet(),
+                            );
+                          },
                           style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
@@ -499,7 +538,8 @@ class CreateRostr extends GetView<CreateRostrController> {
                               Text(
                                 'Add Rating',
                                 style: AppTextStyle.boldNormal.copyWith(
-                                    color: const Color(0xff41A3F0), fontSize: 16.sp),
+                                    color: const Color(0xff41A3F0),
+                                    fontSize: 16.sp),
                               ),
                             ],
                           ),
@@ -527,53 +567,37 @@ class CreateRostr extends GetView<CreateRostrController> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 60.h,
-                width: MediaQuery.of(context).size.width - 48.h,
-                child: Wrap(
-                    children: List.generate(
-                  tags.length,
-                  (index) => Padding(
-                    padding: EdgeInsets.only(right: 12.h, bottom: 12.h),
-                    child: Container(
-                      padding: EdgeInsets.all(8.h),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.h),
-                        color: Colors.white,
+              Visibility(
+                visible: tags.isNotEmpty,
+                child: SizedBox(
+                  height: 60.h,
+                  width: MediaQuery.of(context).size.width - 48.h,
+                  child: Wrap(
+                      children: List.generate(
+                        tags.length,
+                    (index) => Padding(
+                      padding: EdgeInsets.only(right: 12.h, bottom: 12.h),
+                      child: Container(
+                        padding: EdgeInsets.all(8.h),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.h),
+                          color: Colors.white,
+                        ),
+                        child: Text(tags[index].lookTitle,
+                            style: AppTextStyle.regularNormal.copyWith(
+                                fontSize: 14.sp, color: tags[index].lookColor)),
                       ),
-                      child: Text(tags[index].lookTitle,
-                          style: AppTextStyle.regularNormal.copyWith(
-                              fontSize: 14.sp, color: tags[index].lookColor)),
                     ),
-                  ),
-                )),
+                  )),
+                ),
               ),
               80.verticalSpace,
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    primary: AppColor.cCFE8FB,
-                    shadowColor: Colors.transparent,
-                    fixedSize: Size.fromHeight(40.h)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/icons/add.svg',
-                      height: 18.h,
-                      color: const Color(0xff41A3F0),
-                    ),
-                    5.horizontalSpace,
-                    Text(
-                      'Add Tags',
-                      style: AppTextStyle.boldNormal.copyWith(
-                          color: const Color(0xff41A3F0), fontSize: 16.sp),
-                    ),
-                  ],
+              CreateRostrElevatedButton(
+                buttonText: 'Add Tag',
+                bottomSheet: CreateTagBottomSheet(
+                  createRostrController: createRostrController,
                 ),
+                createRostrController: createRostrController,
               ),
               16.verticalSpace,
               Row(
@@ -593,179 +617,54 @@ class CreateRostr extends GetView<CreateRostrController> {
                   ),
                 ],
               ),
-              16.verticalSpace,
-              Container(
-                width: double.infinity,
-                margin: EdgeInsets.only(bottom: 24.h),
-                padding: EdgeInsets.all(8.h),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.r),
-                  color: Colors.white,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("General Notes",
-                        style:
-                            AppTextStyle.boldNormal.copyWith(fontSize: 16.sp)),
-                    Text("Write some general notes about this person",
-                        style: AppTextStyle.regularNormal
-                            .copyWith(fontSize: 16.sp, height: 1.6)),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(bottom: 24.h),
-                padding: EdgeInsets.all(8.h),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.r),
-                  color: Colors.white,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text("Likes" ' ',
-                            style: AppTextStyle.boldNormal
-                                .copyWith(fontSize: 16.sp)),
-                        EmojiText(
-                          text: '👍',
-                          size: 21.h,
-                        ),
-                      ],
-                    ),
-                    Text("Write things that this person likes",
-                        style: AppTextStyle.regularNormal
-                            .copyWith(fontSize: 16.sp, height: 1.6)),
-                  ],
-                ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.only(bottom: 24.h),
-                padding: EdgeInsets.all(8.h),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.r),
-                  color: Colors.white,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text("Dislikes",
-                            style: AppTextStyle.boldNormal
-                                .copyWith(fontSize: 16.sp)),
-                        EmojiText(
-                          text: '👎',
-                          size: 21.h,
-                        ),
-                      ],
-                    ),
-                    Text("Write things that this person dislikes",
-                        style: AppTextStyle.regularNormal
-                            .copyWith(fontSize: 16.sp, height: 1.6)),
-                  ],
-                ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.only(bottom: 24.h),
-                padding: EdgeInsets.all(8.h),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.r),
-                  color: Colors.white,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text("Pros" ' ',
-                            style: AppTextStyle.boldNormal
-                                .copyWith(fontSize: 16.sp)),
-                        EmojiText(
-                          text: '🟢',
-                          size: 16.h,
-                        ),
-                      ],
-                    ),
-                    Text("Write things that YOU like about this person",
-                        style: AppTextStyle.regularNormal
-                            .copyWith(fontSize: 16.sp, height: 1.6)),
-                  ],
-                ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.only(bottom: 24.h),
-                padding: EdgeInsets.all(8.h),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.r),
-                  color: Colors.white,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text("Cons" ' ',
-                            style: AppTextStyle.boldNormal
-                                .copyWith(fontSize: 16.sp)),
-                        EmojiText(
-                          text: '🔴',
-                          size: 16.h,
-                        ),
-                      ],
-                    ),
-                    Text("Write things that you consider drawbacks / red flags",
-                        style: AppTextStyle.regularNormal
-                            .copyWith(fontSize: 16.sp, height: 1.6)),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 40.h,
-                width: MediaQuery.of(context).size.width,
-                child: OutlinedButton(
-                  onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => const Safety()));
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    primary: const Color(0xffCFE8FB),
-                    //  fixedSize: Size(101.w, 32.h),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        12.0.r,
+              Visibility(
+                visible: createRostrController.createNoteList.isNotEmpty,
+                child: ListView.builder(
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) => Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Container(
+                      padding: const EdgeInsets.only(
+                        left: 8,
+                      ),
+                      height: 66,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: AppColor.white,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                              createRostrController
+                                  .createNoteList[index].noteTitle,
+                              style: AppTextStyle.boldNormal
+                                  .copyWith(fontSize: 16.sp)),
+                          Text(
+                              createRostrController
+                                  .createNoteList[index].noteSubtitle,
+                              style: AppTextStyle.regularNormal
+                                  .copyWith(fontSize: 16.sp, height: 1.6)),
+                        ],
                       ),
                     ),
                   ),
-                  child: Wrap(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/icons/add.svg',
-                        height: 18.h,
-                        color: const Color(0xff41A3F0),
-                      ),
-                      Text(' ' 'Add Note',
-                          style: AppTextStyle.boldNormal.copyWith(
-                            fontSize: 16.sp,
-                            color: const Color(0xff41A3F0),
-                          )),
-                    ],
-                  ),
+                  itemCount: createRostrController.createNoteList.length,
                 ),
               ),
+
+              12.verticalSpace,
+              CreateRostrElevatedButton(
+                buttonText: 'Add Note',
+                bottomSheet: CreateNoteBottomSheet(
+                  createRostrController: createRostrController,
+                ),
+                createRostrController: createRostrController,
+              ),
+
               12.verticalSpace,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -837,12 +736,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                 height: 40.h,
                 width: MediaQuery.of(context).size.width,
                 child: OutlinedButton(
-                  onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => const Safety()));
-                  },
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.zero,
                     primary: const Color(0xffCFE8FB),
@@ -893,7 +787,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                 ],
               ),
               12.verticalSpace,
-              Container(
+              ListView.builder(shrinkWrap:true,itemCount: 3,itemBuilder: (context,index) => Container(
                 width: MediaQuery.of(context).size.width,
                 margin: EdgeInsets.only(
                   bottom: 24.h,
@@ -925,49 +819,9 @@ class CreateRostr extends GetView<CreateRostrController> {
                     ),
                   ],
                 ),
-              ),
+              ),),
 
-              SizedBox(
-                height: 40.h,
-                width: MediaQuery.of(context).size.width,
-                child: OutlinedButton(
-                  onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => const Safety()));
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    primary: const Color(0xffCFE8FB),
-                    //  fixedSize: Size(101.w, 32.h),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        12.0.r,
-                      ),
-                    ),
-                    side: const BorderSide(
-                      color: Colors.transparent,
-                    ),
-                  ),
-                  child: Wrap(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/icons/add.svg',
-                        height: 18.h,
-                        color: Color(0xff41A3F0),
-                      ),
-                      Text(
-                        ' ' 'Add Date',
-                        style: AppTextStyle.boldNormal.copyWith(
-                          fontSize: 16.sp,
-                          color: const Color(0xff41A3F0),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              CreateRostrElevatedButton(buttonText: "Add Date", bottomSheet: CreateDataBottomSheet(createRostrController: createRostrController,), createRostrController: createRostrController),
               16.verticalSpace,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1066,30 +920,6 @@ class CreateRostr extends GetView<CreateRostrController> {
           ),
         );
       }),
-    );
-  }
-
-  Container buildStory(int index) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        children: [
-          ///images
-          CircleAvatar(
-            radius: 30,
-            backgroundColor: Colors.red,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-
-          ///text
-          Text(
-            "fmdkakmdfsjk",
-            style: TextStyle(color: Colors.grey),
-          )
-        ],
-      ),
     );
   }
 }
