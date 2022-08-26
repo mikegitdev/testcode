@@ -3,29 +3,72 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:tasker/inner/helper_class.dart';
+import 'package:tasker/data/models/tag_model.dart';
 import 'package:tasker/inner/local_back.dart';
 
 class CreateRostrController extends GetxController {
   bool enableRating = false;
   File? image;
   List<File> fileList = [];
-  int selectedIndex = -1;
-  List<CreateNote> createNoteList = [];
-  List<CreateTag> createTagList = [];
-  List<CreateDate> createDateList = [];
-  List<Color> listColor = [Colors.purpleAccent,Colors.green,Colors.blue,Colors.deepOrangeAccent,Colors.tealAccent,Colors.red,Colors.greenAccent,];
+  // List<CreateNote> createNoteList = [];
+  // List<CreateTag> createTagList = [];
+  // List<CreateDate> createDateList = [];
+
+  final personNameController = TextEditingController();
+  final personBirthDateController = TextEditingController();
+  final personPlaceController = TextEditingController();
+
+  final ratingNameController = TextEditingController();
+  final noteController = TextEditingController();
+  final tagController = TextEditingController();
+  Color? _newTagColor;
+  final List<Color> tagColors = const [
+    Color(0xffE50101),
+    Color(0xff83C3F5),
+    Color(0xff00AE26),
+    Color(0xffFF9900),
+    Color(0xff660099),
+    Color(0xff1372FF),
+    Color(0xffA09000),
+    Color(0xff222222),
+    Color(0xff969696),
+  ];
+  // List of items in our dropdown menu
+  final List<String> _sectionItems = [
+    'Choose a rostr type',
+    'Dating',
+    'Friends',
+    'Professional',
+  ];
+
+  // List of items in our dropdown menu
+  final List<String> _folderItems = [
+    'Choose a folder',
+    'Starting Lineup',
+    'Reserves',
+  ];
+
+
   TextEditingController noteTitleController = TextEditingController();
   TextEditingController noteSubtitleController = TextEditingController();
-  TextEditingController tagController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController headingNameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
+  List<String> get sectionItems => _sectionItems;
+  List<String> get folderItems => _folderItems;
+
+  int get ratingsColumnNumber => (ratings.length/ 2).ceil();
+  Color? get selectedTagColor => _newTagColor;
+  set newTagColor(Color? newColor){
+    if(tagColors.contains(newColor) && _newTagColor != newColor){
+      _newTagColor = newColor;
+      update();
+    }
+  }
+
   void changeRating(bool value) {
     enableRating = value;
-    update();
-    enableRating ? enableRating == false : enableRating == true;
     update();
     log("enableRating   $enableRating");
   }
@@ -91,94 +134,68 @@ class CreateRostrController extends GetxController {
         });
   }
 
-  Future<void> apiPostImage(
-    File? file,
-  ) async {}
+  Future<void> apiPostImage(File? file) async {}
 
   void deleteIndex(int index) {
     fileList.removeAt(index);
     update();
   }
 
-  void createNoteFunction() async{
-    String? noteTitle = noteTitleController.text.trim().toString();
-    String? noteSubtitle = noteSubtitleController.text.trim().toString();
-    if (noteSubtitle.isNotEmpty && noteSubtitle.isNotEmpty) {
-      CreateNote createNote = CreateNote(noteTitle: noteTitle, noteSubtitle: noteSubtitle);
-      createNoteList.add(createNote);
-      noteTitleController.text  = "";
-      noteTitleController.text  = "";
-      Get.back();
-      update();
-    }
-  }
+  // void createNoteFunction() async{
+  //   String? noteTitle = noteTitleController.text.trim().toString();
+  //   String? noteSubtitle = noteSubtitleController.text.trim().toString();
+  //   if (noteSubtitle.isNotEmpty && noteSubtitle.isNotEmpty) {
+  //     CreateNote createNote = CreateNote(noteTitle: noteTitle, noteSubtitle: noteSubtitle);
+  //     createNoteList.add(createNote);
+  //     noteTitleController.text  = "";
+  //     noteTitleController.text  = "";
+  //     Get.back();
+  //     update();
+  //   }
+  // }
 
 
-  Future openBottomSheet({required Widget bottomSheet, }){
+  Future openBottomSheet(Widget bottomSheet){
     return Get.bottomSheet(
       bottomSheet,
-      isDismissible: false, // Dismiss when anywhere except the sheet pressed
+      isDismissible: false,
       isScrollControlled: true,
-      backgroundColor: Colors.transparent,
     );
   }
 
-  void createTagFunction() {
-    Color color = listColor[selectedIndex];
-    String tag = tagController.text.trim().toString();
-    Tags tagObject = Tags(lookTitle: tag, lookColor: color);
-    tags.add(tagObject);
-    update();
-    selectedIndex = -1;
-    tagController.text = "";
-    Get.back();
+  // void createTagFunction() {
+  //   Color color = listColor[selectedIndex];
+  //   String tag = tagController.text.trim().toString();
+  //   Tag tagObject = Tag(title: tag, color: color);
+  //   tags.add(tagObject);
+  //   update();
+  //   selectedIndex = -1;
+  //   tagController.text = "";
+  //   Get.back();
+  //
+  // }
 
-  }
+  // void createDateFunction() {
+  //   String date = dateController.text.trim().toString();
+  //   String headname = headingNameController.text.trim().toString();
+  //   String description = descriptionController.text.trim().toString();
+  //   if(date.isNotEmpty && headname.isNotEmpty && description.isNotEmpty){
+  //     CreateDate createDate = CreateDate(date: date, description: description, headName: headname);
+  //     createDateList.add(createDate);
+  //     update();
+  //     Get.back();
+  //   }
+  //
+  //   update();
+  //   dateController.text = "";
+  //   headingNameController.text = "";
+  //   descriptionController.text = "";
+  //   Get.back();
+  //
+  // }
 
-  void createDateFunction() {
-    String date = dateController.text.trim().toString();
-    String headname = headingNameController.text.trim().toString();
-    String description = descriptionController.text.trim().toString();
-    if(date.isNotEmpty && headname.isNotEmpty && description.isNotEmpty){
-      CreateDate createDate = CreateDate(date: date, description: description, headName: headname);
-      createDateList.add(createDate);
-      update();
-      Get.back();
-    }
-
-    update();
-    dateController.text = "";
-    headingNameController.text = "";
-    descriptionController.text = "";
-    Get.back();
-
-  }
-
-  void chooseIndex(int index) {
-    selectedIndex = index;
-    update();
-  }
-}
-
-class CreateNote {
-  String noteTitle;
-  String noteSubtitle;
-
-  CreateNote({required this.noteTitle, required this.noteSubtitle});
-}
-
-class CreateTag{
-  String tagName;
-  Color color;
-
-  CreateTag({required this.tagName, required this.color});
-
-}
-class CreateDate{
-  String headName;
-  String date;
-  String description;
-
-  CreateDate({required this.headName, required this.date,required this.description});
-
+  // void chooseIndex(int index) {
+  //   selectedIndex = index;
+  //   update();
+  // }
 }
