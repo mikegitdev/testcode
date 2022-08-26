@@ -2,10 +2,10 @@ import 'package:get/get.dart';
 import 'package:tasker/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:tasker/emoji_text.dart';
+import 'package:tasker/inner/bottom_sheet/multi_textfield_bottom_sheet.dart';
 import 'package:tasker/inner/component/custom_add_button.dart';
 import 'package:tasker/inner/component/custom_text_field.dart';
 import 'package:tasker/inner/local_back.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/app_utils/app_image.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
@@ -300,7 +300,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                           ),
                         ),
                         24.verticalSpace,
-                        CreateButton(
+                        AddButton(
                           title: 'Add Rating',
                           onTap: () {
                             controller.openBottomSheet(
@@ -314,7 +314,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                               ),
                             );
                           },
-                        )
+                        ),
                       ],
                     )
                   : const SizedBox.shrink(),
@@ -361,7 +361,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                     )),
               ),
               20.verticalSpace,
-              CreateButton(
+              AddButton(
                 title: 'Add Tag',
                 onTap: () {
                   controller.openBottomSheet(
@@ -370,7 +370,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                       subtitle:
                           'Please, input a name of a new tag and choose a color',
                       hintText: 'Tag name',
-                      textController: controller.ratingNameController,
+                      textController: controller.tagNameController,
                       chooseColor: true,
                       onTap: () {},
                     ),
@@ -533,7 +533,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                   ],
                 ),
               ),
-              CreateButton(
+              AddButton(
                 title: 'Add Note',
                 onTap: () {
                   controller.openBottomSheet(
@@ -541,7 +541,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                       title: 'Create a Note',
                       subtitle: 'Please, input a name of a new note block',
                       hintText: 'Notes name',
-                      textController: controller.noteController,
+                      textController: controller.noteNameController,
                       onTap: () {},
                     ),
                   );
@@ -615,41 +615,18 @@ class CreateRostr extends GetView<CreateRostrController> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 40.h,
-                width: MediaQuery.of(context).size.width,
-                child: OutlinedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    primary: const Color(0xffCFE8FB),
-                    //  fixedSize: Size(101.w, 32.h),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        12.0.r,
-                      ),
-                    ),
-                    side: const BorderSide(
-                      color: Colors.transparent,
-                    ),
-                  ),
-                  child: Wrap(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/icons/add.svg',
-                        height: 18.h,
-                        color: AppColor.c41A3F0,
-                      ),
-                      Text(
-                        ' Add Contact',
-                        style: AppTextStyle.boldNormal.copyWith(
-                          fontSize: 16.sp,
-                          color: AppColor.c41A3F0,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+              AddButton(
+                title: 'Add Contact',
+                onTap: () {
+                  controller.openBottomSheet(
+                    MultiTextFieldBottomSheet(
+                      title: 'Create a Contact',
+                      subtitle: 'Please, input a name of a new contact and a link',
+                      type: BottomSheetType.CONTACT,
+                      onTap: (){},
+                    )
+                  );
+                },
               ),
               16.verticalSpace,
               Row(
@@ -672,6 +649,7 @@ class CreateRostr extends GetView<CreateRostrController> {
               12.verticalSpace,
               ListView.builder(
                 shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: 3,
                 itemBuilder: (context, index) => Container(
                   width: MediaQuery.of(context).size.width,
@@ -708,12 +686,19 @@ class CreateRostr extends GetView<CreateRostrController> {
                 ),
               ),
 
-              // CreateRostrElevatedButton(
-              //     buttonText: "Add Date",
-              //     bottomSheet: CreateDataBottomSheet(
-              //       controller: controller,
-              //     ),
-              //     controller: controller),
+              AddButton(
+                title: 'Add Contact',
+                onTap: () {
+                  controller.openBottomSheet(
+                      MultiTextFieldBottomSheet(
+                        title: 'Create a Date',
+                        subtitle: 'Please, input a date, heading and description of the event ',
+                        type: BottomSheetType.EVENT_DATE,
+                        onTap: (){},
+                      )
+                  );
+                },
+              ),
               16.verticalSpace,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
