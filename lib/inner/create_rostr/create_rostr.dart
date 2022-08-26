@@ -3,7 +3,6 @@ import 'package:tasker/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:tasker/emoji_text.dart';
 import 'package:tasker/inner/bottom_sheet/multi_textfield_bottom_sheet.dart';
-import 'package:tasker/inner/component/custom_add_button.dart';
 import 'package:tasker/inner/component/custom_elevated_button.dart';
 import 'package:tasker/inner/component/custom_text_field.dart';
 import 'package:tasker/inner/local_back.dart';
