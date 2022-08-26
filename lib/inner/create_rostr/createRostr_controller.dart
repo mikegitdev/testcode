@@ -11,6 +11,8 @@ enum BottomSheetType{
 }
 
 class CreateRostrController extends GetxController {
+  /// Fields
+
   bool enableRating = false;
   File? image;
   List<File> fileList = [];
@@ -41,6 +43,7 @@ class CreateRostrController extends GetxController {
     Color(0xff222222),
     Color(0xff969696),
   ];
+
   // List of items in our dropdown menu
   final List<String> _sectionItems = [
     'Choose a rostr type',
@@ -56,9 +59,10 @@ class CreateRostrController extends GetxController {
     'Reserves',
   ];
 
+  /// Getters and Setters
+
   List<String> get sectionItems => _sectionItems;
   List<String> get folderItems => _folderItems;
-
   int get ratingsColumnNumber => (ratings.length/ 2).ceil();
   Color? get selectedTagColor => _newTagColor;
   set newTagColor(Color? newColor){
@@ -68,13 +72,14 @@ class CreateRostrController extends GetxController {
     }
   }
 
+  /// Methods
+
   void changeRating(bool value) {
     enableRating = value;
     update();
     log("enableRating   $enableRating");
   }
 
-  ///Picker Camera
   _imgFromCamera() async {
     XFile? images = await ImagePicker()
         .pickImage(source: ImageSource.camera, imageQuality: 50);
@@ -87,7 +92,6 @@ class CreateRostrController extends GetxController {
     }
   }
 
-  ///Picker Gallery
   _imgFromGallery() async {
     XFile? images = await ImagePicker()
         .pickImage(source: ImageSource.gallery, imageQuality: 50);
@@ -105,32 +109,30 @@ class CreateRostrController extends GetxController {
     }
   }
 
-  ///Show Picker
   void showPicker(BuildContext context) {
     showModalBottomSheet(
         context: context,
+        isDismissible: false,
         builder: (BuildContext bc) {
-          return SafeArea(
-            child: Wrap(
-              children: <Widget>[
-                ListTile(
-                  leading: const Icon(Icons.photo_library),
-                  title: const Text('Photo Library'),
-                  onTap: () {
-                    _imgFromGallery();
-                    Get.back();
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(Icons.photo_camera),
-                  title: const Text('Camera'),
-                  onTap: () {
-                    _imgFromCamera();
-                    Get.back();
-                  },
-                ),
-              ],
-            ),
+          return Column(
+            children: <Widget>[
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title: const Text('Photo Library'),
+                onTap: () {
+                  _imgFromGallery();
+                  Get.back();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.photo_camera),
+                title: const Text('Camera'),
+                onTap: () {
+                  _imgFromCamera();
+                  Get.back();
+                },
+              ),
+            ],
           );
         });
   }

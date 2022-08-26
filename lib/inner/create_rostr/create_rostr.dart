@@ -2,17 +2,17 @@ import 'package:get/get.dart';
 import 'package:tasker/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:tasker/emoji_text.dart';
-import 'package:tasker/inner/bottom_sheet/multi_textfield_bottom_sheet.dart';
-import 'package:tasker/inner/component/custom_elevated_button.dart';
-import 'package:tasker/inner/component/custom_text_field.dart';
 import 'package:tasker/inner/local_back.dart';
 import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/app_utils/app_image.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tasker/inner/create_rating/create_rating.dart';
+import 'package:tasker/inner/component/custom_text_field.dart';
 import 'package:tasker/inner/component/custom_checkbox_list.dart';
+import 'package:tasker/inner/component/custom_elevated_button.dart';
 import 'package:tasker/inner/create_rostr/createRostr_controller.dart';
+import 'package:tasker/inner/bottom_sheet/multi_textfield_bottom_sheet.dart';
 import 'package:tasker/inner/bottom_sheet/single_textfield_bottom_sheet.dart';
 
 class CreateRostr extends GetView<CreateRostrController> {
@@ -380,8 +380,8 @@ class CreateRostr extends GetView<CreateRostrController> {
                   );
                 },
               ),
-              16.verticalSpace,
 
+              16.verticalSpace,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -769,9 +769,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                   hasGradient: true,
                   onPressed: (){},
               ),
-              // add padding s from here
               100.verticalSpace,
-              //Here
             ],
           ),
         );

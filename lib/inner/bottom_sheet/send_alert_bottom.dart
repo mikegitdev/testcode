@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -8,7 +6,7 @@ import 'package:tasker/app_route/app_route_name.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/emoji_single.dart';
 import 'package:tasker/inner/bottom_sheet/back_button.dart';
-import 'package:tasker/inner/local_back.dart';
+import 'package:tasker/inner/component/custom_elevated_button.dart';
 import 'package:tasker/inner/rostr_info/inner_controller.dart';
 
 import 'create_alert_bottom.dart';
@@ -188,27 +186,16 @@ class SendAlertBottom extends GetView<InnerController> {
                   12.verticalSpace,
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24.w),
-                    child: ElevatedButton(
+                    child: CustomElevatedButton(
+                      title: 'Add Custom Alert',
+                      hasGradient: false,
                       onPressed: () {
                         // sendAlert(context);
                         controller.openBottomSheet(
-                            bottomSheet: const CreateAlertBottom(),
-                            isCleanCreatedEmoji: true);
+                          bottomSheet: const CreateAlertBottom(),
+                          isCleanCreatedEmoji: true,
+                        );
                       },
-                      style: ElevatedButton.styleFrom(
-                        elevation: 0.0,
-                        primary: AppColor.cCFE8FB,
-                        fixedSize: Size.fromHeight(48.h),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12.r)),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Add Custom Alert',
-                          style: AppTextStyle.boldNormal.copyWith(
-                              color: AppColor.c41A3F0, fontSize: 16.sp),
-                        ),
-                      ),
                     ),
                   ),
                   12.verticalSpace,

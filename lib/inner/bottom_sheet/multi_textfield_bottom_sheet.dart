@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/inner/bottom_sheet/back_button.dart';
+import 'package:tasker/inner/component/custom_elevated_button.dart';
 import 'package:tasker/inner/component/custom_text_field.dart';
 import 'package:tasker/inner/create_rostr/createRostr_controller.dart';
 
@@ -106,33 +107,11 @@ class MultiTextFieldBottomSheet extends GetView<CreateRostrController> {
                           ],
                         ),
                   32.verticalSpace,
-                  Container(
-                    height: 48.h,
-                    decoration: BoxDecoration(
-                      gradient: AppColor.gradient_03,
-                      borderRadius: BorderRadius.circular(12.r),
-                    ),
-                    child: ElevatedButton(
-                      onPressed: () => onTap,
-                      style: ElevatedButton.styleFrom(
-                        elevation: 0.0,
-                        primary: Colors.transparent,
-                        shadowColor: Colors.transparent,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.r),
-                        ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Save',
-                          style: AppTextStyle.boldNormal.copyWith(
-                              color: AppColor.white,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                    ),
-                  )
+                  CustomElevatedButton(
+                    title: 'Save',
+                    hasGradient: true,
+                    onPressed: () => onTap,
+                  ),
                 ],
               ),
             ),

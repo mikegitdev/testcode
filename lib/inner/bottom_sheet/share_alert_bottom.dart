@@ -10,6 +10,7 @@ import 'package:tasker/app_utils/app_image.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/emoji_text.dart';
 import 'package:tasker/inner/bottom_sheet/back_button.dart';
+import 'package:tasker/inner/component/custom_elevated_button.dart';
 import 'package:tasker/inner/rostr_info/inner_controller.dart';
 
 
@@ -325,32 +326,12 @@ class _ShareAlertBottomState extends State<ShareAlertBottom> {
                   12.verticalSpace,
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24.w),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          gradient: AppColor.gradient_03,
-                          borderRadius: BorderRadius.circular(12.r)),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          controller.openBottomSheet(
-                              bottomSheet: const ShareAlertBottom());
-                        }, //AppColor.gradient_03
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.transparent,
-                          shadowColor: Colors.transparent,
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            8.horizontalSpace,
-                            Text(
-                              'Send To Chat',
-                              style: AppTextStyle.boldNormal.copyWith(
-                                  color: Colors.white, fontSize: 16.sp),
-                            ),
-                          ],
-                        ),
-                      ),
+                    child: CustomElevatedButton(
+                      title: 'Send To Chat',
+                      hasGradient: true,
+                      onPressed: () {
+                        controller.openBottomSheet(bottomSheet: const ShareAlertBottom());
+                      },
                     ),
                   ),
                   12.verticalSpace,
