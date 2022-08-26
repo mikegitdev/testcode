@@ -4,7 +4,7 @@ import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/inner/component/custom_switch.dart';
 
-class CustomCheckboxList extends StatelessWidget {
+class CustomSwitchListTile extends StatelessWidget {
   final String text;
   final bool value;
   final ValueChanged<bool> onChanged;
@@ -15,7 +15,7 @@ class CustomCheckboxList extends StatelessWidget {
   final Color activeTextColor;
   final Color inactiveTextColor;
 
-  const CustomCheckboxList({
+  const CustomSwitchListTile({
     Key? key,
     required this.text,
     required this.value,
