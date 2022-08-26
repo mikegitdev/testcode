@@ -195,6 +195,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                 },
               ),
 
+              // * Ratings
               controller.enableRating
                   ? Column(
                       children: [
@@ -286,7 +287,6 @@ class CreateRostr extends GetView<CreateRostrController> {
                           ),
                         ),
                         24.verticalSpace,
-
                         CustomElevatedButton(
                           title: 'Add Rating',
                           hasGradient: false,
@@ -307,6 +307,8 @@ class CreateRostr extends GetView<CreateRostrController> {
                     )
                   : const SizedBox.shrink(),
               12.verticalSpace,
+
+              // * Tags
               CustomLabel(label: 'Tags', onTap: () {}),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
@@ -350,8 +352,9 @@ class CreateRostr extends GetView<CreateRostrController> {
                   );
                 },
               ),
-
               16.verticalSpace,
+
+              // * Notes
               CustomLabel(label: 'Notes', onTap: (){}),
               16.verticalSpace,
               Container(
@@ -505,8 +508,9 @@ class CreateRostr extends GetView<CreateRostrController> {
                   );
                 },
               ),
-
               12.verticalSpace,
+
+              // * Contacts
               CustomLabel(label: 'Contacts', onTap: () {}),
               12.verticalSpace,
               Container(
@@ -572,6 +576,8 @@ class CreateRostr extends GetView<CreateRostrController> {
                 },
               ),
               16.verticalSpace,
+
+              // * Dates
               CustomLabel(label: 'Dates', onTap: () {}),
               12.verticalSpace,
               ListView.builder(
@@ -612,7 +618,6 @@ class CreateRostr extends GetView<CreateRostrController> {
                   ),
                 ),
               ),
-
               CustomElevatedButton(
                 title: 'Add Date',
                 hasGradient: false,
@@ -628,6 +633,8 @@ class CreateRostr extends GetView<CreateRostrController> {
                 },
               ),
               16.verticalSpace,
+
+              // * Position
               CustomLabel(label: 'Position', onTap: (){}),
               12.verticalSpace,
               Container(
