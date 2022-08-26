@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tasker/data/local_storage.dart';
 import 'package:tasker/inner/local_back.dart';
-import 'package:tasker/models/emoji_model.dart';
+import 'package:tasker/data/models/emoji_model.dart';
+
+enum ImageSourceType { gallery, camera }
 
 class InnerController extends GetxController {
   EmojiModel? _selectedEmoji;
