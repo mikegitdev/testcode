@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:tasker/emoji_text.dart';
 import 'package:tasker/inner/bottom_sheet/multi_textfield_bottom_sheet.dart';
 import 'package:tasker/inner/component/custom_add_button.dart';
+import 'package:tasker/inner/component/custom_elevated_button.dart';
 import 'package:tasker/inner/component/custom_text_field.dart';
 import 'package:tasker/inner/local_back.dart';
 import 'package:tasker/app_utils/app_color.dart';
@@ -300,14 +301,16 @@ class CreateRostr extends GetView<CreateRostrController> {
                           ),
                         ),
                         24.verticalSpace,
-                        AddButton(
+
+                        CustomElevatedButton(
                           title: 'Add Rating',
-                          onTap: () {
+                          hasGradient: false,
+                          onPressed: () {
                             controller.openBottomSheet(
                               SingleTextFieldBottomSheet(
                                 title: 'Create a Rating',
                                 subtitle:
-                                    'Please, input a name of a new rating categorie',
+                                'Please, input a name of a new rating categorie',
                                 hintText: 'Rating name',
                                 textController: controller.ratingNameController,
                                 onTap: () {},
@@ -361,14 +364,15 @@ class CreateRostr extends GetView<CreateRostrController> {
                     )),
               ),
               20.verticalSpace,
-              AddButton(
+              CustomElevatedButton(
                 title: 'Add Tag',
-                onTap: () {
+                hasGradient: false,
+                onPressed: () {
                   controller.openBottomSheet(
                     SingleTextFieldBottomSheet(
                       title: 'Create a Tag',
                       subtitle:
-                          'Please, input a name of a new tag and choose a color',
+                      'Please, input a name of a new tag and choose a color',
                       hintText: 'Tag name',
                       textController: controller.tagNameController,
                       chooseColor: true,
@@ -533,9 +537,10 @@ class CreateRostr extends GetView<CreateRostrController> {
                   ],
                 ),
               ),
-              AddButton(
+              CustomElevatedButton(
                 title: 'Add Note',
-                onTap: () {
+                hasGradient: false,
+                onPressed: () {
                   controller.openBottomSheet(
                     SingleTextFieldBottomSheet(
                       title: 'Create a Note',
@@ -615,16 +620,17 @@ class CreateRostr extends GetView<CreateRostrController> {
                   ],
                 ),
               ),
-              AddButton(
+              CustomElevatedButton(
                 title: 'Add Contact',
-                onTap: () {
+                hasGradient: false,
+                onPressed: () {
                   controller.openBottomSheet(
-                    MultiTextFieldBottomSheet(
-                      title: 'Create a Contact',
-                      subtitle: 'Please, input a name of a new contact and a link',
-                      type: BottomSheetType.CONTACT,
-                      onTap: (){},
-                    )
+                      MultiTextFieldBottomSheet(
+                        title: 'Create a Contact',
+                        subtitle: 'Please, input a name of a new contact and a link',
+                        type: BottomSheetType.CONTACT,
+                        onTap: (){},
+                      )
                   );
                 },
               ),
@@ -686,9 +692,10 @@ class CreateRostr extends GetView<CreateRostrController> {
                 ),
               ),
 
-              AddButton(
-                title: 'Add Contact',
-                onTap: () {
+              CustomElevatedButton(
+                title: 'Add Date',
+                hasGradient: false,
+                onPressed: (){
                   controller.openBottomSheet(
                       MultiTextFieldBottomSheet(
                         title: 'Create a Date',
@@ -758,37 +765,10 @@ class CreateRostr extends GetView<CreateRostrController> {
                     onChanged: (value) {}),
               ),
               12.verticalSpace,
-              Container(
-                decoration: BoxDecoration(
-                    gradient: AppColor.gradient_03,
-                    borderRadius: BorderRadius.circular(12.r)),
-                child: ElevatedButton(
-                  onPressed: () {
-                    // showModalBottomSheet(
-                    //     context: context,
-                    //     isScrollControlled: true,
-                    //     backgroundColor: Colors.transparent,
-                    //     builder: (context) {
-                    //       return ShareAlertBottom();
-                    //     });
-                  }, //AppColor.gradient_03
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.transparent,
-                    shadowColor: Colors.transparent,
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      8.horizontalSpace,
-                      Text(
-                        'Create',
-                        style: AppTextStyle.boldNormal
-                            .copyWith(color: Colors.white, fontSize: 16.sp),
-                      ),
-                    ],
-                  ),
-                ),
+              CustomElevatedButton(
+                  title: 'Create',
+                  hasGradient: true,
+                  onPressed: (){},
               ),
               // add padding s from here
               100.verticalSpace,

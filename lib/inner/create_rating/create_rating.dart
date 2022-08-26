@@ -180,7 +180,11 @@ class CreateRating extends StatelessWidget {
               ),
             ),
 
-            CustomElevatedButton(onPressed: (){}, child: const Text("Save",style: TextStyle(color: Colors.white),),),
+            CustomElevatedButton(
+              title: 'Save',
+              hasGradient: true,
+              onPressed: (){},
+            ),
 
 
           ],
