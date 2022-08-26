@@ -6,7 +6,7 @@ import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/emoji_text.dart';
 import 'package:tasker/inner/rostr_info/inner_controller.dart';
-import 'package:tasker/models/emoji_model.dart';
+import 'package:tasker/data/models/emoji_model.dart';
 
 class EmojiSingle extends GetView<InnerController> {
   final EmojiModel object;
