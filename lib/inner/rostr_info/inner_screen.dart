@@ -230,97 +230,97 @@ class InnerScreen extends GetView<InnerController> {
                 ),
               ),
 
-              Padding(
-                padding: EdgeInsets.only(left: 24.h, right: 24.h, bottom: 24.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      children: List.generate(
-                        ratings.length - ratings.length ~/ 2,
-                        (index) => Padding(
-                          padding: EdgeInsets.only(bottom: 12.0.h),
-                          child: Container(
-                            height: 38.h,
-                            width: MediaQuery.of(context).size.width / 2 - 30.h,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8.r)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  " ${ratings[ratings.length ~/ 2 + index].ratingTitle}",
-                                  style: AppTextStyle.regularNormal
-                                      .copyWith(fontSize: 16.sp),
-                                ),
-                                Wrap(
-                                  alignment: WrapAlignment.start,
-                                  children: [
-                                    Text(
-                                      "${ratings[ratings.length ~/ 2 + index].ratingScore} ",
-                                      style: AppTextStyle.boldNormal.copyWith(
-                                        fontSize: 16.sp,
-                                        color: Color(0xff00AE26),
-                                      ),
-                                    ),
-                                    const Icon(
-                                      Icons.grade,
-                                      color: Colors.amber,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Column(
-                      children: List.generate(
-                        ratings.length ~/ 2,
-                        (index) => Padding(
-                          padding: EdgeInsets.only(bottom: 12.0.h),
-                          child: Container(
-                            height: 38.h,
-                            width: MediaQuery.of(context).size.width / 2 - 30.h,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8.r)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  " ${ratings[index].ratingTitle}",
-                                  style: AppTextStyle.regularNormal
-                                      .copyWith(fontSize: 16.sp),
-                                ),
-                                Wrap(
-                                  alignment: WrapAlignment.start,
-                                  children: [
-                                    Text(
-                                      "${ratings[index].ratingScore} ",
-                                      style: AppTextStyle.boldNormal.copyWith(
-                                        fontSize: 16.sp,
-                                        color: Color(0xff00AE26),
-                                      ),
-                                    ),
-                                    const Icon(
-                                      Icons.grade,
-                                      color: Colors.amber,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              // Padding(
+              //   padding: EdgeInsets.only(left: 24.h, right: 24.h, bottom: 24.h),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: [
+              //       Column(
+              //         children: List.generate(
+              //           ratings.length - ratings.length ~/ 2,
+              //           (index) => Padding(
+              //             padding: EdgeInsets.only(bottom: 12.0.h),
+              //             child: Container(
+              //               height: 38.h,
+              //               width: MediaQuery.of(context).size.width / 2 - 30.h,
+              //               decoration: BoxDecoration(
+              //                   color: Colors.white,
+              //                   borderRadius: BorderRadius.circular(8.r)),
+              //               child: Row(
+              //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //                 children: [
+              //                   Text(
+              //                     " ${ratings[ratings.length ~/ 2 + index].ratingTitle}",
+              //                     style: AppTextStyle.regularNormal
+              //                         .copyWith(fontSize: 16.sp),
+              //                   ),
+              //                   Wrap(
+              //                     alignment: WrapAlignment.start,
+              //                     children: [
+              //                       Text(
+              //                         "${ratings[ratings.length ~/ 2 + index].ratingScore} ",
+              //                         style: AppTextStyle.boldNormal.copyWith(
+              //                           fontSize: 16.sp,
+              //                           color: Color(0xff00AE26),
+              //                         ),
+              //                       ),
+              //                       const Icon(
+              //                         Icons.grade,
+              //                         color: Colors.amber,
+              //                       ),
+              //                     ],
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //       Column(
+              //         children: List.generate(
+              //           ratings.length ~/ 2,
+              //           (index) => Padding(
+              //             padding: EdgeInsets.only(bottom: 12.0.h),
+              //             child: Container(
+              //               height: 38.h,
+              //               width: MediaQuery.of(context).size.width / 2 - 30.h,
+              //               decoration: BoxDecoration(
+              //                   color: Colors.white,
+              //                   borderRadius: BorderRadius.circular(8.r)),
+              //               child: Row(
+              //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //                 children: [
+              //                   Text(
+              //                     " ${ratings[index].ratingTitle}",
+              //                     style: AppTextStyle.regularNormal
+              //                         .copyWith(fontSize: 16.sp),
+              //                   ),
+              //                   Wrap(
+              //                     alignment: WrapAlignment.start,
+              //                     children: [
+              //                       Text(
+              //                         "${ratings[index].ratingScore} ",
+              //                         style: AppTextStyle.boldNormal.copyWith(
+              //                           fontSize: 16.sp,
+              //                           color: Color(0xff00AE26),
+              //                         ),
+              //                       ),
+              //                       const Icon(
+              //                         Icons.grade,
+              //                         color: Colors.amber,
+              //                       ),
+              //                     ],
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.h),
                 child: SizedBox(
@@ -398,9 +398,9 @@ class InnerScreen extends GetView<InnerController> {
                         borderRadius: BorderRadius.circular(8.h),
                         color: Colors.white,
                       ),
-                      child: Text(tags[index].lookTitle,
+                      child: Text(tags[index].title,
                           style: AppTextStyle.regularNormal.copyWith(
-                              fontSize: 14.sp, color: tags[index].lookColor)),
+                              fontSize: 14.sp, color: tags[index].color)),
                     ),
                   ),
                 )),
