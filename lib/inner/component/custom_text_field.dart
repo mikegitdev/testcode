@@ -8,49 +8,68 @@ class CustomTextField extends StatelessWidget {
   final String? labelText;
   final String hintText;
   final int? maxLines;
-  final Function(String? value) onChanged;
+  final void Function(String)? onChanged;
+  final TextEditingController textController;
 
   const CustomTextField({
     Key? key,
+    required this.hintText,
+    required this.textController,
     this.initialValue,
     this.labelText,
-    required this.hintText,
-    required this.onChanged,
+    this.onChanged,
     this.maxLines,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColor.cF6FAFE,
-        borderRadius: BorderRadius.all(Radius.circular(12.r)),
-      ),
-      child: TextFormField(
-        onChanged: onChanged,
-        initialValue: initialValue,
-        style: AppTextStyle.regularNormal.copyWith(
+    return TextFormField(
+      controller: textController,
+
+      style: AppTextStyle.regularNormal.copyWith(color: AppColor.c15213B, fontSize: 16.sp,),
+      initialValue: initialValue,
+      maxLines: maxLines,
+
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: AppColor.cF6FAFE,
+        hintText: hintText,
+        labelText: labelText,
+        alignLabelWithHint: false,
+        floatingLabelAlignment: FloatingLabelAlignment.start,
+
+        hintStyle: AppTextStyle.regularNormal.copyWith(
           fontSize: 16.sp,
-          color: AppColor.c15213B,
+          color: AppColor.c969BA7,
+          fontWeight: FontWeight.w400,
         ),
-        maxLines: maxLines,
-        decoration: InputDecoration(
-          contentPadding:
-              EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
-          border: InputBorder.none,
-          isDense: true,
-          hintText: hintText,
-          labelText: labelText,
-          hintStyle: AppTextStyle.regularNormal.copyWith(
-            fontSize: 16.sp,
-            color: AppColor.c969BA7,
-          ),
-          labelStyle: AppTextStyle.regularNormal.copyWith(
-            fontSize: 12.sp,
-            color: AppColor.c969BA7,
-          ),
+        labelStyle: AppTextStyle.regularNormal.copyWith(
+          fontSize: 12.sp,
+          color: AppColor.c969BA7,
+        ),
+        floatingLabelStyle: AppTextStyle.regularNormal.copyWith(
+          fontSize: 16.sp,
+          color: AppColor.c969BA7,
+        ),
+
+        contentPadding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
+
+
+        border: InputBorder.none,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: const BorderSide(color: AppColor.transparent),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: const BorderSide(color: AppColor.transparent),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: const BorderSide(color: AppColor.transparent),
         ),
       ),
+      onChanged: onChanged,
     );
   }
 }
