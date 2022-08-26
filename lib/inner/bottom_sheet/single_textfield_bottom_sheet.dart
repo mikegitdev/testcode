@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/inner/bottom_sheet/back_button.dart';
+import 'package:tasker/inner/component/custom_text_field.dart';
 import 'package:tasker/inner/create_rostr/createRostr_controller.dart';
 import 'package:tasker/inner/local_back.dart';
 
@@ -71,22 +72,9 @@ class SingleTextFieldBottomSheet extends GetView<CreateRostrController> {
                       style: AppTextStyle.regularNormal.copyWith(fontSize: 12.sp, color: AppColor.c62677D, fontWeight: FontWeight.w400,),
                     ),
                     16.verticalSpace,
-                    TextFormField(
-                      controller: textController,
-                      style: AppTextStyle.regularNormal.copyWith(color: AppColor.c15213B, fontSize: 16.sp,),
-
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
-                        filled: true,
-                        fillColor: AppColor.cF6FAFE,
+                    CustomTextField(
                         hintText: hintText,
-
-                        border: OutlineInputBorder(
-                          borderSide: const BorderSide(width: 0, style: BorderStyle.none),
-                          borderRadius: BorderRadius.all(Radius.circular(12.r)),
-                        ),
-                      ),
-                      onChanged: (text) {},
+                        textController: textController,
                     ),
                     Visibility(
                       visible: chooseColor,
