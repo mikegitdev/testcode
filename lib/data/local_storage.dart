@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tasker/models/emoji_model.dart';
+import 'package:tasker/data/models/emoji_model.dart';
 
 class SharedPreferenceService{
 
