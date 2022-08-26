@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:tasker/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:tasker/emoji_text.dart';
+import 'package:tasker/inner/component/custom_label_edit.dart';
 import 'package:tasker/inner/local_back.dart';
 import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/app_utils/app_image.dart';
@@ -197,30 +198,16 @@ class CreateRostr extends GetView<CreateRostrController> {
               controller.enableRating
                   ? Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Ratings",
-                              style: AppTextStyle.boldNormal
-                                  .copyWith(fontSize: 18.sp),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const CreateRating(),
-                                  ),
-                                );
-                              },
-                              child: Text(
-                                "Edit",
-                                style: AppTextStyle.boldNormal.copyWith(
-                                    fontSize: 16.sp, color: Colors.red),
-                              ),
-                            ),
-                          ],
+                        CustomLabel(
+                            label: 'Ratings',
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const CreateRating(),
+                                ),
+                              );
+                            }
                         ),
                         16.verticalSpace,
                         Padding(
@@ -270,7 +257,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                               crossAxisSpacing: 12.w,
                               childAspectRatio: 4,
                             ),
-                            itemCount: ratings.length,
+                            itemCount: controller.rating.length,
                             itemBuilder: (BuildContext context, int index) {
                               return Container(
                                 padding: const EdgeInsets.all(8.0),
@@ -279,15 +266,14 @@ class CreateRostr extends GetView<CreateRostrController> {
                                   color: AppColor.white,
                                 ),
                                 child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      ratings[index].title,
-                                      style: AppTextStyle.regularNormal
-                                          .copyWith(
+                                      controller.rating[index].title,
+                                      style: AppTextStyle.regularNormal.copyWith(
                                               fontSize: 16.sp,
-                                              color: AppColor.c15213B),
+                                              color: AppColor.c15213B,
+                                      ),
                                     ),
                                     const Icon(
                                       Icons.arrow_forward_outlined,
@@ -321,23 +307,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                     )
                   : const SizedBox.shrink(),
               12.verticalSpace,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Tags",
-                    style: AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Edit",
-                      style: AppTextStyle.boldNormal
-                          .copyWith(fontSize: 16.sp, color: Colors.red),
-                    ),
-                  ),
-                ],
-              ),
+              CustomLabel(label: 'Tags', onTap: () {}),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Wrap(
@@ -382,23 +352,7 @@ class CreateRostr extends GetView<CreateRostrController> {
               ),
 
               16.verticalSpace,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Notes",
-                    style: AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Edit",
-                      style: AppTextStyle.boldNormal
-                          .copyWith(fontSize: 16.sp, color: Colors.red),
-                    ),
-                  ),
-                ],
-              ),
+              CustomLabel(label: 'Notes', onTap: (){}),
               16.verticalSpace,
               Container(
                 width: double.infinity,
@@ -553,23 +507,7 @@ class CreateRostr extends GetView<CreateRostrController> {
               ),
 
               12.verticalSpace,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Contacts",
-                    style: AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Edit",
-                      style: AppTextStyle.boldNormal
-                          .copyWith(fontSize: 16.sp, color: Colors.red),
-                    ),
-                  ),
-                ],
-              ),
+              CustomLabel(label: 'Contacts', onTap: () {}),
               12.verticalSpace,
               Container(
                 width: MediaQuery.of(context).size.width,
@@ -634,23 +572,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                 },
               ),
               16.verticalSpace,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Dates",
-                    style: AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Edit",
-                      style: AppTextStyle.boldNormal
-                          .copyWith(fontSize: 16.sp, color: Colors.red),
-                    ),
-                  ),
-                ],
-              ),
+              CustomLabel(label: 'Dates', onTap: () {}),
               12.verticalSpace,
               ListView.builder(
                 shrinkWrap: true,
@@ -706,23 +628,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                 },
               ),
               16.verticalSpace,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Position",
-                    style: AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Edit",
-                      style: AppTextStyle.boldNormal
-                          .copyWith(fontSize: 16.sp, color: Colors.red),
-                    ),
-                  ),
-                ],
-              ),
+              CustomLabel(label: 'Position', onTap: (){}),
               12.verticalSpace,
               Container(
                 padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),

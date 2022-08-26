@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tasker/data/models/rating_model.dart';
 import 'package:tasker/inner/local_back.dart';
 
 enum BottomSheetType{
@@ -16,6 +17,7 @@ class CreateRostrController extends GetxController {
   bool enableRating = false;
   File? image;
   List<File> fileList = [];
+  List<Ratings> rating = defaultRatings;
 
   final personNameController = TextEditingController();
   final personBirthDateController = TextEditingController();
@@ -63,13 +65,19 @@ class CreateRostrController extends GetxController {
 
   List<String> get sectionItems => _sectionItems;
   List<String> get folderItems => _folderItems;
-  int get ratingsColumnNumber => (ratings.length/ 2).ceil();
+  int get ratingsColumnNumber => (rating.length/ 2).ceil();
   Color? get selectedTagColor => _newTagColor;
   set newTagColor(Color? newColor){
     if(tagColors.contains(newColor) && _newTagColor != newColor){
       _newTagColor = newColor;
       update();
     }
+  }
+
+  @override
+  void onInit() {
+    /// Load Data From Local
+    super.onInit();
   }
 
   /// Methods

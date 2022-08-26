@@ -198,7 +198,7 @@ List<EmojiModel> emojisSet = [
   EmojiModel(emoji: "💯", isSelected: false),
 ];
 
-List<Ratings> ratings = [
+List<Ratings> defaultRatings = [
   Ratings(title: "Looks", score: 8),
   Ratings(title: "Personality", score: 9),
   Ratings(title: "Fun", score: 7),
