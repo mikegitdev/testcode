@@ -29,7 +29,7 @@ class SharedPreferenceService{
   //   return emojis?.contains(object) ?? false;
   // }
 
-  static Future<bool> removeEmojis(StorageKey key) async{
+  static Future<bool> removeStringList(StorageKey key) async{
     SharedPreferences pref = await SharedPreferences.getInstance();
     return pref.remove(key.name);
   }
