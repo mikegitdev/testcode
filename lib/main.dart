@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:tasker/app_route/app_route_name.dart';
 import 'package:tasker/app_route/app_router.dart';
+import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/app_utils/scroll_config.dart';
 import 'package:tasker/data/local_database.dart';
 import 'app_controller_binding.dart';
@@ -32,6 +33,9 @@ class MyApp extends StatelessWidget {
           initialBinding: AppControllerBinding(),
           initialRoute: '/${AppRouteName.createRostr}',
           getPages: AppRouter.onGeneratePage(),
+          theme: ThemeData(
+            scaffoldBackgroundColor: AppColor.cF5F5F5,
+          ),
           builder: (context, child) {
             return MediaQuery(
               data: MediaQuery.of(context).copyWith(textScaleFactor: 1),

@@ -22,7 +22,6 @@ class CreateRostr extends GetView<CreateRostrController> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: AppColor.cF5F5F5,
       appBar: AppBarScreen(appbarTitle: 'Create a rostr'),
       body: GetBuilder<CreateRostrController>(builder: (ctrl) {
         return SingleChildScrollView(
@@ -193,6 +192,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                         controller.enableRating = value;
                       },
                     ),
+                    12.verticalSpace,
                     controller.enableRating
                         ? Column(
                             children: [

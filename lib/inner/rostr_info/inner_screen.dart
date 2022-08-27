@@ -19,7 +19,6 @@ class InnerScreen extends GetView<InnerController> {
     return GetBuilder<InnerController>(
       builder: (ctr) => Scaffold(
         resizeToAvoidBottomInset: true,
-        backgroundColor: const Color(0XffF5F5F5),
         appBar: AppBarScreen(
           appbarTitle: 'Rostr',
         ),

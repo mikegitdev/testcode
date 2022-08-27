@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tasker/app_utils/app_color.dart';
+import 'package:tasker/appbar.dart';
+import 'package:tasker/inner/component/custom_app_bar.dart';
 import 'package:tasker/inner/component/custom_checkbox_list.dart';
 import 'package:tasker/inner/component/custom_elevated_button.dart';
 import 'package:tasker/inner/component/custom_label_edit.dart';
@@ -17,21 +19,21 @@ class CreateRating extends GetView<CreateRostrController> {
   Widget build(BuildContext context) {
     //15213B
     return Scaffold(
-      backgroundColor: AppColor.white,
-      appBar: AppBar(
-        elevation: 0,
-        foregroundColor: AppColor.c15213B,
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        title: Text(
-          'Quick Ratings Edit',
-          style: AppTextStyle.regularNormal.copyWith(
-            color: AppColor.c15213B,
-            fontWeight: FontWeight.w700,
-            fontSize: 16.sp,
-          ),
-        ),
-      ),
+      appBar: AppBarScreen(appbarTitle: 'Quick Ratings Edit'),
+      // AppBar(
+      //   elevation: 0,
+      //   foregroundColor: AppColor.c15213B,
+      //   centerTitle: true,
+      //   backgroundColor: Colors.white,
+      //   title: Text(
+      //     'Quick Ratings Edit',
+      //     style: AppTextStyle.regularNormal.copyWith(
+      //       color: AppColor.c15213B,
+      //       fontWeight: FontWeight.w700,
+      //       fontSize: 16.sp,
+      //     ),
+      //   ),
+      // ),
       body: GetBuilder<CreateRostrController>(
         builder: (ctr) {
           return SingleChildScrollView(
@@ -40,10 +42,8 @@ class CreateRating extends GetView<CreateRostrController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 36.verticalSpace,
-
-                //#Ratings Settings
                 Text(
-                  "Ratings Settings",
+                  'Ratings Settings',
                   style: AppTextStyle.regularNormal.copyWith(
                     color: AppColor.c15213B,
                     fontWeight: FontWeight.w700,
@@ -54,144 +54,100 @@ class CreateRating extends GetView<CreateRostrController> {
 
                 // * Ratings
                 CustomSwitchListTile(
-                  text: 'Ratings',
-                  value: false,
-                  onChanged: (value) {
-                    // createRostrController.changeRating(value);
-                  },
-                  activeColor: Colors.red,
                   activeText: 'On',
                   inactiveText: 'Off',
+                  text: 'Ratings',
+                  activeColor: Colors.red,
                   activeTextColor: AppColor.white,
                   inactiveTextColor: AppColor.c969696,
+                  value: true,
+                  onChanged: (value) {},
                 ),
                 28.verticalSpace,
-                //#Existing Ratings
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "",
-                      style: AppTextStyle.regularNormal.copyWith(
-                        color: AppColor.c15213B,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20.sp,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {},
-                      child: Text(
-                        "Edit",
-                        style: AppTextStyle.boldNormal.copyWith(
-                          color: AppColor.cE50101, //E50101
-                          fontWeight: FontWeight.w700,
-                          fontSize: 16.sp,
-                        ),
-                      ),
-                    ),
-                  ],
+
+                // * Existing Ratings
+                CustomLabel(
+                  label: 'Existing Ratings',
+                  onTap: () {},
                 ),
                 26.verticalSpace,
 
-                //#RatingList
-                ListView.builder(
-                  physics: const BouncingScrollPhysics(),
+                // * RatingList
+                ListView.separated(
                   shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: controller.rating.length,
-                  itemBuilder: (context, index) => Container(
-                    padding: const EdgeInsets.only(top: 5),
-                    height: 160,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          controller.rating[index].title,
-                          style: AppTextStyle.boldNormal.copyWith(
-                            color: AppColor.c15213B, //E50101
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18.sp,
-                          ),
-                        ),
-                        12.verticalSpace,
-                        GridView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          itemCount: 10,
-                          gridDelegate:
-                              const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 60,
-                            childAspectRatio: 10 / 7,
-                            crossAxisSpacing: 8,
-                            mainAxisSpacing: 12,
-                          ),
-                          itemBuilder: (context, index) =>
-                              index == 8 || index == 9 ? Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: AppColor.cF6FAFE,
+                  separatorBuilder: (BuildContext context, int index){
+                    return 24.verticalSpace;
+                  },
+                  itemBuilder: (BuildContext context, int superIndex){
+                    return Container(
+                      padding: const EdgeInsets.only(top: 5),
+                      height: 140.h,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            controller.rating[superIndex].title,
+                            style: AppTextStyle.boldNormal.copyWith(
+                              color: AppColor.c15213B,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 18.sp,
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-
-                                //#iconStar
-                                const Icon(
-                                  Icons.grade,
-                                  color: AppColor.c969BA7,
-                                  size: 18,
-                                ),
-                                4.horizontalSpace,
-
-                                //#textIndex
-                                Text(
-                                  "${index + 1}",
-                                  style: AppTextStyle.boldNormal.copyWith(
-                                    color: AppColor.c969BA7, //E50101
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 18.sp,
+                          ),
+                          12.verticalSpace,
+                          Wrap(
+                            spacing: 6.w,
+                            runSpacing: 12.h,
+                            children: List.generate(
+                              10,
+                                  (index) {
+                                return Container(
+                                  height: 43.h,
+                                  width: 60.w,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(999),
+                                    color: index + 1 <= controller.rating[superIndex].score
+                                        ? AppColor.c83C3F5 : AppColor.cF6FAFE,
                                   ),
-                                )
-                              ],
-                            ),
-                          ): Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  color: Colors.blue,
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Icon(
-                                      Icons.grade,
-                                      color: Colors.white,
-                                      size: 18,
-                                    ),
-                                    4.horizontalSpace,
-                                    Text(
-                                      "${index + 1}",
-                                      style: AppTextStyle.boldNormal.copyWith(
-                                        color: AppColor.white, //E50101
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 18.sp,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(
+                                        Icons.grade,
+                                        color: index + 1 <= controller.rating[superIndex].score
+                                            ? AppColor.white : AppColor.c969BA7,
+                                        size: 15,
                                       ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                        ),
-                      ],
-                    ),
-                  ),
+                                      4.horizontalSpace,
+                                      Text(
+                                        '${index + 1}',
+                                        style: AppTextStyle.boldNormal.copyWith(
+                                          color: index + 1 <= controller.rating[superIndex].score
+                                              ? AppColor.white : AppColor.c969BA7,
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 16.sp,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
 
+                32.verticalSpace,
                 CustomElevatedButton(
                   title: 'Save',
                   hasGradient: true,
                   onPressed: (){},
                 ),
-
-
               ],
             ),
           );
