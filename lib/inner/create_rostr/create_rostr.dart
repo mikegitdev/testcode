@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:tasker/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:tasker/emoji_text.dart';
-import 'package:tasker/inner/local_back.dart';
 import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/app_utils/app_image.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
@@ -181,6 +180,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                     ),
                     16.verticalSpace,
 
+                    // * Ratings
                     CustomSwitchListTile(
                       activeText: 'On',
                       inactiveText: 'Off',
@@ -193,7 +193,6 @@ class CreateRostr extends GetView<CreateRostrController> {
                         controller.enableRating = value;
                       },
                     ),
-                    // * Ratings
                     controller.enableRating
                         ? Column(
                             children: [
@@ -249,7 +248,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                                 ),
                               ),
                               SizedBox(
-                                height: 54.h * controller.ratingsColumnNumber,
+                                height: 52.h * controller.ratingsColumnNumber,
                                 child: GridView.builder(
                                   physics: const NeverScrollableScrollPhysics(),
                                   gridDelegate:

@@ -319,20 +319,20 @@ class CreateRostrController extends GetxController {
     List<String>? ratingsStringList =  await SharedPreferenceService.loadStringList(StorageKey.RATINGS);
     if(ratingsStringList != null){
       _createdRatings = ratingsStringList.map((string) => Rating.fromJson(jsonDecode(string))).toList();
-      _ratings.addAll(_createdRatings!);
+      _ratings = _createdRatings!;
     }
 
     // * Tags
     List<String>? tagsStringList =  await SharedPreferenceService.loadStringList(StorageKey.TAGS);
     if(tagsStringList != null){
       _createdTags = tagsStringList.map((string) => Tag.fromJson(jsonDecode(string))).toList();
-      _tags.addAll(_createdTags!);
+      _tags = _createdTags!;
     }
     update();
   }
 
   void addRating(){
-    print('ADD RATING');
+    print('ADD RATING : ${_ratings.length}');
     String title = ratingNameController.text.trim();
     if(title.isNotEmpty){
       Rating newRating = Rating(title: title);
