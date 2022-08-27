@@ -3,16 +3,16 @@ import 'package:tasker/data/models/emoji_model.dart';
 import 'package:tasker/data/models/rating_model.dart';
 import 'package:tasker/data/models/tag_model.dart';
 
-List<Tag> tags = [
-  Tag(title: 'Hot', color: AppColor.cE50101),
-  Tag(title: 'Rich', color: AppColor.c83C3F5),
-  Tag(title: 'Successful', color: AppColor.c00AE26),
-  Tag(title: 'Smart', color: AppColor.cFF9900),
-  Tag(title: 'Confident', color: AppColor.c660099),
-  Tag(title: 'Funny', color: AppColor.c1372FF),
-  Tag(title: 'Beta', color: AppColor.cA09000),
-  Tag(title: 'Alpha', color: AppColor.c222222),
-  Tag(title: 'Sigma', color: AppColor.c969696),
+List<Tag> defaultTags = [
+  Tag(title: 'Hot', color: AppColor.cE50101.value),
+  Tag(title: 'Rich', color: AppColor.c83C3F5.value),
+  Tag(title: 'Successful', color: AppColor.c00AE26.value),
+  Tag(title: 'Smart', color: AppColor.cFF9900.value),
+  Tag(title: 'Confident', color: AppColor.c660099.value),
+  Tag(title: 'Funny', color: AppColor.c1372FF.value),
+  Tag(title: 'Beta', color: AppColor.cA09000.value),
+  Tag(title: 'Alpha', color: AppColor.c222222.value),
+  Tag(title: 'Sigma', color: AppColor.c969696.value),
 ];
 
 List<EmojiModel> emojisSet = [
@@ -198,12 +198,12 @@ List<EmojiModel> emojisSet = [
   EmojiModel(emoji: "💯", isSelected: false),
 ];
 
-List<Ratings> defaultRatings = [
-  Ratings(title: "Looks", score: 8),
-  Ratings(title: "Personality", score: 9),
-  Ratings(title: "Fun", score: 7),
-  Ratings(title: "Intelligence", score: 8),
-  Ratings(title: "Successful", score: 9),
-  Ratings(title: "Humor", score: 9),
-  Ratings(title: "Compatibility", score: 8),
+List<Rating> defaultRatings = [
+  Rating(title: "Looks", score: 8),
+  Rating(title: "Personality", score: 9),
+  Rating(title: "Fun", score: 7),
+  Rating(title: "Intelligence", score: 8),
+  Rating(title: "Successful", score: 9),
+  Rating(title: "Humor", score: 9),
+  Rating(title: "Compatibility", score: 8),
 ];
