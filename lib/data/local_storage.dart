@@ -1,31 +1,36 @@
-import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tasker/data/models/emoji_model.dart';
+
+enum StorageKey{
+  EMOJIS,
+  RATINGS,
+  TAGS,
+}
 
 class SharedPreferenceService{
-
-  static Future<bool> storeEmojis(List<EmojiModel> list) async{
+  static Future<bool> storeStringList(StorageKey key, List<String> list) async{
     SharedPreferences pref = await SharedPreferences.getInstance();
-    List<String> stringList = list.map((e) => jsonEncode(e.toJson())).toList();
-    return await pref.setStringList('emojis', stringList);
+    // List<String> stringList = list.map((e) => jsonEncode(e.toJson())).toList();
+    return await pref.setStringList(key.name, list);
   }
-  static Future<List<EmojiModel>?> loadEmojis() async {
+  static Future<List<String>?> loadStringList(StorageKey key) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    List<EmojiModel>? objectsList =  pref.getStringList('emojis')?.map((stringList) => EmojiModel.fromJson(jsonDecode(stringList))).toList();
-    return objectsList;
-  }
-
-  static Future<bool> removeAnEmoji(EmojiModel object) async{
-    List<EmojiModel>? emojis = await loadEmojis();
-    if(emojis != null){
-      emojis.removeWhere((element) => element.emoji == object.emoji && element.title == object.title);
-      storeEmojis(emojis);
-    }
-    return emojis?.contains(object) ?? false;
+    // List<EmojiModel>? objectsList =  pref.getStringList('emojis')?.map((stringList) => EmojiModel.fromJson(jsonDecode(stringList))).toList();
+    List<String>? list = pref.getStringList(key.name);
+    return list;
   }
 
-  static Future<bool> removeEmojis() async{
+  // static Future<bool> removeAString(StorageKey key, EmojiModel object) async{
+  //   List<String>? list = await loadStringList(key);
+  //   // List<EmojiModel>? emojis = await loadEmojis();
+  //   if(list != null){
+  //     list.removeWhere((element) => element.emoji == object.emoji && element.title == object.title);
+  //     storeEmojis(emojis);
+  //   }
+  //   return emojis?.contains(object) ?? false;
+  // }
+
+  static Future<bool> removeEmojis(StorageKey key) async{
     SharedPreferences pref = await SharedPreferences.getInstance();
-    return pref.remove('emojis');
+    return pref.remove(key.name);
   }
 }
