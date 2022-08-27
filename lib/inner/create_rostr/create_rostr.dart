@@ -249,7 +249,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                                 ),
                               ),
                               SizedBox(
-                                height: 50.h * controller.ratingsColumnNumber,
+                                height: 54.h * controller.ratingsColumnNumber,
                                 child: GridView.builder(
                                   physics: const NeverScrollableScrollPhysics(),
                                   gridDelegate:
@@ -291,7 +291,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                                   },
                                 ),
                               ),
-                              24.verticalSpace,
+                              12.verticalSpace,
                               CustomElevatedButton(
                                 title: 'Add Rating',
                                 hasGradient: false,
@@ -309,6 +309,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                                   );
                                 },
                               ),
+                              20.verticalSpace,
                             ],
                           )
                         : const SizedBox.shrink(),
@@ -359,7 +360,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                         );
                       },
                     ),
-                    16.verticalSpace,
+                    32.verticalSpace,
 
                     // * Notes
                     CustomLabel(label: 'Notes', onTap: () {}),
@@ -517,7 +518,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                         );
                       },
                     ),
-                    12.verticalSpace,
+                    32.verticalSpace,
 
                     // * Contacts
                     CustomLabel(label: 'Contacts', onTap: () {}),
@@ -587,7 +588,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                         ));
                       },
                     ),
-                    16.verticalSpace,
+                    36.verticalSpace,
 
                     // * Dates
                     CustomLabel(label: 'Dates', onTap: () {}),
@@ -643,7 +644,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                         ));
                       },
                     ),
-                    16.verticalSpace,
+                    32.verticalSpace,
 
                     // * Position
                     CustomLabel(label: 'Position', onTap: () {}),
