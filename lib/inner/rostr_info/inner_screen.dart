@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,14 +7,13 @@ import 'package:tasker/appbar.dart';
 import 'package:tasker/bullet_box.dart';
 import 'package:tasker/emoji_text.dart';
 import 'package:tasker/inner/bottom_sheet/send_alert_bottom.dart';
+import 'package:tasker/inner/create_rostr/createRostr_controller.dart';
 import 'package:tasker/inner/photo_view.dart';
-
-import '../local_back.dart';
 import 'inner_controller.dart';
 
 class InnerScreen extends GetView<InnerController> {
-  const InnerScreen({Key? key}) : super(key: key);
-
+  InnerScreen({Key? key}) : super(key: key);
+  final createRostrController = Get.find<CreateRostrController>();
   @override
   Widget build(BuildContext context) {
     return GetBuilder<InnerController>(
@@ -92,7 +90,9 @@ class InnerScreen extends GetView<InnerController> {
                   children: [
                     OutlinedButton(
                       onPressed: () {
-                        controller.openBottomSheet(bottomSheet: const SendAlertBottom(), isCleanSelectedEmoji: true);
+                        controller.openBottomSheet(
+                            bottomSheet: const SendAlertBottom(),
+                            isCleanSelectedEmoji: true);
                       },
                       style: OutlinedButton.styleFrom(
                         padding: EdgeInsets.zero,
@@ -107,8 +107,7 @@ class InnerScreen extends GetView<InnerController> {
                           ),
                         ),
                       ),
-                      child: Text(
-                          'Send Alert',
+                      child: Text('Send Alert',
                           style: AppTextStyle.boldNormal.copyWith(
                             fontSize: 16.sp,
                             color: const Color(0xff41A3F0),
@@ -389,7 +388,7 @@ class InnerScreen extends GetView<InnerController> {
                 width: MediaQuery.of(context).size.width - 48.h,
                 child: Wrap(
                     children: List.generate(
-                  tags.length,
+                  createRostrController.tags.length,
                   (index) => Padding(
                     padding: EdgeInsets.only(right: 12.h, bottom: 12.h),
                     child: Container(
@@ -398,9 +397,13 @@ class InnerScreen extends GetView<InnerController> {
                         borderRadius: BorderRadius.circular(8.h),
                         color: Colors.white,
                       ),
-                      child: Text(tags[index].title,
-                          style: AppTextStyle.regularNormal.copyWith(
-                              fontSize: 14.sp, color: tags[index].color)),
+                      child: Text(
+                        createRostrController.tags[index].title,
+                        style: AppTextStyle.regularNormal.copyWith(
+                          fontSize: 14.sp,
+                          color: Color(createRostrController.tags[index].color),
+                        ),
+                      ),
                     ),
                   ),
                 )),
@@ -511,8 +514,7 @@ class InnerScreen extends GetView<InnerController> {
                   children: [
                     Row(
                       children: [
-                        Text(
-                            "Likes" ' ',
+                        Text("Likes" ' ',
                             style: AppTextStyle.boldNormal
                                 .copyWith(fontSize: 16.sp)),
                         EmojiText(
