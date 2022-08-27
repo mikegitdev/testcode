@@ -346,13 +346,13 @@ class CreateRostrController extends GetxController {
   }
 
   void addTag(){
-    print('ADD TAG');
     String title = tagNameController.text.trim();
 
     if(title.isNotEmpty && _newTagColor != null){
       Tag newTag = Tag(title: title, color: _newTagColor!);
       _tags.add(newTag);
       tagNameController.clear();
+      _newTagColor = null;
       update();
       List<String> tagsStringList = _tags.map((e) => jsonEncode(e.toJson())).toList();
       SharedPreferenceService.storeStringList(StorageKey.TAGS, tagsStringList);
