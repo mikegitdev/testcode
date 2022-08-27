@@ -14,7 +14,7 @@ class SingleTextFieldBottomSheet extends GetView<CreateRostrController> {
   final String subtitle;
   final String hintText;
   final TextEditingController textController;
-  final Function() onTap;
+  final void Function() onTap;
   final bool chooseColor;
 
   const SingleTextFieldBottomSheet({
@@ -91,7 +91,7 @@ class SingleTextFieldBottomSheet extends GetView<CreateRostrController> {
                           16.verticalSpace,
                           Row(
                             children: [
-                              for(int i = 0; i < tags.length; i++)
+                              for(int i = 0; i < controller.tagColors.length; i++)
                                 GestureDetector(
                                   onTap: () {
                                     controller.newTagColor = controller.tagColors[i];
@@ -102,10 +102,10 @@ class SingleTextFieldBottomSheet extends GetView<CreateRostrController> {
                                     margin: EdgeInsets.only(right: 4.w),
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color: controller.tagColors[i],
+                                      color: Color(controller.tagColors[i]),
                                     ),
                                     child: Visibility(
-                                      visible: controller.selectedTagColor == controller.tagColors[i],
+                                      visible: controller.newTagColor == controller.tagColors[i],
                                       child: const Icon(Icons.check, color: AppColor.white, size: 12,),
                                     ),
                                   ),
@@ -120,7 +120,7 @@ class SingleTextFieldBottomSheet extends GetView<CreateRostrController> {
                     CustomElevatedButton(
                         title: 'Save',
                         hasGradient: true,
-                        onPressed: () => onTap,
+                        onPressed: onTap,
                     ),
                   ],
                 ),
