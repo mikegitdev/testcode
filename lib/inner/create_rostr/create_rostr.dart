@@ -6,6 +6,7 @@ import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/app_utils/app_image.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tasker/inner/bottom_sheet/rating_bottom_sheet.dart';
 import 'package:tasker/inner/component/custom_label_edit.dart';
 import 'package:tasker/inner/create_rating/create_rating.dart';
 import 'package:tasker/inner/component/custom_text_field.dart';
@@ -190,6 +191,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                       value: controller.enableRating,
                       onChanged: (value) {
                         controller.enableRating = value;
+                        controller.calculateOverallRating();
                       },
                     ),
                     12.verticalSpace,
@@ -217,31 +219,28 @@ class CreateRostr extends GetView<CreateRostrController> {
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(8.r)),
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        "Overall Rating",
-                                        style: AppTextStyle.boldNormal.copyWith(
-                                          fontSize: 16.sp,
+                                      Expanded(
+                                        child: Text(
+                                          "Overall Rating",
+                                          style: AppTextStyle.boldNormal.copyWith(
+                                            fontSize: 16.sp,
+                                          ),
                                         ),
                                       ),
-                                      Wrap(
-                                        alignment: WrapAlignment.start,
-                                        children: [
-                                          Text(
-                                            "- - ",
-                                            style: AppTextStyle.boldNormal
-                                                .copyWith(
-                                              fontSize: 16.sp,
-                                              color: const Color(0xff00AE26),
-                                            ),
-                                          ),
-                                          const Icon(
-                                            Icons.grade,
-                                            color: Colors.amber,
-                                          ),
-                                        ],
+                                      Text(
+                                        controller.overallRating.toString(),
+                                        style: AppTextStyle.boldNormal
+                                            .copyWith(
+                                          fontSize: 16.sp,
+                                          color: const Color(0xff00AE26),
+                                        ),
+                                      ),
+                                      4.horizontalSpace,
+                                      const Icon(
+                                        Icons.grade,
+                                        color: Colors.amber,
+                                        size: 20,
                                       ),
                                     ],
                                   ),
@@ -261,30 +260,39 @@ class CreateRostr extends GetView<CreateRostrController> {
                                   itemCount: controller.rating.length,
                                   itemBuilder:
                                       (BuildContext context, int index) {
-                                    return Container(
-                                      padding: const EdgeInsets.all(8.0),
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        color: AppColor.white,
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            controller.rating[index].title,
-                                            style: AppTextStyle.regularNormal
-                                                .copyWith(
-                                              fontSize: 16.sp,
+                                    return GestureDetector(
+                                      onTap: (){
+                                        controller.openBottomSheet(
+                                          RatingBottomSheet(superIndex: index)
+                                        ).whenComplete(() {
+                                          controller.calculateOverallRating();
+                                        });
+                                      },
+                                      child: Container(
+                                        padding: const EdgeInsets.all(8.0),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          color: AppColor.white,
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              controller.rating[index].title,
+                                              style: AppTextStyle.regularNormal
+                                                  .copyWith(
+                                                fontSize: 16.sp,
+                                                color: AppColor.c15213B,
+                                              ),
+                                            ),
+                                            const Icon(
+                                              Icons.arrow_forward_outlined,
                                               color: AppColor.c15213B,
                                             ),
-                                          ),
-                                          const Icon(
-                                            Icons.arrow_forward_outlined,
-                                            color: AppColor.c15213B,
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     );
                                   },
