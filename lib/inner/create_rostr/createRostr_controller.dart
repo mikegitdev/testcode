@@ -24,6 +24,7 @@ class CreateRostrController extends GetxController {
   bool _enableRating = false;
   File? _image;
   List<File> _profileImages = [];
+  int _overallRating = 0;
 
   List<Rating> _ratings = defaultRatings;
   List<Rating>? _createdRatings;
@@ -77,6 +78,7 @@ class CreateRostrController extends GetxController {
 
   bool get enableRating => _enableRating;
   List<File> get profileImages => _profileImages;
+  int get overallRating => _overallRating;
 
   List<Rating> get rating => _ratings;
   List<Tag> get tags => _tags;
@@ -360,4 +362,19 @@ class CreateRostrController extends GetxController {
     Get.back();
   }
 
+  void updateRating(int superIndex, int index){
+    _ratings[superIndex].score = index;
+    update();
+    List<String> ratingsStringList = _ratings.map((e) => jsonEncode(e.toJson())).toList();
+    SharedPreferenceService.storeStringList(StorageKey.RATINGS, ratingsStringList);
+  }
+
+  void calculateOverallRating(){
+    _overallRating = 0;
+    for(var rating in _ratings){
+      _overallRating += rating.score;
+    }
+    update();
+    print('OVERALL: $_overallRating');
+  }
 }
