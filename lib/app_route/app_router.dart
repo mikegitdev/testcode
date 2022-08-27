@@ -19,12 +19,12 @@ class AppRouter {
       GetPage(
         name: '/${AppRouteName.rostrInner}',
         bindings: [InnerBinding()],
-        page: () => const InnerScreen(),
+        page: () => InnerScreen(),
       ),
       GetPage(
         name: '/${AppRouteName.createRostr}',
         bindings: [CreateRostrBinding()],
-        page: () =>  CreateRostr(),
+        page: () =>  const CreateRostr(),
       ),
 
       GetPage(
