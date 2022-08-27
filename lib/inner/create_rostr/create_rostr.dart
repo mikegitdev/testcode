@@ -2,6 +2,9 @@ import 'package:get/get.dart';
 import 'package:tasker/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:tasker/emoji_text.dart';
+import 'package:tasker/inner/bottom_sheet/send_alert.dart';
+import 'package:tasker/inner/bottom_sheet/send_alert_bottom.dart';
+import 'package:tasker/inner/bottom_sheet/send_tochat_bottom.dart';
 import 'package:tasker/inner/component/custom_label_edit.dart';
 import 'package:tasker/inner/local_back.dart';
 import 'package:tasker/app_utils/app_color.dart';
@@ -201,15 +204,14 @@ class CreateRostr extends GetView<CreateRostrController> {
                       children: [
                         CustomLabel(
                             label: 'Ratings',
-                            onTap: (){
+                            onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => const CreateRating(),
                                 ),
                               );
-                            }
-                        ),
+                            }),
                         16.verticalSpace,
                         Padding(
                           padding: EdgeInsets.only(bottom: 24.h),
@@ -267,13 +269,15 @@ class CreateRostr extends GetView<CreateRostrController> {
                                   color: AppColor.white,
                                 ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       controller.rating[index].title,
-                                      style: AppTextStyle.regularNormal.copyWith(
-                                              fontSize: 16.sp,
-                                              color: AppColor.c15213B,
+                                      style:
+                                          AppTextStyle.regularNormal.copyWith(
+                                        fontSize: 16.sp,
+                                        color: AppColor.c15213B,
                                       ),
                                     ),
                                     const Icon(
@@ -295,7 +299,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                               SingleTextFieldBottomSheet(
                                 title: 'Create a Rating',
                                 subtitle:
-                                'Please, input a name of a new rating categorie',
+                                    'Please, input a name of a new rating categorie',
                                 hintText: 'Rating name',
                                 textController: controller.ratingNameController,
                                 onTap: () {},
@@ -343,7 +347,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                     SingleTextFieldBottomSheet(
                       title: 'Create a Tag',
                       subtitle:
-                      'Please, input a name of a new tag and choose a color',
+                          'Please, input a name of a new tag and choose a color',
                       hintText: 'Tag name',
                       textController: controller.tagNameController,
                       chooseColor: true,
@@ -355,7 +359,7 @@ class CreateRostr extends GetView<CreateRostrController> {
               16.verticalSpace,
 
               // * Notes
-              CustomLabel(label: 'Notes', onTap: (){}),
+              CustomLabel(label: 'Notes', onTap: () {}),
               16.verticalSpace,
               Container(
                 width: double.infinity,
@@ -565,14 +569,13 @@ class CreateRostr extends GetView<CreateRostrController> {
                 title: 'Add Contact',
                 hasGradient: false,
                 onPressed: () {
-                  controller.openBottomSheet(
-                      MultiTextFieldBottomSheet(
-                        title: 'Create a Contact',
-                        subtitle: 'Please, input a name of a new contact and a link',
-                        type: BottomSheetType.CONTACT,
-                        onTap: (){},
-                      )
-                  );
+                  controller.openBottomSheet(MultiTextFieldBottomSheet(
+                    title: 'Create a Contact',
+                    subtitle:
+                        'Please, input a name of a new contact and a link',
+                    type: BottomSheetType.CONTACT,
+                    onTap: () {},
+                  ));
                 },
               ),
               16.verticalSpace,
@@ -621,21 +624,20 @@ class CreateRostr extends GetView<CreateRostrController> {
               CustomElevatedButton(
                 title: 'Add Date',
                 hasGradient: false,
-                onPressed: (){
-                  controller.openBottomSheet(
-                      MultiTextFieldBottomSheet(
-                        title: 'Create a Date',
-                        subtitle: 'Please, input a date, heading and description of the event ',
-                        type: BottomSheetType.EVENT_DATE,
-                        onTap: (){},
-                      )
-                  );
+                onPressed: () {
+                  controller.openBottomSheet(MultiTextFieldBottomSheet(
+                    title: 'Create a Date',
+                    subtitle:
+                        'Please, input a date, heading and description of the event ',
+                    type: BottomSheetType.EVENT_DATE,
+                    onTap: () {},
+                  ));
                 },
               ),
               16.verticalSpace,
 
               // * Position
-              CustomLabel(label: 'Position', onTap: (){}),
+              CustomLabel(label: 'Position', onTap: () {}),
               12.verticalSpace,
               Container(
                 padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
@@ -678,9 +680,11 @@ class CreateRostr extends GetView<CreateRostrController> {
               ),
               12.verticalSpace,
               CustomElevatedButton(
-                  title: 'Create',
-                  hasGradient: true,
-                  onPressed: (){},
+                title: 'Create',
+                hasGradient: true,
+                onPressed: () {
+                  controller.openBottomSheet(SentAlert());
+                },
               ),
               100.verticalSpace,
             ],
@@ -690,3 +694,84 @@ class CreateRostr extends GetView<CreateRostrController> {
     );
   }
 }
+//
+// return Scaffold(
+//       body: Stack(
+//         children: [
+//
+//           PageView(
+//             controller: controller.pageController,
+//             children: [
+//               Container(
+//                 height: 100,
+//                 width: double.infinity,
+//                 color: Colors.red,
+//               ),
+//               Container(
+//                 height: 100,
+//                 width: double.infinity,
+//                 color: Colors.green,
+//               )
+//             ],
+//           ),
+//           Row(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//
+//             children: [
+//               InkWell(
+//                 onTap: (){
+//                   controller.pageController.animateToPage(0, duration: const Duration(seconds: 1), curve: Curves.easeInOut);
+//                 },
+//                 child: Container(
+//                   height: 50,
+//                   width: 50,
+//                   color: Colors.black,
+//                 ),
+//               ),
+//               const SizedBox(width: 20,),
+//               InkWell(
+//                 onTap: (){
+//                   controller.pageController.animateToPage(1, duration: const Duration(seconds: 1), curve: Curves.easeInOut);
+//
+//                 },
+//                 child: Container(
+//                   height: 50,
+//                   width: 50,
+//                   color: Colors.deepPurple,
+//                 ),
+//               )
+//             ],
+//           ),
+//         ],
+//       ),
+//     );
+
+
+
+/* Column(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.bottomRight,
+                                      height: 50,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: AppColor.c41A3F0,
+                                            width: 3),
+                                        borderRadius:
+                                            BorderRadius.circular(4),
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: AssetImage(controller
+                                              .imageList[index].image),
+                                        ),
+                                      ),
+                                      child: SvgPicture.asset(
+                                        'assets/icons/ic_check.svg',
+                                        height: 16,
+                                      ),
+                                    ),
+                                    5.verticalSpace,
+                                    Text(controller.imageList[index].name)
+                                  ],
+                                );*/

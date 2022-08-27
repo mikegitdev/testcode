@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:tasker/data/models/rating_model.dart';
 import 'package:tasker/inner/local_back.dart';
 
-enum BottomSheetType{
+enum BottomSheetType {
   EVENT_DATE,
   CONTACT,
 }
@@ -15,6 +15,22 @@ class CreateRostrController extends GetxController {
   /// Fields
 
   bool enableRating = false;
+  PageController pageController = PageController(initialPage: 0);
+  int currentTap = 0;
+  int selectedIndex = -1;
+  int pageIndex = 0;
+  List<Person> imageList = [
+    Person(image: "assets/images/im_person_1.jpg", name: "John"),
+    Person(image: "assets/images/im_person_2.jpg", name: "Mike"),
+    Person(image: "assets/images/im_person_3.jpg", name: "Alex"),
+    Person(image: "assets/images/im_person_1.jpg", name: "John"),
+    Person(image: "assets/images/im_person_2.jpg", name: "Mike"),
+    Person(image: "assets/images/im_person_3.jpg", name: "Alex"),
+    Person(image: "assets/images/im_person_1.jpg", name: "John"),
+    Person(image: "assets/images/im_person_2.jpg", name: "Mike"),
+    Person(image: "assets/images/im_person_3.jpg", name: "Alex"),
+  ];
+
   File? image;
   List<File> fileList = [];
   List<Ratings> rating = defaultRatings;
@@ -64,11 +80,15 @@ class CreateRostrController extends GetxController {
   /// Getters and Setters
 
   List<String> get sectionItems => _sectionItems;
+
   List<String> get folderItems => _folderItems;
-  int get ratingsColumnNumber => (rating.length/ 2).ceil();
+
+  int get ratingsColumnNumber => (rating.length / 2).ceil();
+
   Color? get selectedTagColor => _newTagColor;
-  set newTagColor(Color? newColor){
-    if(tagColors.contains(newColor) && _newTagColor != newColor){
+
+  set newTagColor(Color? newColor) {
+    if (tagColors.contains(newColor) && _newTagColor != newColor) {
       _newTagColor = newColor;
       update();
     }
@@ -165,8 +185,7 @@ class CreateRostrController extends GetxController {
   //   }
   // }
 
-
-  Future openBottomSheet(Widget bottomSheet){
+  Future openBottomSheet(Widget bottomSheet) {
     return Get.bottomSheet(
       bottomSheet,
       isDismissible: false,
@@ -209,4 +228,23 @@ class CreateRostrController extends GetxController {
   //   selectedIndex = index;
   //   update();
   // }
+
+  void changeIndex(int index) {
+    selectedIndex = index;
+    update();
+  }
+  void changePageIndex(int index) {
+    pageIndex = index;
+    update();
+   pageController.animateToPage(pageIndex,
+        duration: const Duration(seconds: 1),
+        curve: Curves.easeInOut);
+  }
+}
+
+class Person {
+  String name;
+  String image;
+
+  Person({required this.image, required this.name});
 }
