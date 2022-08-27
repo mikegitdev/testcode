@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tasker/app_utils/app_color.dart';
+import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/inner/bottom_sheet/back_button.dart';
+import 'package:tasker/inner/component/custom_elevated_button.dart';
 import 'package:tasker/inner/create_rostr/createRostr_controller.dart';
-import 'package:tasker/inner/rostr_info/inner_controller.dart';
-
 
 class RatingBottomSheet extends GetView<CreateRostrController> {
-  const RatingBottomSheet({Key? key}) : super(key: key);
+  final int superIndex;
+  const RatingBottomSheet({Key? key, required this.superIndex}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class RatingBottomSheet extends GetView<CreateRostrController> {
                         borderRadius:
                         BorderRadius.vertical(top: Radius.circular(25.r)),
                       ),
-                      padding: EdgeInsets.only(top: 8.h),
+                      padding: EdgeInsets.only(top: 8.h, left: 24.w, right: 24.w,),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
@@ -44,7 +46,19 @@ class RatingBottomSheet extends GetView<CreateRostrController> {
                               ),
                             ),
                           ),
+                          24.verticalSpace,
+                          Text(
+                            '${controller.rating[superIndex].title} Rating',
+                            textAlign: TextAlign.center,
+                            style: AppTextStyle.boldNormal.copyWith(fontSize: 16.sp, fontWeight: FontWeight.w700,),
+                          ),
                           12.verticalSpace,
+                          Text(
+                            'Please, rate this rostrs “${controller.rating[superIndex].title}” rating using stars below',
+                            textAlign: TextAlign.center,
+                            style: AppTextStyle.regularNormal.copyWith(fontSize: 12.sp, color: AppColor.c62677D, fontWeight: FontWeight.w400,),
+                          ),
+                          20.verticalSpace,
                           Wrap(
                             spacing: 6.w,
                             runSpacing: 12.h,
@@ -52,7 +66,9 @@ class RatingBottomSheet extends GetView<CreateRostrController> {
                               10,
                               (index) {
                                 return GestureDetector(
-                                  onTap: (){},
+                                  onTap: (){
+                                    controller.updateRating(superIndex, index);
+                                  },
                                   child: Container(
                                     height: 43.h,
                                     width: 60.w,
@@ -88,6 +104,15 @@ class RatingBottomSheet extends GetView<CreateRostrController> {
                                 },
                             ),
                           ),
+                          32.verticalSpace,
+                          CustomElevatedButton(
+                            title: 'Save',
+                            hasGradient: true,
+                            onPressed: (){
+                              Get.back();
+                            },
+                          ),
+                          16.verticalSpace,
                         ],
                       ),
                     ),

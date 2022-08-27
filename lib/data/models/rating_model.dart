@@ -1,6 +1,6 @@
 class Rating {
   String title;
-  double score;
+  int score;
 
   Rating({required this.title, this.score = 0});
 
