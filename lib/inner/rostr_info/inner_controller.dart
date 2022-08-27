@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tasker/data/local_storage.dart';
@@ -43,7 +44,10 @@ class InnerController extends GetxController {
   }
 
   loadData()async{
-    _createdEmojis = await SharedPreferenceService.loadEmojis();
+    List<String>? list =  await SharedPreferenceService.loadStringList(StorageKey.EMOJIS);
+    if(list != null){
+      _createdEmojis = list.map((string) => EmojiModel.fromJson(jsonDecode(string))).toList();
+    }
     update();
   }
 
@@ -81,7 +85,8 @@ class InnerController extends GetxController {
         _createdEmojis = [newEmoji];
       }
       update();
-      SharedPreferenceService.storeEmojis(_createdEmojis!);
+      List<String> stringList = _createdEmojis!.map((e) => jsonEncode(e.toJson())).toList();
+      SharedPreferenceService.storeStringList(StorageKey.EMOJIS, stringList);
     }
     cleanCreatedEmoji();
   }
