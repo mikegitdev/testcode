@@ -1,5 +1,7 @@
 import 'package:tasker/app_utils/app_color.dart';
+import 'package:tasker/data/models/direct_model.dart';
 import 'package:tasker/data/models/emoji_model.dart';
+import 'package:tasker/data/models/group_model.dart';
 import 'package:tasker/data/models/rating_model.dart';
 import 'package:tasker/data/models/tag_model.dart';
 
@@ -206,4 +208,26 @@ List<Ratings> defaultRatings = [
   Ratings(title: "Successful", score: 9),
   Ratings(title: "Humor", score: 9),
   Ratings(title: "Compatibility", score: 8),
+];
+
+List<DirectModel> directModelList = [
+  DirectModel(image: "assets/images/im_person_1.jpg", name: "John"),
+  DirectModel(image: "assets/images/im_person_2.jpg", name: "Mike"),
+  DirectModel(image: "assets/images/im_person_3.jpg", name: "Alex"),
+  DirectModel(image: "assets/images/im_person_1.jpg", name: "John"),
+  DirectModel(image: "assets/images/im_person_2.jpg", name: "Mike"),
+  DirectModel(image: "assets/images/im_person_3.jpg", name: "Alex"),
+  DirectModel(image: "assets/images/im_person_1.jpg", name: "John"),
+  DirectModel(image: "assets/images/im_person_2.jpg", name: "Mike"),
+  DirectModel(image: "assets/images/im_person_3.jpg", name: "Alex"),
+];
+List<GroupModel> groupModelList = [
+  GroupModel(image: "assets/images/im_group1.jpg", name: "Alex"),
+  GroupModel(image: "assets/images/im_group2.jpg", name: "Karry"),
+  GroupModel(image: "assets/images/im_group3.jpg", name: "Jarry"),
+  GroupModel(image: "assets/images/im_group4.jpg", name: "Mike"),
+  GroupModel(image: "assets/images/im_group1.jpg", name: "Alex"),
+  GroupModel(image: "assets/images/im_group2.jpg", name: "Karry"),
+  GroupModel(image: "assets/images/im_group3.jpg", name: "Jarry"),
+  GroupModel(image: "assets/images/im_group4.jpg", name: "Mike"),
 ];

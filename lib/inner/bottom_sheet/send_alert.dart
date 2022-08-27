@@ -7,6 +7,7 @@ import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/inner/bottom_sheet/back_button.dart';
 import 'package:tasker/inner/component/custom_elevated_button.dart';
 import 'package:tasker/inner/create_rostr/createRostr_controller.dart';
+import 'package:tasker/inner/local_back.dart';
 
 class SentAlert extends GetView<CreateRostrController> {
   const SentAlert({Key? key}) : super(key: key);
@@ -118,25 +119,24 @@ class SentAlert extends GetView<CreateRostrController> {
                         physics: const NeverScrollableScrollPhysics(),
                         controller: controller.pageController,
                         children: [
+
+                          //Direct
                           Padding(
-                            padding: const EdgeInsets.only(left: 40, right: 40),
+                            padding: const EdgeInsets.only(left: 24, right: 24),
                             child: GridView.builder(
                               shrinkWrap: true,
                               scrollDirection: Axis.vertical,
-                              padding: EdgeInsets.symmetric(horizontal: 24.w),
                               gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 4,
-                                childAspectRatio: 0.7,
-                                mainAxisSpacing: 10,
-                                crossAxisSpacing: 10,
+                                childAspectRatio: 1,
                               ),
                               itemBuilder: (BuildContext ctx, index) {
                                 return Column(
                                   children: [
                                     InkWell(
                                       onTap: () {
-                                        controller.changeIndex(index);
+                                        controller.changeDirectIndex(index);
                                       },
                                       child: Container(
                                         alignment: Alignment.bottomRight,
@@ -144,22 +144,21 @@ class SentAlert extends GetView<CreateRostrController> {
                                         width: 50,
                                         decoration: BoxDecoration(
                                           border: Border.all(
-                                              color: controller.selectedIndex ==
+                                              color: controller.directIndex ==
                                                   index
                                                   ? AppColor.c41A3F0
                                                   : AppColor.white,
                                               width: 3),
                                           borderRadius:
-                                          BorderRadius.circular(4),
+                                          BorderRadius.circular(8),
                                           image: DecorationImage(
                                             fit: BoxFit.cover,
-                                            image: AssetImage(controller
-                                                .imageList[index].image),
+                                            image: AssetImage(directModelList[index].image),
                                           ),
                                         ),
                                         child: Visibility(
                                           visible:
-                                          controller.selectedIndex == index,
+                                          controller.directIndex == index,
                                           child: SvgPicture.asset(
                                             'assets/icons/ic_check.svg',
                                             height: 16,
@@ -168,32 +167,31 @@ class SentAlert extends GetView<CreateRostrController> {
                                       ),
                                     ),
                                     5.verticalSpace,
-                                    Text(controller.imageList[index].name)
+                                    Text(directModelList[index].name)
                                   ],
                                 );
                               },
-                              itemCount: controller.imageList.length,
+                              itemCount: directModelList.length,
                             ),
                           ),
+
+                          //Group
                           Padding(
-                            padding: const EdgeInsets.only(left: 40, right: 40),
+                            padding: const EdgeInsets.only(left: 24, right: 24),
                             child: GridView.builder(
                               shrinkWrap: true,
                               scrollDirection: Axis.vertical,
-                              padding: EdgeInsets.symmetric(horizontal: 24.w),
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 4,
-                                childAspectRatio: 0.7,
-                                mainAxisSpacing: 10,
-                                crossAxisSpacing: 10,
+                                    crossAxisCount: 4,
+                                    childAspectRatio: 1,
                               ),
                               itemBuilder: (BuildContext ctx, index) {
                                 return Column(
                                   children: [
                                     InkWell(
                                       onTap: () {
-                                        controller.changeIndex(index);
+                                        controller.changeGroupIndex(index);
                                       },
                                       child: Container(
                                         alignment: Alignment.bottomRight,
@@ -201,22 +199,21 @@ class SentAlert extends GetView<CreateRostrController> {
                                         width: 50,
                                         decoration: BoxDecoration(
                                           border: Border.all(
-                                              color: controller.selectedIndex ==
+                                              color: controller.groupIndex ==
                                                       index
                                                   ? AppColor.c41A3F0
                                                   : AppColor.white,
                                               width: 3),
                                           borderRadius:
-                                              BorderRadius.circular(4),
+                                              BorderRadius.circular(8),
                                           image: DecorationImage(
                                             fit: BoxFit.cover,
-                                            image: AssetImage(controller
-                                                .imageList[index].image),
+                                            image: AssetImage(groupModelList[index].image),
                                           ),
                                         ),
                                         child: Visibility(
                                           visible:
-                                              controller.selectedIndex == index,
+                                              controller.groupIndex == index,
                                           child: SvgPicture.asset(
                                             'assets/icons/ic_check.svg',
                                             height: 16,
@@ -225,11 +222,11 @@ class SentAlert extends GetView<CreateRostrController> {
                                       ),
                                     ),
                                     5.verticalSpace,
-                                    Text(controller.imageList[index].name)
+                                    Text(groupModelList[index].name)
                                   ],
                                 );
                               },
-                              itemCount: controller.imageList.length,
+                              itemCount: groupModelList.length,
                             ),
                           ),
                         ],

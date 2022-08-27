@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tasker/data/models/direct_model.dart';
 import 'package:tasker/data/models/rating_model.dart';
 import 'package:tasker/inner/local_back.dart';
 
@@ -17,19 +18,10 @@ class CreateRostrController extends GetxController {
   bool enableRating = false;
   PageController pageController = PageController(initialPage: 0);
   int currentTap = 0;
-  int selectedIndex = -1;
+  int directIndex = -1;
+  int groupIndex = -1;
   int pageIndex = 0;
-  List<Person> imageList = [
-    Person(image: "assets/images/im_person_1.jpg", name: "John"),
-    Person(image: "assets/images/im_person_2.jpg", name: "Mike"),
-    Person(image: "assets/images/im_person_3.jpg", name: "Alex"),
-    Person(image: "assets/images/im_person_1.jpg", name: "John"),
-    Person(image: "assets/images/im_person_2.jpg", name: "Mike"),
-    Person(image: "assets/images/im_person_3.jpg", name: "Alex"),
-    Person(image: "assets/images/im_person_1.jpg", name: "John"),
-    Person(image: "assets/images/im_person_2.jpg", name: "Mike"),
-    Person(image: "assets/images/im_person_3.jpg", name: "Alex"),
-  ];
+
 
   File? image;
   List<File> fileList = [];
@@ -92,12 +84,6 @@ class CreateRostrController extends GetxController {
       _newTagColor = newColor;
       update();
     }
-  }
-
-  @override
-  void onInit() {
-    /// Load Data From Local
-    super.onInit();
   }
 
   /// Methods
@@ -229,8 +215,14 @@ class CreateRostrController extends GetxController {
   //   update();
   // }
 
-  void changeIndex(int index) {
-    selectedIndex = index;
+  void changeDirectIndex(int index) {
+
+    index== directIndex ? directIndex = -1 : directIndex = index  ;
+    update();
+  }
+
+  void changeGroupIndex(int index) {
+    index == groupIndex ? groupIndex = -1 : groupIndex = index  ;
     update();
   }
   void changePageIndex(int index) {
@@ -242,9 +234,4 @@ class CreateRostrController extends GetxController {
   }
 }
 
-class Person {
-  String name;
-  String image;
 
-  Person({required this.image, required this.name});
-}
