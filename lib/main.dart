@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
           title: 'Test',
           debugShowCheckedModeBanner: false,
           initialBinding: AppControllerBinding(),
-          initialRoute: '/${AppRouteName.createRostr}',
+          initialRoute: '/${AppRouteName.rostrInner}',
           getPages: AppRouter.onGeneratePage(),
           theme: ThemeData(
             scaffoldBackgroundColor: AppColor.cF5F5F5,

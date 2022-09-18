@@ -14,6 +14,21 @@ class InnerController extends GetxController {
   String _createEmojiImage = '';
   TextEditingController createEmojiTitle = TextEditingController();
 
+  List<EmojiModel> _reserveEmojis=[
+    EmojiModel(emoji: '😍', title: 'Love', isSelected: false),
+    EmojiModel(emoji: '🔥', title: 'Hot', isSelected: false),
+    EmojiModel(emoji: '🍷', title: 'Date', isSelected: false),
+    EmojiModel(emoji: '🤩', title: 'Obsessed', isSelected: false),
+    EmojiModel(emoji: '😈', title: 'Thrilling', isSelected: false),
+    EmojiModel(emoji: '🤡', title: 'Funny', isSelected: false),
+    EmojiModel(emoji: '🤮', title: 'Ick', isSelected: false),
+    EmojiModel(emoji: '👻', title: 'Ghost', isSelected: false),
+    EmojiModel(emoji: '✅', title: 'Added', isSelected: false),
+    EmojiModel(emoji: '🔺', title: 'Promoted', isSelected: false),
+    EmojiModel(emoji: '🔻', title: 'Demoted', isSelected: false),
+    EmojiModel(emoji: '❌', title: 'Removed', isSelected: false),
+  ];
+
   final List<EmojiModel> _localEmojis = [
     EmojiModel(emoji: '😍', title: 'Love', isSelected: false),
     EmojiModel(emoji: '🔥', title: 'Hot', isSelected: false),
@@ -33,6 +48,7 @@ class InnerController extends GetxController {
   List<EmojiModel>? get createdEmojis => _createdEmojis;
   String get createEmojiImage => _createEmojiImage;
   List<EmojiModel> get localEmojis => _localEmojis;
+  List<EmojiModel> get reserveEmojis => _reserveEmojis;
   bool get canCreateEmoji => _createEmojiImage.isNotEmpty && createEmojiTitle.text.trim().isNotEmpty;
   bool get isCreatedExist => _createdEmojis != null && _createdEmojis!.isNotEmpty;
 
@@ -61,6 +77,31 @@ class InnerController extends GetxController {
       }
     }
     update();
+  }
+
+  void enableEmoji(EmojiModel object) {
+    print("#################################################");
+    print("${_localEmojis.length}");
+
+    if(_localEmojis.contains(object)){
+      for(var emoji in _reserveEmojis){
+        if(emoji.title == object.title){
+          emoji.isEnabled = false;
+        }
+      }
+      _localEmojis.removeWhere((e) => e.title==object.title);
+    }else if(_reserveEmojis.contains(object)){
+      for(var emoji in _reserveEmojis){
+        if(emoji.title == object.title){
+          emoji.isEnabled = true;
+          _localEmojis.add(emoji);
+        }
+      }
+    }
+    print("${_localEmojis.length}");
+    print("#################################################");
+    update();
+    Get.forceAppUpdate();
   }
 
   void chooseEmojiImage(EmojiModel image){

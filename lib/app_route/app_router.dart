@@ -30,7 +30,7 @@ class AppRouter {
       GetPage(
         name: '/${AppRouteName.editAlert}',
         bindings: [EditAlertBinding()],
-        page: () => const EditAlertView(),
+        page: () => EditAlertView(),
       ),
     ];
   }
