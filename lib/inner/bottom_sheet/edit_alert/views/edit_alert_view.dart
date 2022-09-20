@@ -60,9 +60,10 @@ class EditAlertView extends GetView<EditAlertController> {
                 text: emojis[i].title!,
                 value: emojis[i].isEnabled,
                 onChanged: (value) {
-                  print("${emojis.length}");
-                  Get.find<InnerController>().enableEmoji(emojis[i]);
-                  print("${emojis.length}");
+                  Get.find<InnerController>().enableEmoji(emojis[i], value);
+                  value= !value;
+                  print("$value++++++++++++++++");
+                  print("${emojis.length}==============edit two");
                 },
                 activeColor: Colors.red,
                 activeText: 'On',
@@ -79,8 +80,15 @@ class EditAlertView extends GetView<EditAlertController> {
           //         padding: EdgeInsets.symmetric(horizontal: 24.w),
           //         child: CustomSwitchListTile(
           //           text: 'Love',
-          //           value: true,
+          //           value: emojis[0].isEnabled,
           //           onChanged: (value) {
+          //
+          //                   print("$value++++++++++++++++");
+          //                   print("${emojis.length}===================edit");
+          //                   Get.find<InnerController>().enableEmoji(emojis[0]);
+          //                   value= !value;
+          //                   print("$value++++++++++++++++");
+          //                   print("${emojis.length}==============edit two");
           //             if(value){
           //             }
           //           },
@@ -98,7 +106,7 @@ class EditAlertView extends GetView<EditAlertController> {
           //         padding: EdgeInsets.symmetric(horizontal: 24.w),
           //         child: CustomSwitchListTile(
           //           text: 'Hot',
-          //           value: true,
+          //           value: emojis[1].isEnabled,
           //           onChanged: (value) {},
           //           activeColor: Colors.red,
           //           activeText: 'On',
@@ -114,7 +122,7 @@ class EditAlertView extends GetView<EditAlertController> {
           //         padding: EdgeInsets.symmetric(horizontal: 24.w),
           //         child: CustomSwitchListTile(
           //           text: 'Date',
-          //           value: true,
+          //           value: emojis[2].isEnabled,
           //           onChanged: (value) {},
           //           activeColor: Colors.red,
           //           activeText: 'On',
@@ -130,7 +138,7 @@ class EditAlertView extends GetView<EditAlertController> {
           //         padding: EdgeInsets.symmetric(horizontal: 24.w),
           //         child: CustomSwitchListTile(
           //           text: 'Obsessed',
-          //           value: true,
+          //           value: emojis[3].isEnabled,
           //           onChanged: (value) {},
           //           activeColor: Colors.red,
           //           activeText: 'On',
@@ -145,8 +153,8 @@ class EditAlertView extends GetView<EditAlertController> {
           //       child: Padding(
           //         padding: EdgeInsets.symmetric(horizontal: 24.w),
           //         child: CustomSwitchListTile(
-          //           text: 'F-boy',
-          //           value: true,
+          //           text: 'Thrilling',
+          //           value: emojis[4].isEnabled,
           //           onChanged: (value) {},
           //           activeColor: Colors.red,
           //           activeText: 'On',
@@ -161,8 +169,8 @@ class EditAlertView extends GetView<EditAlertController> {
           //       child: Padding(
           //         padding: EdgeInsets.symmetric(horizontal: 24.w),
           //         child: CustomSwitchListTile(
-          //           text: 'F-girl',
-          //           value: true,
+          //           text: 'Funny',
+          //           value: emojis[5].isEnabled,
           //           onChanged: (value) {},
           //           activeColor: Colors.red,
           //           activeText: 'On',
@@ -178,7 +186,7 @@ class EditAlertView extends GetView<EditAlertController> {
           //         padding: EdgeInsets.symmetric(horizontal: 24.w),
           //         child: CustomSwitchListTile(
           //           text: 'Ick',
-          //           value: true,
+          //           value: emojis[6].isEnabled,
           //           onChanged: (value) {},
           //           activeColor: Colors.red,
           //           activeText: 'On',
@@ -194,7 +202,7 @@ class EditAlertView extends GetView<EditAlertController> {
           //         padding: EdgeInsets.symmetric(horizontal: 24.w),
           //         child: CustomSwitchListTile(
           //           text: 'Ghost',
-          //           value: true,
+          //           value: emojis[7].isEnabled,
           //           onChanged: (value) {},
           //           activeColor: Colors.red,
           //           activeText: 'On',
@@ -210,7 +218,7 @@ class EditAlertView extends GetView<EditAlertController> {
           //         padding: EdgeInsets.symmetric(horizontal: 24.w),
           //         child: CustomSwitchListTile(
           //           text: 'Added',
-          //           value: true,
+          //           value: emojis[8].isEnabled,
           //           onChanged: (value) {},
           //           activeColor: Colors.red,
           //           activeText: 'On',
@@ -226,7 +234,7 @@ class EditAlertView extends GetView<EditAlertController> {
           //         padding: EdgeInsets.symmetric(horizontal: 24.w),
           //         child: CustomSwitchListTile(
           //           text: 'Promoted',
-          //           value: true,
+          //           value: emojis[9].isEnabled,
           //           onChanged: (value) {},
           //           activeColor: Colors.red,
           //           activeText: 'On',
@@ -242,7 +250,7 @@ class EditAlertView extends GetView<EditAlertController> {
           //         padding: EdgeInsets.symmetric(horizontal: 24.w),
           //         child: CustomSwitchListTile(
           //           text: 'Demoted',
-          //           value: true,
+          //           value: emojis[10].isEnabled,
           //           onChanged: (value) {},
           //           activeColor: Colors.red,
           //           activeText: 'On',
@@ -258,7 +266,7 @@ class EditAlertView extends GetView<EditAlertController> {
           //         padding: EdgeInsets.symmetric(horizontal: 24.w),
           //         child: CustomSwitchListTile(
           //           text: 'Removed',
-          //           value: true,
+          //           value: emojis[11].isEnabled,
           //           onChanged: (value) {},
           //           activeColor: Colors.red,
           //           activeText: 'On',

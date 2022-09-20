@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tasker/data/local_storage.dart';
@@ -15,33 +16,33 @@ class InnerController extends GetxController {
   TextEditingController createEmojiTitle = TextEditingController();
 
   List<EmojiModel> _reserveEmojis=[
-    EmojiModel(emoji: '😍', title: 'Love', isSelected: false),
-    EmojiModel(emoji: '🔥', title: 'Hot', isSelected: false),
-    EmojiModel(emoji: '🍷', title: 'Date', isSelected: false),
-    EmojiModel(emoji: '🤩', title: 'Obsessed', isSelected: false),
-    EmojiModel(emoji: '😈', title: 'Thrilling', isSelected: false),
-    EmojiModel(emoji: '🤡', title: 'Funny', isSelected: false),
-    EmojiModel(emoji: '🤮', title: 'Ick', isSelected: false),
-    EmojiModel(emoji: '👻', title: 'Ghost', isSelected: false),
-    EmojiModel(emoji: '✅', title: 'Added', isSelected: false),
-    EmojiModel(emoji: '🔺', title: 'Promoted', isSelected: false),
-    EmojiModel(emoji: '🔻', title: 'Demoted', isSelected: false),
-    EmojiModel(emoji: '❌', title: 'Removed', isSelected: false),
+    EmojiModel(emoji: '😍', title: 'Love', isSelected: false, isEnabled: true),
+    EmojiModel(emoji: '🔥', title: 'Hot', isSelected: false, isEnabled: true),
+    EmojiModel(emoji: '🍷', title: 'Date', isSelected: false, isEnabled: true),
+    EmojiModel(emoji: '🤩', title: 'Obsessed', isSelected: false, isEnabled: true),
+    EmojiModel(emoji: '😈', title: 'Thrilling', isSelected: false, isEnabled: true),
+    EmojiModel(emoji: '🤡', title: 'Funny', isSelected: false, isEnabled: true),
+    EmojiModel(emoji: '🤮', title: 'Ick', isSelected: false, isEnabled: true),
+    EmojiModel(emoji: '👻', title: 'Ghost', isSelected: false, isEnabled: true),
+    EmojiModel(emoji: '✅', title: 'Added', isSelected: false, isEnabled: true),
+    EmojiModel(emoji: '🔺', title: 'Promoted', isSelected: false, isEnabled: true),
+    EmojiModel(emoji: '🔻', title: 'Demoted', isSelected: false, isEnabled: true),
+    EmojiModel(emoji: '❌', title: 'Removed', isSelected: false, isEnabled: true),
   ];
 
   final List<EmojiModel> _localEmojis = [
-    EmojiModel(emoji: '😍', title: 'Love', isSelected: false),
-    EmojiModel(emoji: '🔥', title: 'Hot', isSelected: false),
-    EmojiModel(emoji: '🍷', title: 'Date', isSelected: false),
-    EmojiModel(emoji: '🤩', title: 'Obsessed', isSelected: false),
-    EmojiModel(emoji: '😈', title: 'Thrilling', isSelected: false),
-    EmojiModel(emoji: '🤡', title: 'Funny', isSelected: false),
-    EmojiModel(emoji: '🤮', title: 'Ick', isSelected: false),
-    EmojiModel(emoji: '👻', title: 'Ghost', isSelected: false),
-    EmojiModel(emoji: '✅', title: 'Added', isSelected: false),
-    EmojiModel(emoji: '🔺', title: 'Promoted', isSelected: false),
-    EmojiModel(emoji: '🔻', title: 'Demoted', isSelected: false),
-    EmojiModel(emoji: '❌', title: 'Removed', isSelected: false),
+    EmojiModel(emoji: '😍', title: 'Love', isSelected: false, isEnabled: true),
+    EmojiModel(emoji: '🔥', title: 'Hot', isSelected: false, isEnabled: true),
+    EmojiModel(emoji: '🍷', title: 'Date', isSelected: false, isEnabled: true),
+    EmojiModel(emoji: '🤩', title: 'Obsessed', isSelected: false, isEnabled: true),
+    EmojiModel(emoji: '😈', title: 'Thrilling', isSelected: false, isEnabled: true),
+    EmojiModel(emoji: '🤡', title: 'Funny', isSelected: false, isEnabled: true),
+    EmojiModel(emoji: '🤮', title: 'Ick', isSelected: false, isEnabled: true),
+    EmojiModel(emoji: '👻', title: 'Ghost', isSelected: false, isEnabled: true),
+    EmojiModel(emoji: '✅', title: 'Added', isSelected: false, isEnabled: true),
+    EmojiModel(emoji: '🔺', title: 'Promoted', isSelected: false, isEnabled: true),
+    EmojiModel(emoji: '🔻', title: 'Demoted', isSelected: false, isEnabled: true),
+    EmojiModel(emoji: '❌', title: 'Removed', isSelected: false, isEnabled: true),
   ];
 
   EmojiModel? get selectedEmoji => _selectedEmoji;
@@ -79,27 +80,24 @@ class InnerController extends GetxController {
     update();
   }
 
-  void enableEmoji(EmojiModel object) {
-    print("#################################################");
-    print("${_localEmojis.length}");
+  void enableEmoji(EmojiModel object, bool value) {
 
-    if(_localEmojis.contains(object)){
+    if(value == false){
       for(var emoji in _reserveEmojis){
         if(emoji.title == object.title){
-          emoji.isEnabled = false;
+          emoji.isEnabled=false;
         }
       }
       _localEmojis.removeWhere((e) => e.title==object.title);
-    }else if(_reserveEmojis.contains(object)){
+    }else{
       for(var emoji in _reserveEmojis){
         if(emoji.title == object.title){
-          emoji.isEnabled = true;
+          emoji.isEnabled =true;
+          //_localEmojis.removeWhere((e) => e.title==object.title);
           _localEmojis.add(emoji);
         }
       }
     }
-    print("${_localEmojis.length}");
-    print("#################################################");
     update();
     Get.forceAppUpdate();
   }
@@ -119,7 +117,7 @@ class InnerController extends GetxController {
 
   void createEmoji(){
     if(canCreateEmoji){
-      final newEmoji = EmojiModel(emoji: _createEmojiImage, title: createEmojiTitle.text.trim(), isSelected: false);
+      final newEmoji = EmojiModel(emoji: _createEmojiImage, title: createEmojiTitle.text.trim(), isSelected: false, isEnabled: true,);
       if(_createdEmojis != null){
         _createdEmojis!.add(newEmoji);
       }else{
@@ -130,6 +128,7 @@ class InnerController extends GetxController {
       SharedPreferenceService.storeStringList(StorageKey.EMOJIS, stringList);
     }
     cleanCreatedEmoji();
+    update();
   }
 
   void cleanCreatedEmoji(){

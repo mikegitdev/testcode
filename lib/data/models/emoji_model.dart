@@ -6,7 +6,7 @@ class EmojiModel {
 
   EmojiModel({
     this.title,
-    this.isEnabled=true,
+    required this.isEnabled,
     required this.emoji,
     required this.isSelected,
   });

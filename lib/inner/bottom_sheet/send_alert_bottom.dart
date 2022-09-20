@@ -224,197 +224,195 @@ class _SendAlertBottomState extends State<SendAlertBottom> {
   Widget build(BuildContext context) {
     return GetBuilder<InnerController>(builder: (controller) {
       return StatefulBuilder(builder: (context, update) {
-        return Expanded(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const CustomBackButton(),
-              12.verticalSpace,
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(25.r),
-                    topRight: Radius.circular(25.r),
-                  ),
-                ),
-                padding: EdgeInsets.only(top: 8.h),
-                //  height: 626.h,
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      height: 5.h,
-                      width: 64.w,
-                      decoration: BoxDecoration(
-                          color: Colors.black54,
-                          borderRadius: BorderRadius.circular(30)),
-                    ),
-                    12.verticalSpace,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          width: 60.w,
-                        ),
-                        Text(
-                          "Send Alert",
-                          style:
-                          AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            // Get.toNamed(AppRouteName.editAlert);
-                            Navigator.pushNamed(context, AppRouteName.editAlert ).then((value) {
-                              setState(() {
-
-                              });
-                            });
-                          },
-                          child: Text(
-                            "Edit",
-                            style: AppTextStyle.boldNormal
-                                .copyWith(fontSize: 16.sp, color: Colors.red),
-                          ),
-                        ),
-                      ],
-                    ),
-                    4.verticalSpace,
-                    Text(
-                      "Please, choose an emoji and type in an alert name",
-                      style: AppTextStyle.regularNormal
-                          .copyWith(fontSize: 12.sp, color: AppColor.c62677D),
-                    ),
-                    20.verticalSpace,
-                    SizedBox(
-                      height: controller.isCreatedExist ? 450.h : 346.h,
-                      child: ListView(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 24.w),
-                            height: 350.h,
-                            child: GridView.builder(
-                              physics: controller.isCreatedExist ? const NeverScrollableScrollPhysics() : null,
-                              gridDelegate:
-                              const SliverGridDelegateWithMaxCrossAxisExtent(
-                                maxCrossAxisExtent: 140,
-                                childAspectRatio: 3 / 2.14,
-                                crossAxisSpacing: 8,
-                                mainAxisSpacing: 12,
-                              ),
-                              itemBuilder: (BuildContext ctx, index) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    update(() {
-                                      controller.chooseEmoji(
-                                          controller.localEmojis[index]);
-                                    });
-                                  },
-                                  child: EmojiSingle(
-                                    object: controller.localEmojis[index],
-                                  ),
-                                );
-                              },
-                              itemCount: controller.localEmojis.length,
-                            ),
-                          ),
-                          controller.createdEmojis != null &&
-                              controller.createdEmojis!.isNotEmpty
-                              ? Column(
-                            children: [
-                              24.verticalSpace,
-                              Text(
-                                "Custom Alerts",
-                                style: AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
-                              ),
-                              24.verticalSpace,
-                              Container(
-                                padding:
-                                EdgeInsets.symmetric(horizontal: 24.w),
-                                height: 200.h,
-                                child: GridView.builder(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  gridDelegate:
-                                  const SliverGridDelegateWithMaxCrossAxisExtent(
-                                    maxCrossAxisExtent: 140,
-                                    childAspectRatio: 3 / 2.14,
-                                    crossAxisSpacing: 8,
-                                    mainAxisSpacing: 12,
-                                  ),
-                                  itemBuilder: (BuildContext ctx, index) {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        update(() {
-                                          controller.chooseEmoji(controller
-                                              .createdEmojis![index]);
-                                        });
-                                      },
-                                      child: EmojiSingle(
-                                        object: controller
-                                            .createdEmojis![index],
-                                      ),
-                                    );
-                                  },
-                                  itemCount:
-                                  controller.createdEmojis!.length,
-                                ),
-                              ),
-                            ],
-                          )
-                              : const SizedBox.shrink(),
-                        ],
-                      ),
-                    ),
-                    24.verticalSpace,
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 24.w),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            gradient: AppColor.gradient_03,
-                            borderRadius: BorderRadius.circular(12.r)),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (controller.selectedEmoji != null) {
-                              controller.openBottomSheet(
-                                  bottomSheet: const ShareAlertBottom());
-                            }
-                          }, //AppColor.gradient_03
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.transparent,
-                            shadowColor: Colors.transparent,
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Continue',
-                              style: AppTextStyle.boldNormal
-                                  .copyWith(color: Colors.white, fontSize: 16.sp),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    12.verticalSpace,
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 24.w),
-                      child: CustomElevatedButton(
-                        title: 'Add Custom Alert',
-                        hasGradient: false,
-                        onPressed: () {
-                          // sendAlert(context);
-                          controller.openBottomSheet(
-                            bottomSheet: const CreateAlertBottom(),
-                            isCleanCreatedEmoji: true,
-                          );
-                        },
-                      ),
-                    ),
-                    12.verticalSpace,
-                  ],
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const CustomBackButton(),
+            12.verticalSpace,
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(25.r),
+                  topRight: Radius.circular(25.r),
                 ),
               ),
-            ],
-          ),
+              padding: EdgeInsets.only(top: 8.h),
+              //  height: 626.h,
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    height: 5.h,
+                    width: 64.w,
+                    decoration: BoxDecoration(
+                        color: Colors.black54,
+                        borderRadius: BorderRadius.circular(30)),
+                  ),
+                  12.verticalSpace,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        width: 60.w,
+                      ),
+                      Text(
+                        "Send Alert",
+                        style:
+                        AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          // Get.toNamed(AppRouteName.editAlert);
+                          Navigator.pushNamed(context, AppRouteName.editAlert ).then((value) {
+                            setState(() {
+
+                            });
+                          });
+                        },
+                        child: Text(
+                          "Edit",
+                          style: AppTextStyle.boldNormal
+                              .copyWith(fontSize: 16.sp, color: Colors.red),
+                        ),
+                      ),
+                    ],
+                  ),
+                  4.verticalSpace,
+                  Text(
+                    "Please, choose an emoji and type in an alert name",
+                    style: AppTextStyle.regularNormal
+                        .copyWith(fontSize: 12.sp, color: AppColor.c62677D),
+                  ),
+                  20.verticalSpace,
+                  SizedBox(
+                    height: controller.isCreatedExist ? 450.h : (86.5*controller.localEmojis.length/3).h,
+                    child: ListView(
+                      children: [
+                        Container(
+                          height: 350.h,
+                          padding: EdgeInsets.symmetric(horizontal: 24.w),
+                          child: GridView.builder(
+                            physics: controller.isCreatedExist ? const NeverScrollableScrollPhysics() : null,
+                            gridDelegate:
+                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                              maxCrossAxisExtent: 140,
+                              childAspectRatio: 3 / 2.14,
+                              crossAxisSpacing: 8,
+                              mainAxisSpacing: 12,
+                            ),
+                            itemBuilder: (BuildContext ctx, index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  update(() {
+                                    controller.chooseEmoji(
+                                        controller.localEmojis[index]);
+                                  });
+                                },
+                                child: EmojiSingle(
+                                  object: controller.localEmojis[index],
+                                ),
+                              );
+                            },
+                            itemCount: controller.localEmojis.length,
+                          ),
+                        ),
+                        controller.createdEmojis != null &&
+                            controller.createdEmojis!.isNotEmpty
+                            ? Column(
+                          children: [
+                            24.verticalSpace,
+                            Text(
+                              "Custom Alerts",
+                              style: AppTextStyle.boldNormal.copyWith(fontSize: 18.sp),
+                            ),
+                            24.verticalSpace,
+                            Container(
+                              padding:
+                              EdgeInsets.symmetric(horizontal: 24.w),
+                              height: 200.h,
+                              child: GridView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                gridDelegate:
+                                const SliverGridDelegateWithMaxCrossAxisExtent(
+                                  maxCrossAxisExtent: 140,
+                                  childAspectRatio: 3 / 2.14,
+                                  crossAxisSpacing: 8,
+                                  mainAxisSpacing: 12,
+                                ),
+                                itemBuilder: (BuildContext ctx, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      update(() {
+                                        controller.chooseEmoji(controller
+                                            .createdEmojis![index]);
+                                      });
+                                    },
+                                    child: EmojiSingle(
+                                      object: controller
+                                          .createdEmojis![index],
+                                    ),
+                                  );
+                                },
+                                itemCount:
+                                controller.createdEmojis!.length,
+                              ),
+                            ),
+                          ],
+                        )
+                            : const SizedBox.shrink(),
+                      ],
+                    ),
+                  ),
+                  24.verticalSpace,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24.w),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          gradient: AppColor.gradient_03,
+                          borderRadius: BorderRadius.circular(12.r)),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (controller.selectedEmoji != null) {
+                            controller.openBottomSheet(
+                                bottomSheet: const ShareAlertBottom());
+                          }
+                        }, //AppColor.gradient_03
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.transparent,
+                          shadowColor: Colors.transparent,
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Continue',
+                            style: AppTextStyle.boldNormal
+                                .copyWith(color: Colors.white, fontSize: 16.sp),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  12.verticalSpace,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24.w),
+                    child: CustomElevatedButton(
+                      title: 'Add Custom Alert',
+                      hasGradient: false,
+                      onPressed: () {
+                        // sendAlert(context);
+                        controller.openBottomSheet(
+                          bottomSheet: const CreateAlertBottom(),
+                          isCleanCreatedEmoji: true,
+                        );
+                      },
+                    ),
+                  ),
+                  12.verticalSpace,
+                ],
+              ),
+            ),
+          ],
         );
       });
     });
