@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,6 +11,7 @@ import 'package:tasker/emoji_text.dart';
 import 'package:tasker/inner/bottom_sheet/send_alert_bottom.dart';
 import 'package:tasker/inner/create_rostr/createRostr_controller.dart';
 import 'package:tasker/inner/photo_view.dart';
+import '../bottom_sheet/send_alert_to_bottom.dart';
 import 'inner_controller.dart';
 
 class InnerScreen extends GetView<InnerController> {
@@ -115,6 +118,13 @@ class InnerScreen extends GetView<InnerController> {
                     12.horizontalSpace,
                     ElevatedButton(
                       onPressed: () {
+
+                        //#Send To Alert ni
+                        // Shu yerda ochib quyayabman
+                        controller.openBottomSheet(
+                          bottomSheet: const SendAlertToBottom(),
+                        );
+
                         // Navigator.push(
                         //     context,
                         //     MaterialPageRoute(
