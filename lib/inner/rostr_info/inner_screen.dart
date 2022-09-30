@@ -109,6 +109,9 @@ class InnerScreen extends GetView<InnerController> {
                           ),
                         ),
                       ),
+
+
+                      //#send alert
                       child: Text('Send Alert',
                           style: AppTextStyle.boldNormal.copyWith(
                             fontSize: 16.sp,

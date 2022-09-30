@@ -8,16 +8,20 @@ import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:tasker/inner/component/custom_checkbox_list.dart';
 import 'package:tasker/inner/component/custom_checkbox_list_remove.dart';
 
+import '../../../rostr_info/inner_controller.dart';
 import '../controllers/edit_alert_controller.dart';
 
 class EditAlertView extends GetView<EditAlertController> {
-  const EditAlertView({Key? key}) : super(key: key);
+  EditAlertView({Key? key}) : super(key: key);
+
+  final emojis=Get.find<InnerController>().reserveEmojis;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Edit Alerts",
+        title: Text("",
             style: AppTextStyle.boldNormal
                 .copyWith(fontSize: 16.sp, color: Colors.black)),
         leading: IconButton(
@@ -49,223 +53,252 @@ class EditAlertView extends GetView<EditAlertController> {
           SizedBox(
             height: 46,
           ),
-          Column(
-            children: [
-              InkWell(
-                onTap: () {},
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomSwitchListTile(
-                    text: 'Love',
-                    value: true,
-                    onChanged: (value) {},
-                    activeColor: Colors.red,
-                    activeText: 'On',
-                    inactiveText: 'Off',
-                    activeTextColor: AppColor.white,
-                    inactiveTextColor: AppColor.c969696,
-                  ),
-                ),
+          for(int i=0; i<emojis.length; i++)
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: CustomSwitchListTile(
+                text: emojis[i].title!,
+                value: emojis[i].isEnabled,
+                onChanged: (value) {
+                  Get.find<InnerController>().enableEmoji(emojis[i], value);
+                  value= !value;
+                  print("$value++++++++++++++++");
+                  print("${emojis.length}==============edit two");
+                },
+                activeColor: Colors.red,
+                activeText: 'On',
+                inactiveText: 'Off',
+                activeTextColor: AppColor.white,
+                inactiveTextColor: AppColor.c969696,
               ),
-              InkWell(
-                onTap: () {},
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomSwitchListTile(
-                    text: 'Hot',
-                    value: true,
-                    onChanged: (value) {},
-                    activeColor: Colors.red,
-                    activeText: 'On',
-                    inactiveText: 'Off',
-                    activeTextColor: AppColor.white,
-                    inactiveTextColor: AppColor.c969696,
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {},
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomSwitchListTile(
-                    text: 'Date',
-                    value: true,
-                    onChanged: (value) {},
-                    activeColor: Colors.red,
-                    activeText: 'On',
-                    inactiveText: 'Off',
-                    activeTextColor: AppColor.white,
-                    inactiveTextColor: AppColor.c969696,
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {},
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomSwitchListTile(
-                    text: 'Obsessed',
-                    value: true,
-                    onChanged: (value) {},
-                    activeColor: Colors.red,
-                    activeText: 'On',
-                    inactiveText: 'Off',
-                    activeTextColor: AppColor.white,
-                    inactiveTextColor: AppColor.c969696,
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {},
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomSwitchListTile(
-                    text: 'F-boy',
-                    value: true,
-                    onChanged: (value) {},
-                    activeColor: Colors.red,
-                    activeText: 'On',
-                    inactiveText: 'Off',
-                    activeTextColor: AppColor.white,
-                    inactiveTextColor: AppColor.c969696,
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {},
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomSwitchListTile(
-                    text: 'F-girl',
-                    value: true,
-                    onChanged: (value) {},
-                    activeColor: Colors.red,
-                    activeText: 'On',
-                    inactiveText: 'Off',
-                    activeTextColor: AppColor.white,
-                    inactiveTextColor: AppColor.c969696,
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {},
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomSwitchListTile(
-                    text: 'Ick',
-                    value: true,
-                    onChanged: (value) {},
-                    activeColor: Colors.red,
-                    activeText: 'On',
-                    inactiveText: 'Off',
-                    activeTextColor: AppColor.white,
-                    inactiveTextColor: AppColor.c969696,
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {},
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomSwitchListTile(
-                    text: 'Ghost',
-                    value: true,
-                    onChanged: (value) {},
-                    activeColor: Colors.red,
-                    activeText: 'On',
-                    inactiveText: 'Off',
-                    activeTextColor: AppColor.white,
-                    inactiveTextColor: AppColor.c969696,
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {},
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomSwitchListTile(
-                    text: 'Added',
-                    value: true,
-                    onChanged: (value) {},
-                    activeColor: Colors.red,
-                    activeText: 'On',
-                    inactiveText: 'Off',
-                    activeTextColor: AppColor.white,
-                    inactiveTextColor: AppColor.c969696,
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {},
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomSwitchListTile(
-                    text: 'Promoted',
-                    value: true,
-                    onChanged: (value) {},
-                    activeColor: Colors.red,
-                    activeText: 'On',
-                    inactiveText: 'Off',
-                    activeTextColor: AppColor.white,
-                    inactiveTextColor: AppColor.c969696,
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {},
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomSwitchListTile(
-                    text: 'Demoted',
-                    value: true,
-                    onChanged: (value) {},
-                    activeColor: Colors.red,
-                    activeText: 'On',
-                    inactiveText: 'Off',
-                    activeTextColor: AppColor.white,
-                    inactiveTextColor: AppColor.c969696,
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {},
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomSwitchListTile(
-                    text: 'Removed',
-                    value: true,
-                    onChanged: (value) {},
-                    activeColor: Colors.red,
-                    activeText: 'On',
-                    inactiveText: 'Off',
-                    activeTextColor: AppColor.white,
-                    inactiveTextColor: AppColor.c969696,
-                  ),
-                ),
-              ),
-
-              // ListTile(
-              //   leading: Text("Love"),
-              //   trailing: InkWell(
-              //     onTap: () {},
-              //     child: Padding(
-              //       padding: EdgeInsets.symmetric(horizontal: 24.w),
-              //       child: CustomCheckboxList(
-              //         text: 'Turn this folder: ',
-              //         value: true,
-              //         onChanged: (value) {},
-              //         activeColor: Colors.red,
-              //         activeText: 'On',
-              //         inactiveText: 'Off',
-              //         activeTextColor: AppColor.white,
-              //         inactiveTextColor: AppColor.c969696,
-              //       ),
-              //     ),
-              //   ),
-              //   //title: Text("List item $index")
-              // ),
-            ],
-          ),
+            ),
+          // Column(
+          //   children: [
+          //     InkWell(
+          //       onTap: () {},
+          //       child: Padding(
+          //         padding: EdgeInsets.symmetric(horizontal: 24.w),
+          //         child: CustomSwitchListTile(
+          //           text: 'Love',
+          //           value: emojis[0].isEnabled,
+          //           onChanged: (value) {
+          //
+          //                   print("$value++++++++++++++++");
+          //                   print("${emojis.length}===================edit");
+          //                   Get.find<InnerController>().enableEmoji(emojis[0]);
+          //                   value= !value;
+          //                   print("$value++++++++++++++++");
+          //                   print("${emojis.length}==============edit two");
+          //             if(value){
+          //             }
+          //           },
+          //           activeColor: Colors.red,
+          //           activeText: 'On',
+          //           inactiveText: 'Off',
+          //           activeTextColor: AppColor.white,
+          //           inactiveTextColor: AppColor.c969696,
+          //         ),
+          //       ),
+          //     ),
+          //     InkWell(
+          //       onTap: () {},
+          //       child: Padding(
+          //         padding: EdgeInsets.symmetric(horizontal: 24.w),
+          //         child: CustomSwitchListTile(
+          //           text: 'Hot',
+          //           value: emojis[1].isEnabled,
+          //           onChanged: (value) {},
+          //           activeColor: Colors.red,
+          //           activeText: 'On',
+          //           inactiveText: 'Off',
+          //           activeTextColor: AppColor.white,
+          //           inactiveTextColor: AppColor.c969696,
+          //         ),
+          //       ),
+          //     ),
+          //     InkWell(
+          //       onTap: () {},
+          //       child: Padding(
+          //         padding: EdgeInsets.symmetric(horizontal: 24.w),
+          //         child: CustomSwitchListTile(
+          //           text: 'Date',
+          //           value: emojis[2].isEnabled,
+          //           onChanged: (value) {},
+          //           activeColor: Colors.red,
+          //           activeText: 'On',
+          //           inactiveText: 'Off',
+          //           activeTextColor: AppColor.white,
+          //           inactiveTextColor: AppColor.c969696,
+          //         ),
+          //       ),
+          //     ),
+          //     InkWell(
+          //       onTap: () {},
+          //       child: Padding(
+          //         padding: EdgeInsets.symmetric(horizontal: 24.w),
+          //         child: CustomSwitchListTile(
+          //           text: 'Obsessed',
+          //           value: emojis[3].isEnabled,
+          //           onChanged: (value) {},
+          //           activeColor: Colors.red,
+          //           activeText: 'On',
+          //           inactiveText: 'Off',
+          //           activeTextColor: AppColor.white,
+          //           inactiveTextColor: AppColor.c969696,
+          //         ),
+          //       ),
+          //     ),
+          //     InkWell(
+          //       onTap: () {},
+          //       child: Padding(
+          //         padding: EdgeInsets.symmetric(horizontal: 24.w),
+          //         child: CustomSwitchListTile(
+          //           text: 'Thrilling',
+          //           value: emojis[4].isEnabled,
+          //           onChanged: (value) {},
+          //           activeColor: Colors.red,
+          //           activeText: 'On',
+          //           inactiveText: 'Off',
+          //           activeTextColor: AppColor.white,
+          //           inactiveTextColor: AppColor.c969696,
+          //         ),
+          //       ),
+          //     ),
+          //     InkWell(
+          //       onTap: () {},
+          //       child: Padding(
+          //         padding: EdgeInsets.symmetric(horizontal: 24.w),
+          //         child: CustomSwitchListTile(
+          //           text: 'Funny',
+          //           value: emojis[5].isEnabled,
+          //           onChanged: (value) {},
+          //           activeColor: Colors.red,
+          //           activeText: 'On',
+          //           inactiveText: 'Off',
+          //           activeTextColor: AppColor.white,
+          //           inactiveTextColor: AppColor.c969696,
+          //         ),
+          //       ),
+          //     ),
+          //     InkWell(
+          //       onTap: () {},
+          //       child: Padding(
+          //         padding: EdgeInsets.symmetric(horizontal: 24.w),
+          //         child: CustomSwitchListTile(
+          //           text: 'Ick',
+          //           value: emojis[6].isEnabled,
+          //           onChanged: (value) {},
+          //           activeColor: Colors.red,
+          //           activeText: 'On',
+          //           inactiveText: 'Off',
+          //           activeTextColor: AppColor.white,
+          //           inactiveTextColor: AppColor.c969696,
+          //         ),
+          //       ),
+          //     ),
+          //     InkWell(
+          //       onTap: () {},
+          //       child: Padding(
+          //         padding: EdgeInsets.symmetric(horizontal: 24.w),
+          //         child: CustomSwitchListTile(
+          //           text: 'Ghost',
+          //           value: emojis[7].isEnabled,
+          //           onChanged: (value) {},
+          //           activeColor: Colors.red,
+          //           activeText: 'On',
+          //           inactiveText: 'Off',
+          //           activeTextColor: AppColor.white,
+          //           inactiveTextColor: AppColor.c969696,
+          //         ),
+          //       ),
+          //     ),
+          //     InkWell(
+          //       onTap: () {},
+          //       child: Padding(
+          //         padding: EdgeInsets.symmetric(horizontal: 24.w),
+          //         child: CustomSwitchListTile(
+          //           text: 'Added',
+          //           value: emojis[8].isEnabled,
+          //           onChanged: (value) {},
+          //           activeColor: Colors.red,
+          //           activeText: 'On',
+          //           inactiveText: 'Off',
+          //           activeTextColor: AppColor.white,
+          //           inactiveTextColor: AppColor.c969696,
+          //         ),
+          //       ),
+          //     ),
+          //     InkWell(
+          //       onTap: () {},
+          //       child: Padding(
+          //         padding: EdgeInsets.symmetric(horizontal: 24.w),
+          //         child: CustomSwitchListTile(
+          //           text: 'Promoted',
+          //           value: emojis[9].isEnabled,
+          //           onChanged: (value) {},
+          //           activeColor: Colors.red,
+          //           activeText: 'On',
+          //           inactiveText: 'Off',
+          //           activeTextColor: AppColor.white,
+          //           inactiveTextColor: AppColor.c969696,
+          //         ),
+          //       ),
+          //     ),
+          //     InkWell(
+          //       onTap: () {},
+          //       child: Padding(
+          //         padding: EdgeInsets.symmetric(horizontal: 24.w),
+          //         child: CustomSwitchListTile(
+          //           text: 'Demoted',
+          //           value: emojis[10].isEnabled,
+          //           onChanged: (value) {},
+          //           activeColor: Colors.red,
+          //           activeText: 'On',
+          //           inactiveText: 'Off',
+          //           activeTextColor: AppColor.white,
+          //           inactiveTextColor: AppColor.c969696,
+          //         ),
+          //       ),
+          //     ),
+          //     InkWell(
+          //       onTap: () {},
+          //       child: Padding(
+          //         padding: EdgeInsets.symmetric(horizontal: 24.w),
+          //         child: CustomSwitchListTile(
+          //           text: 'Removed',
+          //           value: emojis[11].isEnabled,
+          //           onChanged: (value) {},
+          //           activeColor: Colors.red,
+          //           activeText: 'On',
+          //           inactiveText: 'Off',
+          //           activeTextColor: AppColor.white,
+          //           inactiveTextColor: AppColor.c969696,
+          //         ),
+          //       ),
+          //     ),
+          //
+          //     // ListTile(
+          //     //   leading: Text("Love"),
+          //     //   trailing: InkWell(
+          //     //     onTap: () {},
+          //     //     child: Padding(
+          //     //       padding: EdgeInsets.symmetric(horizontal: 24.w),
+          //     //       child: CustomCheckboxList(
+          //     //         text: 'Turn this folder: ',
+          //     //         value: true,
+          //     //         onChanged: (value) {},
+          //     //         activeColor: Colors.red,
+          //     //         activeText: 'On',
+          //     //         inactiveText: 'Off',
+          //     //         activeTextColor: AppColor.white,
+          //     //         inactiveTextColor: AppColor.c969696,
+          //     //       ),
+          //     //     ),
+          //     //   ),
+          //     //   //title: Text("List item $index")
+          //     // ),
+          //   ],
+          // ),
           Padding(
             padding: const EdgeInsets.only(left: 24.0),
             child: Text(
