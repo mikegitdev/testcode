@@ -1,19 +1,29 @@
 import 'package:tasker/app_utils/app_color.dart';
+import 'package:tasker/data/models/contact_model.dart';
 import 'package:tasker/data/models/emoji_model.dart';
+import 'package:tasker/data/models/note_model.dart';
 import 'package:tasker/data/models/rating_model.dart';
 import 'package:tasker/data/models/tag_model.dart';
 
+import '../data/models/event_date.dart';
+
 List<Tag> defaultTags = [
-  Tag(title: 'Hot', color: AppColor.cE50101.value),
-  Tag(title: 'Rich', color: AppColor.c83C3F5.value),
-  Tag(title: 'Successful', color: AppColor.c00AE26.value),
-  Tag(title: 'Smart', color: AppColor.cFF9900.value),
-  Tag(title: 'Confident', color: AppColor.c660099.value),
-  Tag(title: 'Funny', color: AppColor.c1372FF.value),
-  Tag(title: 'Beta', color: AppColor.cA09000.value),
-  Tag(title: 'Alpha', color: AppColor.c222222.value),
-  Tag(title: 'Sigma', color: AppColor.c969696.value),
+  Tag(title: 'Hot', color: AppColor.cE50101.value, isSelected: false),
+  Tag(title: 'Rich', color: AppColor.c83C3F5.value, isSelected: false),
+  Tag(title: 'Successful', color: AppColor.c00AE26.value, isSelected: false),
+  Tag(title: 'Smart', color: AppColor.cFF9900.value, isSelected: false),
+  Tag(title: 'Confident', color: AppColor.c660099.value, isSelected: false),
+  Tag(title: 'Funny', color: AppColor.c1372FF.value, isSelected: false),
+  Tag(title: 'Beta', color: AppColor.cA09000.value, isSelected: false),
+  Tag(title: 'Alpha', color: AppColor.c222222.value, isSelected: false),
+  Tag(title: 'Sigma', color: AppColor.c969696.value, isSelected: false),
 ];
+
+List<Note> defaultNotes = [];
+
+List<Contact> defaultContact = [];
+
+List<EventDate> defaultEventDate= [];
 
 List<EmojiModel> emojisSet = [
   EmojiModel(emoji: "😀", isSelected: false),

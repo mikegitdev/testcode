@@ -8,6 +8,9 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/data/local_storage.dart';
+import 'package:tasker/data/models/contact_model.dart';
+import 'package:tasker/data/models/event_date.dart';
+import 'package:tasker/data/models/note_model.dart';
 import 'package:tasker/data/models/rating_model.dart';
 import 'package:tasker/data/models/tag_model.dart';
 import 'package:tasker/inner/bottom_sheet/back_button.dart';
@@ -20,8 +23,10 @@ enum BottomSheetType{
 
 class CreateRostrController extends GetxController {
   /// Fields
-
+  String updatedType = 'Choose a rostr type';
+  String updatedFolder = "Choose a folder";
   bool _enableRating = false;
+  bool isSelectedTag = false;
   File? _image;
   List<File> _profileImages = [];
   int _overallRating = 0;
@@ -30,6 +35,13 @@ class CreateRostrController extends GetxController {
   List<Rating>? _createdRatings;
   List<Tag> _tags = defaultTags;
   List<Tag>? _createdTags;
+  List<Note> _notes= defaultNotes;
+  List<Note>? _createdNotes;
+  List<Contact> _contact = defaultContact;
+  List<Contact>? _createdContact;
+  List<EventDate> _eventDate= defaultEventDate;
+  List<EventDate>? _createdEventDate;
+
 
 
   final personNameController = TextEditingController();
@@ -39,8 +51,9 @@ class CreateRostrController extends GetxController {
   // * Used in Bottom Sheets
   final ratingNameController = TextEditingController();
   final noteNameController = TextEditingController();
+  final noteCommentController = TextEditingController();
   final tagNameController = TextEditingController();
-  final contactNameController = TextEditingController();
+  final contactNumberController = TextEditingController();
   final contactLinkController = TextEditingController();
   final eventDateController = TextEditingController();
   final eventHeadingController = TextEditingController();
@@ -82,6 +95,9 @@ class CreateRostrController extends GetxController {
 
   List<Rating> get rating => _ratings;
   List<Tag> get tags => _tags;
+  List<Note> get notes => _notes;
+  List<Contact> get contact => _contact;
+  List<EventDate> get eventDate => _eventDate;
 
   List<String> get sectionItems => _sectionItems;
   List<String> get folderItems => _folderItems;
@@ -330,6 +346,27 @@ class CreateRostrController extends GetxController {
       _createdTags = tagsStringList.map((string) => Tag.fromJson(jsonDecode(string))).toList();
       _tags = _createdTags!;
     }
+
+    //# Notes
+    List<String>? notesStringList = await SharedPreferenceService.loadStringList(StorageKey.NOTES);
+    if(notesStringList != null){
+      _createdNotes=notesStringList.map((string) => Note.fromJson(jsonDecode(string))).toList();
+      _notes = _createdNotes!;
+    }
+
+    //#Contact
+    List<String>? contactStringList = await SharedPreferenceService.loadStringList(StorageKey.CONTACT);
+    if(contactStringList != null){
+      _createdContact=contactStringList.map((string) => Contact.fromJson(jsonDecode(string))).toList();
+      _contact = _createdContact!;
+    }
+
+    //#Event
+    List<String>? eventDateStringList = await SharedPreferenceService.loadStringList(StorageKey.EVENTDATE);
+    if(eventDateStringList != null){
+      _createdEventDate = eventDateStringList.map((string) => EventDate.fromJson(jsonDecode(string))).toList();
+      _eventDate = _createdEventDate!;
+    }
     update();
   }
 
@@ -351,13 +388,63 @@ class CreateRostrController extends GetxController {
     String title = tagNameController.text.trim();
 
     if(title.isNotEmpty && _newTagColor != null){
-      Tag newTag = Tag(title: title, color: _newTagColor!);
+      Tag newTag = Tag(title: title, color: _newTagColor!, isSelected: false);
       _tags.add(newTag);
       tagNameController.clear();
       _newTagColor = null;
       update();
       List<String> tagsStringList = _tags.map((e) => jsonEncode(e.toJson())).toList();
       SharedPreferenceService.storeStringList(StorageKey.TAGS, tagsStringList);
+    }
+    Get.back();
+  }
+
+  void addNote(){
+    String title = noteNameController.text.trim();
+    String comment = noteCommentController.text.trim();
+
+    if(title.isNotEmpty && comment.isNotEmpty){
+      Note newNote = Note(title: title, comment: comment);
+      _notes.add(newNote);
+      noteNameController.clear();
+      noteCommentController.clear();
+      update();
+      List<String> notesStringList = _notes.map((e) => jsonEncode(e.toJson())).toList();
+      SharedPreferenceService.storeStringList(StorageKey.NOTES, notesStringList);
+    }
+    Get.back();
+  }
+
+  void addContact(){
+    String number = contactNumberController.text.trim();
+    String link = contactLinkController.text.trim();
+
+    if(number.isNotEmpty && link.isNotEmpty){
+      Contact newContact = Contact(number: number, link: link);
+      _contact.add(newContact);
+      contactNumberController.clear();
+      contactLinkController.clear();
+      update();
+      List<String> contactStringList = _contact.map((e) => jsonEncode(e.toJson())).toList();
+      SharedPreferenceService.storeStringList(StorageKey.CONTACT, contactStringList);
+    }
+    Get.back();
+  }
+
+  void addEventDate(){
+    String date = eventDateController.text.trim();
+    String heading = eventHeadingController.text.trim();
+    String description = eventDescriptionController.text.trim();
+
+    if(date.isNotEmpty && heading.isNotEmpty && description.isNotEmpty){
+      EventDate newEventDate = EventDate(date: date, heading: heading, description: description);
+      _eventDate.add(newEventDate);
+      eventDateController.clear();
+      eventHeadingController.clear();
+      eventDescriptionController.clear();
+      update();
+      List<String> eventDateStrinList = _eventDate.map((e) => jsonEncode(e.toJson())).toList();
+      SharedPreferenceService.storeStringList(StorageKey.EVENTDATE, eventDateStrinList);
     }
     Get.back();
   }
@@ -376,5 +463,80 @@ class CreateRostrController extends GetxController {
     }
     update();
     print('OVERALL: $_overallRating');
+  }
+
+  void updateType(String value) {
+    updatedType = value;
+    update();
+  }
+
+  void updateFolder(String value){
+    updatedFolder = value;
+    update();
+  }
+
+  void isSelected(int index){
+    tags[index].isSelected ? tags[index].isSelected=false : tags[index].isSelected=true;
+    update();
+  }
+
+  void clearData(){
+    personNameController.clear();
+    personBirthDateController.clear();
+    personPlaceController.clear();
+ 
+    _ratings.clear();
+    _ratings.addAll(defaultRatings);
+    
+    _tags.clear();
+    _tags.addAll(defaultTags);
+    
+    _notes.clear();
+    _notes.addAll(defaultNotes);
+    
+    _contact.clear();
+    _contact.addAll(defaultContact);
+    
+    _eventDate.clear();
+    _eventDate.addAll(defaultEventDate);
+
+    update();
+
+  }
+
+  void printData(){
+    print("User info");
+    print("\t Name: ${personNameController.text.trim()}  Date: ${personBirthDateController.text.trim()}");
+    print("Ratings: ");
+    _ratings.forEach((e) {
+      print("\t title: ${e.title}  score: ${e.score}");
+    });
+    print("Tags: ");
+    _tags.forEach((e) {
+      e.isSelected ?
+      print("\t title: ${e.title}") : null;
+    });
+    print("Notes: ");
+    _notes.forEach((e) {
+      print("\t title: ${e.title}  commnet: ${e.comment}");
+    });
+    print("Contact: ");
+    _contact.forEach((e) {
+      print("\t number: ${e.number}  link: ${e.link}");
+    });
+    print("EventDate: ");
+    _eventDate.forEach((e) {
+      print("\t heading: ${e.heading}  date: ${e.date}  description: ${e.description}");
+    });
+  }
+
+  void displayData(){
+     _ratings.removeWhere((e) => !defaultRatings.contains(e));
+     _tags.removeWhere((e) => !defaultTags.contains(e));
+     _notes.removeWhere((e) => !defaultNotes.contains(e));
+     _contact.removeWhere((e) => !defaultContact.contains(e));
+     _eventDate.removeWhere((e) => !defaultEventDate.contains(e));
+
+     update();
   }
 }

@@ -32,7 +32,6 @@ dependencies:
 
   connectivity_plus: ^2.3.6+1
   cupertino_icons: ^1.0.5
-  dio: ^4.0.6
   dotted_border: ^2.0.0+2
   drag_and_drop_lists: ^0.3.3
   easy_localization: ^3.0.1

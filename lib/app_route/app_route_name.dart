@@ -13,4 +13,5 @@ class AppRouteName {
   static const editAlert = 'EDIT_ALERT';
   static const listScreen = 'LIST_SCREEN';
   static const createListScreen = 'CREATE_LIST_SCREEN';
+  static const successCreate = "SUCCESS_CREATE";
 }

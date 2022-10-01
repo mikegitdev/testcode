@@ -78,7 +78,7 @@ class MultiTextFieldBottomSheet extends GetView<CreateRostrController> {
                           children: [
                             CustomTextField(
                               hintText: 'Contact name e.g “Instagram”',
-                              textController: controller.contactNameController,
+                              textController: controller.contactNumberController,
                             ),
                             12.verticalSpace,
                             CustomTextField(
@@ -110,7 +110,7 @@ class MultiTextFieldBottomSheet extends GetView<CreateRostrController> {
                   CustomElevatedButton(
                     title: 'Save',
                     hasGradient: true,
-                    onPressed: () => onTap,
+                    onPressed: onTap,
                   ),
                 ],
               ),

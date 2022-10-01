@@ -4,7 +4,6 @@ import 'package:tasker/inner/bottom_sheet/edit_alert/bindings/edit_alert_binding
 import 'package:tasker/inner/bottom_sheet/edit_alert/views/edit_alert_view.dart';
 import 'package:tasker/inner/create_rostr/createRostr_binding.dart';
 import 'package:tasker/inner/create_rostr/create_rostr.dart';
-
 import 'package:tasker/inner/rostr_info/inner_binding.dart';
 import 'package:tasker/inner/rostr_info/inner_screen.dart';
 
@@ -26,6 +25,12 @@ class AppRouter {
         bindings: [CreateRostrBinding()],
         page: () =>  const CreateRostr(),
       ),
+
+      // GetPage(
+      //   name: '/${AppRouteName.successCreate}',
+      //   bindings: [SuccessCreate()],
+      //   page: () => const SuccessCreate(),
+      // ),
 
       GetPage(
         name: '/${AppRouteName.editAlert}',

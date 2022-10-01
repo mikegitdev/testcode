@@ -5,6 +5,9 @@ enum StorageKey{
   RATINGS,
   TAGS,
   USER,
+  NOTES,
+  CONTACT,
+  EVENTDATE,
 }
 
 class SharedPreferenceService{

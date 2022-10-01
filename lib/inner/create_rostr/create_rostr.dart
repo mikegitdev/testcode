@@ -1,12 +1,14 @@
 import 'package:get/get.dart';
 import 'package:tasker/appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:tasker/data/local_storage.dart';
 import 'package:tasker/emoji_text.dart';
 import 'package:tasker/app_utils/app_color.dart';
 import 'package:tasker/app_utils/app_image.dart';
 import 'package:tasker/app_utils/app_text_style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tasker/inner/bottom_sheet/rating_bottom_sheet.dart';
+import 'package:tasker/inner/bottom_sheet/single_two_textfield_bottom_sheet.dart';
 import 'package:tasker/inner/component/custom_label_edit.dart';
 import 'package:tasker/inner/create_rating/create_rating.dart';
 import 'package:tasker/inner/component/custom_text_field.dart';
@@ -332,18 +334,27 @@ class CreateRostr extends GetView<CreateRostrController> {
                           runSpacing: 8.0,
                           children: List.generate(
                             controller.tags.length,
-                            (index) => Container(
-                              padding: EdgeInsets.all(8.h),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.h),
-                                color: Colors.white,
-                              ),
-                              child: Text(
-                                controller.tags[index].title,
-                                style: AppTextStyle.regularNormal.copyWith(
-                                  fontSize: 14.sp,
-                                  color: Color(controller.tags[index].color),
-                                  fontWeight: FontWeight.w400,
+                            (index) => GestureDetector(
+                              onTap: (){
+                                controller.isSelected(index);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(8.h),
+                                decoration: BoxDecoration(
+                                  border: controller.tags[index].isSelected ? Border.all(
+                                    color: Colors.blue,
+                                    width: 3.w,
+                                  ) : Border(),
+                                  borderRadius: BorderRadius.circular(8.h),
+                                  color: Colors.white,
+                                ),
+                                child: Text(
+                                  controller.tags[index].title,
+                                  style: AppTextStyle.regularNormal.copyWith(
+                                    fontSize: 14.sp,
+                                    color: Color(controller.tags[index].color),
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
                               ),
                             ),
@@ -502,25 +513,57 @@ class CreateRostr extends GetView<CreateRostrController> {
                               ),
                             ],
                           ),
-                          Text(
-                              "Write things that you consider drawbacks / red flags",
-                              style: AppTextStyle.regularNormal
-                                  .copyWith(fontSize: 16.sp, height: 1.6)),
+                          Text('Cons ',
+                              style: AppTextStyle.boldNormal
+                                  .copyWith(fontSize: 16.sp)),
                         ],
                       ),
+                    ),
+                    12.verticalSpace,
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: List.generate(
+                            controller.notes.length,
+                                (index) => Container(
+                              padding: EdgeInsets.all(8.h),
+                              margin: EdgeInsets.symmetric(vertical: 10.h),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.h),
+                                color: Colors.white,
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text( controller.notes[index].title,
+                                      style: AppTextStyle.boldNormal
+                                          .copyWith(fontSize: 16.sp)),
+                                  Text(controller.notes[index].comment,
+                                      style: AppTextStyle.regularNormal
+                                          .copyWith(fontSize: 16.sp, height: 1.6)),
+                                  16.verticalSpace,
+                                ],
+                              ),
+                            ),
+                          )),
                     ),
                     CustomElevatedButton(
                       title: 'Add Note',
                       hasGradient: false,
                       onPressed: () {
                         controller.openBottomSheet(
-                          SingleTextFieldBottomSheet(
+                          SingleTwoTextFieldBottomSheet(
                             title: 'Create a Note',
-                            subtitle:
+                            subTitle:
                                 'Please, input a name of a new note block',
-                            hintText: 'Notes name',
-                            textController: controller.noteNameController,
-                            onTap: () {},
+                            hintTextName: 'Notes name',
+                            textNameController: controller.noteNameController,
+                            hintTextComment: "\nComment",
+                            textCommentController: controller.noteCommentController,
+                            onTap: () {controller.addNote();},
                           ),
                         );
                       },
@@ -530,57 +573,123 @@ class CreateRostr extends GetView<CreateRostrController> {
                     // * Contacts
                     CustomLabel(label: 'Contacts', onTap: () {}),
                     12.verticalSpace,
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.only(bottom: 24.h),
-                      padding: EdgeInsets.all(8.h),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12.r),
-                        color: Colors.white,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                    controller.contact.length > 0 ? Column(
+                      children: List.generate(controller.contact.length, (index) => Column(
                         children: [
-                          Text("Phone Number",
-                              style: AppTextStyle.boldNormal
-                                  .copyWith(fontSize: 16.sp)),
-                          Text(
-                            "Add phone number or other contacts",
-                            style: AppTextStyle.regularNormal.copyWith(
-                                fontSize: 16.sp,
-                                height: 1.6,
-                                color: Colors.blue),
+                          //#number
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            margin: EdgeInsets.only(bottom: 24.h),
+                            padding: EdgeInsets.all(8.h),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12.r),
+                              color: Colors.white,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Phone Number ${index+1}",
+                                    style: AppTextStyle.boldNormal
+                                        .copyWith(fontSize: 16.sp)),
+                                Text(
+                                  controller.contact[index].number,
+                                  style: AppTextStyle.regularNormal.copyWith(
+                                      fontSize: 16.sp,
+                                      height: 1.6,
+                                      color: Colors.blue),
+                                ),
+                              ],
+                            ),
+                          ),
+                          //#snapchat
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            margin: EdgeInsets.only(
+                              bottom: 24.h,
+                            ),
+                            padding: EdgeInsets.all(8.h),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12.r),
+                              color: Colors.white,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Snapchat ${index+1}",
+                                    style: AppTextStyle.boldNormal
+                                        .copyWith(fontSize: 16.sp)),
+                                Text(
+                                  controller.contact[index].link,
+                                  style: AppTextStyle.regularNormal.copyWith(
+                                      fontSize: 16.sp,
+                                      height: 1.6,
+                                      color: Colors.blue),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.only(
-                        bottom: 24.h,
-                      ),
-                      padding: EdgeInsets.all(8.h),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12.r),
-                        color: Colors.white,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Snapchat",
-                              style: AppTextStyle.boldNormal
-                                  .copyWith(fontSize: 16.sp)),
-                          Text(
-                            "Add a username",
-                            style: AppTextStyle.regularNormal.copyWith(
-                                fontSize: 16.sp,
-                                height: 1.6,
-                                color: Colors.blue),
+                      )),
+                    ) :
+                    Column(
+                      children: [
+                        //#number
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          margin: EdgeInsets.only(bottom: 24.h),
+                          padding: EdgeInsets.all(8.h),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.r),
+                            color: Colors.white,
                           ),
-                        ],
-                      ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Phone Number",
+                                  style: AppTextStyle.boldNormal
+                                      .copyWith(fontSize: 16.sp)),
+                              Text(
+                                "Add phone number or other contacts",
+                                style: AppTextStyle.regularNormal.copyWith(
+                                    fontSize: 16.sp,
+                                    height: 1.6,
+                                    color: Colors.blue),
+                              ),
+                            ],
+                          ),
+                        ),
+                        //#snapchat
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          margin: EdgeInsets.only(
+                            bottom: 24.h,
+                          ),
+                          padding: EdgeInsets.all(8.h),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.r),
+                            color: Colors.white,
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Snapchat",
+                                  style: AppTextStyle.boldNormal
+                                      .copyWith(fontSize: 16.sp)),
+                              Text(
+                                "Add phone number or other contacts",
+                                style: AppTextStyle.regularNormal.copyWith(
+                                    fontSize: 16.sp,
+                                    height: 1.6,
+                                    color: Colors.blue),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                     CustomElevatedButton(
                       title: 'Add Contact',
@@ -591,7 +700,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                           subtitle:
                               'Please, input a name of a new contact and a link',
                           type: BottomSheetType.CONTACT,
-                          onTap: () {},
+                          onTap: () {controller.addContact();},
                         ));
                       },
                     ),
@@ -603,7 +712,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                     ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: 3,
+                      itemCount: controller.eventDate.length > 0 ? controller.eventDate.length : 1,
                       itemBuilder: (context, index) => Container(
                         width: MediaQuery.of(context).size.width,
                         margin: EdgeInsets.only(
@@ -614,7 +723,29 @@ class CreateRostr extends GetView<CreateRostrController> {
                           borderRadius: BorderRadius.circular(12.r),
                           color: Colors.white,
                         ),
-                        child: Column(
+                        child: controller.eventDate.length > 0 ? Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(controller.eventDate[index].heading,
+                                    style: AppTextStyle.boldNormal
+                                        .copyWith(fontSize: 16.sp)),
+                                Text(controller.eventDate[index].date,
+                                    style: AppTextStyle.boldNormal
+                                        .copyWith(fontSize: 16.sp)),
+                              ],
+                            ),
+                            Text(
+                              controller.eventDate[index].description,
+                              style: AppTextStyle.regularNormal
+                                  .copyWith(fontSize: 16.sp, height: 1.6),
+                            ),
+                          ],
+                        ) :
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -647,7 +778,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                           subtitle:
                               'Please, input a date, heading and description of the event ',
                           type: BottomSheetType.EVENT_DATE,
-                          onTap: () {},
+                          onTap: () {controller.addEventDate();},
                         ));
                       },
                     ),
@@ -665,7 +796,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                       ),
                       child: DropdownButton<String>(
                           underline: const SizedBox(),
-                          value: 'Choose a rostr type',
+                          value: controller.updatedType,
                           isDense: true,
                           isExpanded: true,
                           items: controller.sectionItems.map((String items) {
@@ -674,7 +805,9 @@ class CreateRostr extends GetView<CreateRostrController> {
                               child: Text(items),
                             );
                           }).toList(),
-                          onChanged: (value) {}),
+                          onChanged: (value) {
+                            controller.updateType(value!);
+                          }),
                     ),
                     12.verticalSpace,
                     Container(
@@ -686,7 +819,7 @@ class CreateRostr extends GetView<CreateRostrController> {
                       ),
                       child: DropdownButton<String>(
                           underline: const SizedBox(),
-                          value: 'Choose a folder',
+                          value: controller.updatedFolder,
                           isDense: true,
                           isExpanded: true,
                           items: controller.folderItems.map((String items) {
@@ -695,13 +828,18 @@ class CreateRostr extends GetView<CreateRostrController> {
                               child: Text(items),
                             );
                           }).toList(),
-                          onChanged: (value) {}),
+                          onChanged: (value) {controller.updateFolder(value!);}),
                     ),
                     12.verticalSpace,
                     CustomElevatedButton(
                       title: 'Create',
                       hasGradient: true,
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.printData();
+                        controller.displayData();
+                        controller.clearData();
+                        Get.forceAppUpdate();
+                      },
                     ),
                     100.verticalSpace,
                   ],
