@@ -499,7 +499,7 @@ class CreateRostrController extends GetxController {
     
     _eventDate.clear();
     _eventDate.addAll(defaultEventDate);
-
+ //hello
     update();
 
   }
