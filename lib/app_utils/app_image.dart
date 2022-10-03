@@ -8,4 +8,5 @@ class AppImage {
   static const close = '${_baseImagePath}close.png';
   static const avatar2 = '${_baseImagePath}avatar2.png';
   static const camera = '${_baseImagePath}camera.png';
+  static const check = '${_baseImagePath}check.png';
 }
