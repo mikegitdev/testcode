@@ -122,7 +122,7 @@ class InnerScreen extends GetView<InnerController> {
                         //#Send To Alert ni
                         // Shu yerda ochib quyayabman
                         controller.openBottomSheet(
-                          bottomSheet: const SendAlertToBottom(),
+                          bottomSheet: SendAlertToBottom(),
                         );
 
                         // Navigator.push(
